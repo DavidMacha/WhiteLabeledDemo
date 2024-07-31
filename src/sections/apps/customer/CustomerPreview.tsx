@@ -123,16 +123,6 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                         </IconButton>
                       </Tooltip>
                     </PDFDownloadLink>
-                    <Tooltip title="Edit">
-                      <IconButton color="secondary" onClick={editCustomer}>
-                        <Edit />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete" onClick={handleClose}>
-                      <IconButton color="error">
-                        <Trash />
-                      </IconButton>
-                    </Tooltip>
                   </Stack>
                 }
               >
@@ -286,9 +276,6 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                         <Typography color="secondary">Service Fee per Minute</Typography>
                         <Stack direction="row" alignItems="center" spacing={1}>
                           <Typography variant="h6">${serviceFee}</Typography>
-                          <Button variant="outlined" size="small" onClick={handleServiceFeeEditOpen}>
-                            Edit
-                          </Button>
                         </Stack>
                       </Stack>
 
@@ -305,9 +292,7 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                               {day}
                             </Button>
                           ))}
-                          <Button variant="outlined" size="small" onClick={handleEditDaysOpen}>
-                            Edit Days
-                          </Button>
+
                         </Stack>
                       </Stack>
 
