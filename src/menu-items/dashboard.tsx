@@ -25,24 +25,9 @@ const loadingMenu: NavItemType = {
     {
       id: 'dashboard1',
       title: <FormattedMessage id="dashboard" />,
-      type: 'collapse',
+      type: 'item',
+      url: '/dashboard/default',
       icon: icons.loading,
-      children: [
-        {
-          id: 'default1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/default',
-          breadcrumbs: false
-        },
-        {
-          id: 'analytics1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/analytics',
-          breadcrumbs: false
-        }
-      ]
     }
   ]
 };
