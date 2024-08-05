@@ -1,4 +1,4 @@
-import {
+/*import {
   ClerkProvider,
   SignInButton,
   SignedIn,
@@ -30,8 +30,8 @@ export default function RootLayout({
     </ClerkProvider>
   )
 }
+*/
 
-/*
 // PROJECT IMPORTS
 import GuestGuard from 'utils/route-guard/GuestGuard';
 import { ClerkProvider } from "@clerk/nextjs";
@@ -41,4 +41,4 @@ import { ClerkProvider } from "@clerk/nextjs";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <ClerkProvider><GuestGuard>{children}</GuestGuard></ClerkProvider>;
 }
-*/
+

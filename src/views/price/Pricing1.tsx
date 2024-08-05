@@ -193,11 +193,9 @@ const Pricing1Page = () => {
           </Grid>
         ))}
       </Grid>
-      <Grid item xs={12} sx={{ textAlign: 'center', mt: 4 }}>
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-          Edit
-        </Button>
-      </Grid>
+ 
+ 
+ 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>Edit Pricing Plans</DialogTitle>
         <DialogContent>

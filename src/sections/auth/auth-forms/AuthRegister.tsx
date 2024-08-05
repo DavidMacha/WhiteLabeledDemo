@@ -34,6 +34,8 @@ import { StringColorProps } from 'types/password';
 
 // ASSETS
 import { Eye, EyeSlash } from 'iconsax-react';
+//import { ClerkProvider } from "@clerk/nextjs";
+
 
 // ============================|| JWT - REGISTER ||============================ //
 
@@ -58,6 +60,7 @@ const AuthRegister = () => {
   }, []);
 
   return (
+    
     <Formik
       initialValues={{
         firstname: '',
@@ -257,6 +260,7 @@ const AuthRegister = () => {
         </form>
       )}
     </Formik>
+   
   );
 };
 

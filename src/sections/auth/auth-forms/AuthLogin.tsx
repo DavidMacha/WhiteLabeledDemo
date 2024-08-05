@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, SyntheticEvent } from 'react';
-
+//import { ClerkProvider } from "@clerk/nextjs";
 // NEXT
 import Link from 'next/link';
 import { useSession, signIn } from 'next-auth/react';
@@ -49,6 +49,7 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
   };
 
   return (
+  
     <Formik
       initialValues={{
         email: 'info@phoenixcoded.co',
@@ -170,6 +171,7 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
         </form>
       )}
     </Formik>
+
   );
 };
 
