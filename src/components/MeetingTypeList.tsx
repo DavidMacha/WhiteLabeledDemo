@@ -53,7 +53,7 @@ const MeetingTypeList = () => {
       });
       setCallDetail(call);
       if (!values.description) {
-        router.push(`/meeting/${call.id}`);
+        router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${call.id}`);
       }
       toast({
         title: "Meeting Created",
@@ -85,7 +85,7 @@ const MeetingTypeList = () => {
       />
       <HomeCard
         img="/icons/schedule.svg"
-        title="Schedule Own Meeting"
+        title="ing"
         description="Plan your own meeting"
         className="bg-purple-1"
         handleClick={() => setMeetingState("isScheduleMeeting")}
