@@ -22,7 +22,7 @@ const icons = {
 
 const formsTables: NavItemType = {
   id: 'group-forms-tables',
-  title: <FormattedMessage id="forms-tables" />,
+  title: <FormattedMessage id="Demo Forms" />,
   icon: icons.formsTable,
   type: 'group',
   children: [
