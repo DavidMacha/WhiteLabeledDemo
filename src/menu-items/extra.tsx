@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // ASSETS
-import { Story, Fatrows, PresentionChart } from 'iconsax-react';
+import { Story, Fatrows, Next, PresentionChart } from 'iconsax-react';
 
 // TYPE
 import { NavItemType } from 'types/menu';
@@ -10,6 +10,7 @@ import { NavItemType } from 'types/menu';
 // ICONS
 const icons = {
   widgets: Story,
+  wizard: Next,
   statistics: Story,
   data: Fatrows,
   chart: PresentionChart
@@ -38,11 +39,11 @@ const widget: NavItemType = {
       icon: icons.data
     },
     {
-      id: 'Genarate Legal Document',
-      title: <FormattedMessage id="Genarate Legal Document" />,
+      id: 'forms-plugins',
+      title: <FormattedMessage id="Txt Editor-demos" />,
       type: 'item',
-      url: '/widget/chart',
-      icon: icons.statistics
+      url: '/forms/plugins/editor',
+      icon: icons.wizard
     }
   ]
 };

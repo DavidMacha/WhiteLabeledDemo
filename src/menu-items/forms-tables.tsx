@@ -52,13 +52,6 @@ const formsTables: NavItemType = {
           url: '/forms/layout/multi-column'
         }
       ]
-    },
-    {
-      id: 'forms-plugins',
-      title: <FormattedMessage id="Txt Editor-demos" />,
-      type: 'item',
-      url: '/forms/plugins/editor',
-      icon: icons.wizard
     }
  
   ]
