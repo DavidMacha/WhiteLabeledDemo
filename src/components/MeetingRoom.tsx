@@ -32,37 +32,41 @@ const MeetingRoom = () => {
   const router = useRouter();
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
   const { useCallCallingState } = useCallStateHooks();
-
   const callingState = useCallCallingState();
-
   const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-    let alert5MinutesId: NodeJS.Timeout;
-    let alert30MinutesId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout | null = null;
+    let alertIntervalId: NodeJS.Timeout | null = null;
 
     if (callingState === CallingState.JOINED) {
       intervalId = setInterval(() => {
         setElapsedTime((prevTime) => prevTime + 1);
-      }, 1000) as unknown as NodeJS.Timeout;
+      }, 1000);
 
-      alert5MinutesId = setTimeout(() => {
-        alert("5 minutes have passed!");
-      }, 5 * 60 * 1000) as unknown as NodeJS.Timeout;
-
-      alert30MinutesId = setTimeout(() => {
-        alert("30 minutes have passed!");
-      }, 30 * 60 * 1000) as unknown as NodeJS.Timeout;
+      alertIntervalId = setInterval(() => {
+        setShowButtons(true);
+      }, 5 * 60 * 1000);
     }
 
     return () => {
-      clearInterval(intervalId);
-      clearTimeout(alert5MinutesId);
-      clearTimeout(alert30MinutesId);
+      if (intervalId) clearInterval(intervalId);
+      if (alertIntervalId) clearInterval(alertIntervalId);
     };
   }, [callingState]);
+
+  const handleContinue = () => {
+    setShowButtons(false);
+    // Reset the timer or take any other action if needed
+  };
+
+  const handleEnd = () => {
+    setShowButtons(false);
+    // End the call or take any other action
+    router.push(`/`);
+  };
 
   if (callingState !== CallingState.JOINED) return <Loader />;
 
@@ -132,11 +136,23 @@ const MeetingRoom = () => {
         </button>
         {!isPersonalRoom && <EndCallButton />}
       </div>
+      {showButtons && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <p className="text-lg">5 minutes have passed. Do you want to continue or end the call?</p>
+            <div className="flex justify-around mt-4">
+              <button onClick={handleContinue} className="bg-green-500 text-white rounded-lg py-2 px-4">Continue</button>
+              <button onClick={handleEnd} className="bg-red-500 text-white rounded-lg py-2 px-4">End</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
 
 export default MeetingRoom;
+
 
 /*Videro restart bug
 
