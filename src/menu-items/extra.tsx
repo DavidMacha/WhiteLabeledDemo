@@ -21,7 +21,7 @@ const icons = {
 
 const extra: NavItemType = {
   id: 'group-widget',
-  title: <FormattedMessage id="widgets" />,
+  title: <FormattedMessage id="Extras" />,
   icon: icons.widgets,
   type: 'group',
   children: [
@@ -63,7 +63,7 @@ const extra: NavItemType = {
           id: 'account-profile',
           title: <FormattedMessage id="account-profile" />,
           type: 'item',
-          url: '/apps/profiles/account/basic',
+          url: '/apps/profiles/account/my-account',
           breadcrumbs: false
         }
       ]

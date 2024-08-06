@@ -10,7 +10,7 @@ const icons = {
   landing: Airplane
 };
 
-const MenuFromAPI: NavItemType = {
+const MenuFromAPI : NavItemType = {
   id: 'group-dashboard-loading',
   title: <FormattedMessage id="dashboard" />,
   icon: icons.loading,
@@ -33,8 +33,9 @@ const MenuFromAPI: NavItemType = {
   ]
 };
 
-export default MenuFromAPI
+export default MenuFromAPI 
 
+// test
 
 /* Old version uses api
 // third-party
