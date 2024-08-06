@@ -9,7 +9,8 @@ import Typography from '@mui/material/Typography';
 // PROJECT IMPORTS
 import NavGroup from './NavGroup';
 import menuItem from 'menu-items';
-import { MenuFromAPI } from 'menu-items/dashboard';
+//import { MenuFromAPI } from 'menu-items/dashboard';
+import MenuFromAPI from "menu-items/dashboard"
 
 import useConfig from 'hooks/useConfig';
 import { HORIZONTAL_MAX_ITEM } from 'config';
@@ -44,7 +45,7 @@ const Navigation = () => {
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [menuItems, setMenuItems] = useState<{ items: NavItemType[] }>({ items: [] });
 
-  let dashboardMenu = MenuFromAPI();
+  let dashboardMenu = MenuFromAPI;//MenuFromAPI()
 
   useLayoutEffect(() => {
     if (menuLoading && !isFound(menuItem, 'group-dashboard-loading')) {
