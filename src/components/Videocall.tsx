@@ -1,3 +1,4 @@
+
 "use client";
 
 import { CSSProperties, useRef, useState, useEffect } from "react";
@@ -17,6 +18,7 @@ const Videocall = (props: { slug: string; JWT: string }) => {
   const [isVideoMuted, setIsVideoMuted] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [showPopup, setShowPopup] = useState(false);
   const [showParticipants, setShowParticipants] = useState(false);
   const client = useRef<typeof VideoClient>(ZoomVideo.createClient());
@@ -27,16 +29,18 @@ const Videocall = (props: { slug: string; JWT: string }) => {
   useEffect(() => {
     if (inSession) {
       const interval = setInterval(() => {
-        const elapsedTime = Date.now() - startTime;
-        if (elapsedTime >= 5 * 60 * 1000 && !showPopup) { // 5 minutes in milliseconds
-          setShowPopup(true);
-          clearInterval(interval);
-        }
-      }, 1000); // Check every second
+        setElapsedTime(Date.now() - startTime);
+      }, 1000); // Update every second
 
       return () => clearInterval(interval);
     }
-  }, [inSession, startTime, showPopup]);
+  }, [inSession, startTime]);
+
+  useEffect(() => {
+    if (elapsedTime >= 1 * 60 * 1000 && !showPopup) { // 1 minutes in milliseconds
+      setShowPopup(true);
+    }
+  }, [elapsedTime, showPopup]);
 
   const joinSession = async () => {
     console.log("Joining session...");
@@ -58,7 +62,7 @@ const Videocall = (props: { slug: string; JWT: string }) => {
 
     await renderVideo({
       action: "Start",
-      userId: client.current.getCurrentUserInfo().userId,
+      userId: client.current.getCurrentUserInfo()?.userId ?? -1,
     });
   };
 
@@ -118,6 +122,12 @@ const Videocall = (props: { slug: string; JWT: string }) => {
     setShowParticipants(!showParticipants);
   };
 
+  const formatTime = (elapsedTime: number) => {
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
   return (
     <div className="flex h-full w-full flex-col bg-gray-100">
       <h1 className="text-center text-4xl font-extrabold mb-6 mt-0 text-blue-600">
@@ -152,8 +162,8 @@ const Videocall = (props: { slug: string; JWT: string }) => {
               <PhoneOff />
             </Button>
           </div>
-          <div className="flex w-full justify-center">
-            <div className="mt-4 flex w-full flex-col items-center">
+          <div className="flex flex-col items-center">
+            <div className="flex items-center mb-4">
               <CameraButton
                 client={client}
                 isVideoMuted={isVideoMuted}
@@ -166,13 +176,16 @@ const Videocall = (props: { slug: string; JWT: string }) => {
                 setIsAudioMuted={setIsAudioMuted}
               />
             </div>
+            <div className="text-xl font-bold mt-4">
+              Elapsed Time: {formatTime(elapsedTime)}
+            </div>
           </div>
         </div>
       )}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <p className="text-lg">5 minutes have passed. Do you want to continue or end the session?</p>
+            <p className="text-lg">30 minutes have passed. Do you want to continue or end the session?</p>
             <div className="flex justify-around mt-4">
               <Button onClick={() => handlePopupResponse(true)} className="bg-green-500 text-white rounded-lg py-2 px-4">Continue</Button>
               <Button onClick={() => handlePopupResponse(false)} className="bg-red-500 text-white rounded-lg py-2 px-4">End</Button>
@@ -187,9 +200,9 @@ const Videocall = (props: { slug: string; JWT: string }) => {
             {/* List participants here */}
             <div className="flex flex-col space-y-2">
               {/* Placeholder for participant list */}
-              <div className="bg-gray-200 p-2 rounded-md">Participant 1</div>
-              <div className="bg-gray-200 p-2 rounded-md">Participant 2</div>
-              <div className="bg-gray-200 p-2 rounded-md">Participant 3</div>
+              <div className="bg-gray-200 p-2 rounded-md">Placeholder 1</div>
+              <div className="bg-gray-200 p-2 rounded-md">Placeholder 2</div>
+
             </div>
             <div className="flex justify-center mt-4">
               <Button onClick={toggleParticipants} className="bg-gray-500 text-white rounded-lg py-2 px-4">Close</Button>
@@ -204,17 +217,16 @@ const Videocall = (props: { slug: string; JWT: string }) => {
 export default Videocall;
 
 const videoPlayerStyle = {
-  height: "75vh",
+  height: "50vh",
   marginTop: "1.5rem",
-  marginLeft: "3rem",
-  marginRight: "3rem",
+  marginLeft: "1rem",
+  marginRight: "1rem",
   alignContent: "center",
-  borderRadius: "10px",
+  borderRadius: "5px",
   overflow: "hidden",
 } as CSSProperties;
 
 const userName = `User-${new Date().getTime().toString().slice(8)}`;
-
 
 
 /*
