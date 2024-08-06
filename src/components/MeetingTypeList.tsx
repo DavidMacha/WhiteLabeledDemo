@@ -73,7 +73,7 @@ const MeetingTypeList = () => {
       <HomeCard
         img="/icons/add-meeting.svg"
         title="New Meeting"
-        description="Start an instant meeting"
+        description=""
         handleClick={() => setMeetingState("isInstantMeeting")}
       />
       <HomeCard
@@ -85,7 +85,7 @@ const MeetingTypeList = () => {
       />
       <HomeCard
         img="/icons/schedule.svg"
-        title="ing"
+        title="Schedule your Own Meeting"
         description="Plan your own meeting"
         className="bg-purple-1"
         handleClick={() => setMeetingState("isScheduleMeeting")}
@@ -93,7 +93,7 @@ const MeetingTypeList = () => {
       <HomeCard
         img="/icons/recordings.svg"
         title="View Recordings"
-        description="Meeting Recordings"
+        description="Meeting History"
         className="bg-yellow-1"
         handleClick={() => router.push("/apps/e-commerce/product-list")}
       />
