@@ -32,7 +32,11 @@ import { Eye, EyeSlash } from 'iconsax-react';
 
 // ============================|| CUSTOM LOGIN ||============================ //
 
-const AuthLogin = () => {
+interface AuthLoginProps {
+  forgot?: string; // Add the forgot prop
+}
+
+const AuthLogin = ({ forgot }: AuthLoginProps) => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -169,9 +173,11 @@ const AuthLogin = () => {
                   }
                   label={<Typography variant="h6">Keep me signed in</Typography>}
                 />
-                <Links variant="h6" component={Link} href='/forgot-password' color="text.primary">
-                  Forgot Password?
-                </Links>
+                {forgot && (
+                  <Links variant="h6" component={Link} href={forgot} color="text.primary">
+                    Forgot Password?
+                  </Links>
+                )}
               </Stack>
             </Grid>
             {loginError && (
@@ -194,6 +200,7 @@ const AuthLogin = () => {
 };
 
 export default AuthLogin;
+
 
 
 
