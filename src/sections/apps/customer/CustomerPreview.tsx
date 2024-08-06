@@ -278,7 +278,7 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
 
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
         <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
-          Schedule request sent
+          Call appointment successfully created. We will notify the advisor about this. In the meantime, feel free to start a chat with him.
         </Alert>
       </Snackbar>
     </>
