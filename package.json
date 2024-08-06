@@ -47,7 +47,7 @@
     "antd": "^5.19.2",
     "apexcharts": "^3.45.0",
     "autosuggest-highlight": "^3.3.4",
-    "axios": "^1.6.2",
+    "axios": "^1.7.3",
     "axios-mock-adapter": "^1.22.0",
     "bufferutil": "^4.0.8",
     "chance": "^1.1.11",
