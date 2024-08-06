@@ -116,7 +116,7 @@ function ReactTable({ columns, data, renderRowSubComponent, modalToggler }: Prop
     if (matchDownSM) {
       setHiddenColumns(['age', 'visits', 'email', 'status', 'avatar']);
     } else {
-      setHiddenColumns(['avatar', 'email']);
+      setHiddenColumns(['avatar', 'email', 'contact' ]);
     }
     // eslint-disable-next-line
   }, [matchDownSM]);
@@ -135,9 +135,7 @@ function ReactTable({ columns, data, renderRowSubComponent, modalToggler }: Prop
           <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
           <Stack direction={matchDownSM ? 'column' : 'row'} alignItems="center" spacing={2}>
             <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
-            <Button variant="contained" startIcon={<Add />} onClick={modalToggler} size="large">
-              Add Customer
-            </Button>
+
             <CSVExport
               data={selectedFlatRows.length > 0 ? selectedFlatRows.map((d: Row) => d.original) : data}
               filename={'customer-list.csv'}
@@ -273,6 +271,7 @@ const CustomerList = () => {
             case '2':
               return <Chip color="success" label="Verified" size="small" variant="light" />;
             case '1':
+              return <Chip color="info" label="Pending" size="small" variant="light" />
             default:
               return <Chip color="info" label="Pending" size="small" variant="light" />;
           }
