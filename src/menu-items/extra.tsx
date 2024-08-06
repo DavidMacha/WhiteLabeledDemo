@@ -63,7 +63,7 @@ const extra: NavItemType = {
           id: 'account-profile',
           title: <FormattedMessage id="account-profile" />,
           type: 'item',
-          url: '/apps/profiles/account/my-account',
+          url: '/apps/profiles/account/basic',
           breadcrumbs: false
         }
       ]

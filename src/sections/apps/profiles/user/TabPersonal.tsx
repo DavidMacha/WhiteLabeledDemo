@@ -108,10 +108,10 @@ const TabPersonal = () => {
     <MainCard content={false} title="Personal Information" sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
       <Formik
         initialValues={{
-          firstname: 'Stebin',
-          lastname: 'Ben',
-          email: 'stebin.ben@gmail.com',
-          dob: new Date('03-10-1993'),
+          firstname: 'Lorem',
+          lastname: 'Ipsum',
+          email: 'lorem.ipsum@gmail.com',
+          dob: new Date('03-10-1995'),
           countryCode: '+91',
           contact: 9652364852,
           designation: 'Legal Advisor & Consultant',

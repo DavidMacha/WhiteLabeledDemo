@@ -32,7 +32,6 @@ const MenuFromAPI : NavItemType = {
     }
   ]
 };
-
 export default MenuFromAPI 
 
 // test

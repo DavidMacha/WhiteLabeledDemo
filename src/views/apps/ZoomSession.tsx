@@ -10,7 +10,7 @@ export default function ZoomSession() {
   return (
     <main className="flex flex-col items-center justify-between p-24">
       <h1 className="text-3xl font-bold text-center my-4">
-        Zoom VideoSDK Session
+        Zoom Session
       </h1>
       <Input
         type="text"
