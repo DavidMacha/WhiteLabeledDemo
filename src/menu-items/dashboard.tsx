@@ -3,7 +3,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { Home3, HomeTrendUp, Box1 } from 'iconsax-react';
+import { Home3, HomeTrendUp, Box1, Airplane } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -13,7 +13,8 @@ import { useGetMenu } from 'api/menu';
 const icons = {
   dashboard: HomeTrendUp,
   components: Box1,
-  loading: Home3
+  loading: Home3,
+  landing: Airplane
 };
 
 const loadingMenu: NavItemType = {
@@ -23,11 +24,18 @@ const loadingMenu: NavItemType = {
   icon: icons.loading,
   children: [
     {
-      id: 'dashboard1',
+      id: 'dashboard',
       title: <FormattedMessage id="dashboard" />,
       type: 'item',
       url: '/dashboard/default',
       icon: icons.loading,
+    },
+    {
+      id: 'landing',
+      title: <FormattedMessage id="landing" />,
+      type: 'item',
+      icon: icons.landing,
+      url: '/landing'
     }
   ]
 };

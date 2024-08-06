@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // ASSETS
-import { KyberNetwork, Messages2, Calendar1, Profile2User, Bill, UserSquare, ShoppingBag } from 'iconsax-react';
+import { KyberNetwork, Messages2, Story, Calendar1, Profile2User, Bill, UserSquare, ShoppingBag } from 'iconsax-react';
 
 // TYPE
 import { NavItemType } from 'types/menu';
@@ -11,6 +11,7 @@ import { NavItemType } from 'types/menu';
 const icons = {
   applications: KyberNetwork,
   chat: Messages2,
+  statistics: Story,
   calendar: Calendar1,
   customer: Profile2User,
   invoice: Bill,
@@ -41,6 +42,13 @@ const applications: NavItemType = {
       type: 'item',
       url: '/apps/calendar',
       icon: icons.calendar
+    },
+    {
+      id: 'Genarate Legal Document',
+      title: <FormattedMessage id="Genarate Legal Document" />,
+      type: 'item',
+      url: '/widget/chart',
+      icon: icons.statistics
     },
     /*
     {

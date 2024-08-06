@@ -1,9 +1,9 @@
 // PROJECT IMPORTS
 import applications from './applications';
-import widget from './widget';
+import extra from './extra'
 import formsTables from './forms-tables';
 
-import pages from './pages';
+//import pages from './pages';
 
 // TYPES
 import { NavItemType } from 'types/menu';
@@ -11,7 +11,7 @@ import { NavItemType } from 'types/menu';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems: { items: NavItemType[] } = {
-  items: [widget, applications, formsTables, pages]
+  items: [applications, extra, formsTables]
 };
 
 export default menuItems;
