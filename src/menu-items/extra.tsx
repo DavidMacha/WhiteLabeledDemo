@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // ASSETS
-import { Story, Fatrows, Next, PresentionChart } from 'iconsax-react';
+import { Story, Fatrows, Next, UserSquare, PresentionChart } from 'iconsax-react';
 
 // TYPE
 import { NavItemType } from 'types/menu';
@@ -13,12 +13,13 @@ const icons = {
   wizard: Next,
   statistics: Story,
   data: Fatrows,
+  profile: UserSquare,
   chart: PresentionChart
 };
 
 // ==============================|| MENU ITEMS - WIDGETS ||============================== //
 
-const widget: NavItemType = {
+const extra: NavItemType = {
   id: 'group-widget',
   title: <FormattedMessage id="widgets" />,
   icon: icons.widgets,
@@ -44,8 +45,30 @@ const widget: NavItemType = {
       type: 'item',
       url: '/forms/plugins/editor',
       icon: icons.wizard
-    }
+    },//
+    {
+      id: 'profile',
+      title: <FormattedMessage id="profile" />,
+      type: 'collapse',
+      icon: icons.profile,
+      children: [
+        {
+          id: 'user-profile',
+          title: <FormattedMessage id="user-profile" />,
+          type: 'item',
+          url: '/apps/profiles/user/personal',
+          breadcrumbs: false
+        },
+        {
+          id: 'account-profile',
+          title: <FormattedMessage id="account-profile" />,
+          type: 'item',
+          url: '/apps/profiles/account/basic',
+          breadcrumbs: false
+        }
+      ]
+    },
   ]
 };
 
-export default widget;
+export default extra;
