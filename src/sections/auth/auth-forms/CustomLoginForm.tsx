@@ -139,7 +139,7 @@ const CustomLoginForm = () => {
                       </IconButton>
                     </InputAdornment>
                   }
-                  placeholder="Enter password"
+                  placeholder="Enter password..."
                 />
                 {touched.password && errors.password && (
                   <FormHelperText error id="standard-weight-helper-text-password-login">
