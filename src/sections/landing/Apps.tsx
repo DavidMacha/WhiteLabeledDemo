@@ -25,12 +25,12 @@ const featureDocumentation = '/assets/images/landing/feature-documentation.png';
 const Technologies = [
   {
     image: featureFigma,
-    title: 'Chat',
+    title: 'Lorem ipsum Chat',
     description: 'Power your web apps with the chat app of Law on Earth, send documents and even active before, during and after meeting sessions '
   },
   {
     image: featureComponents,
-    title: 'Video Call App',
+    title: 'Video Lorem ipsum',
     description: 'Schedule, Request, Add New Session, and Record pages makes your advisor journey complete.'
   },
   {
@@ -72,7 +72,7 @@ const AppsPage = () => {
             <Grid container spacing={2} justifyContent="center" sx={{ textAlign: 'center', marginBottom: 3 }}>
               <Grid item xs={12}>
                 <Typography variant="h2" color="white">
-                  White Labeled Apps
+                Lorem ipsum Apps
                 </Typography>
               </Grid>
               <Grid item xs={12} md={7}>

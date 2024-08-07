@@ -21,18 +21,19 @@ const initialImage = 'https://d3hh6raz9l4662.cloudfront.net/media/various/small_
 
 const AboutPanel = () => {
   const panelId = 'about';
-  const title = 'About Law On Earth';
+  const title = 'About Lorem ipsum';
 
   const initialText1 = `
-    We believe that every human being has a right to a basic level of legal assistance and education. 
-    The hard part has been finding ways to pull the cost out of legal and empower the public to manage their own legal needs to the extent they can.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
   `;
   const initialText2 = `
-    Our founder Katie Richards grew up in a small country town in North Queensland where there was at the time only one law firm so half the town had representation and everyone else had to fend for themselves. Katie has built up a team of lawyers, developers and entrepreneurs who are equally as passionate about making a difference for the masses and giving every Australian the opportunity to live happier, more fulfilled and safer futures with equal access to legal help when they need it most, regardless of where they live or what they earn.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
   `;
   const initialText3 = `
-    Research indicates that even in 2019, the majority of the world's population cannot afford or access legal assistance. 
-    As a result, people are making decisions involving their legal rights, or making no decisions at all, and this is impacting not only their current life situation but their future also.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
   `;
 
   const [image, setImage] = useState<string>(initialImage);

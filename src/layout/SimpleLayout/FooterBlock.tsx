@@ -64,9 +64,9 @@ const FooterBlock = ({ isFull }: showProps) => {
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 400 }}>
-                    A way to connect the world and make legal services accessible to everyone. 
-                    The Law On Earth portal contains 100&apos;s of legal documents and guidance sheets 
-                    so that clients can self-service yet also receive advice packages depending on their subscription level.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     </Typography>
                   </Grid>
                 </Grid>
@@ -98,13 +98,13 @@ const FooterBlock = ({ isFull }: showProps) => {
                     <Typography variant="h5">Help & Support</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
                       <FooterLink href="#" target="_blank" underline="none">
-                        Address: Level 54, 111 Eagle Street, Brisbane City, Qld, 4000
+                        Address: Level 54, Lorem ipsum Street, Lorem ipsum City, Qld, 4000
                       </FooterLink>
                       <FooterLink href="#" target="_blank" underline="none">
-                        Support & Enquiries: 1300 66 46 88
+                        Support & Enquiries: ****** 66 46 88
                       </FooterLink>
                       <FooterLink href="#" target="_blank" underline="none">
-                        Email Us: hello@lawonearth.com
+                        Email Us: hello@Loremipsum.com
                       </FooterLink>
                       
                     </Stack>
@@ -139,7 +139,7 @@ const FooterBlock = ({ isFull }: showProps) => {
                 Copyright © 2024{' '}
                 <Link href="#" underline="none">
                   {' '}
-                  Law On Earth IP Pty Ltd
+                  Lorem ipsum Pty Ltd
                 </Link>
               </Typography>
             </Grid>

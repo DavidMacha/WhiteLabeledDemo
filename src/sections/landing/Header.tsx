@@ -22,9 +22,9 @@ import AnimateButton from 'components/@extended/AnimateButton';
 
 const HeaderPage = () => {
   const theme = useTheme();
-  const text = "Browse the Learning Centre to access hundreds of articles & guides. Prepare documents & contracts in just a few clicks. " +
-    "Connect with legal advisors in affordable video sessions. " +
-    "With Law On Earth, you'll be able to understand your legal matter and self-act safely and affordably.";
+  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." +
+    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
 
   return (
     <Container sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
