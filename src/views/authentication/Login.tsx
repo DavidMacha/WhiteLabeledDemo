@@ -9,8 +9,8 @@ import Typography from '@mui/material/Typography';
 
 // PROJECT IMPORTS
 import AuthWrapper from 'sections/auth/AuthWrapper';
-//import AuthLogin from 'sections/auth/auth-forms/AuthLogin';
-import CustomLoginForm from 'sections/auth/auth-forms/CustomLoginForm';
+import AuthLogin from 'sections/auth/auth-forms/AuthLogin';
+//import CustomLoginForm from 'sections/auth/auth-forms/CustomLoginForm';
 // ================================|| LOGIN ||================================ //
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
           </Stack>
         </Grid>
         <Grid item xs={12}>
-          <CustomLoginForm />
+          <AuthLogin />
         </Grid>
       </Grid>
     </AuthWrapper>

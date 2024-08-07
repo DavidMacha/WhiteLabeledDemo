@@ -79,10 +79,10 @@ const FooterBlock = ({ isFull }: showProps) => {
                     <Typography variant="h5">Useful Links</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
                       <FooterLink href="#" target="_blank" underline="none">
-                        Discover Law On Earth for Clients
+                        Discover lorem ipsum for Clients
                       </FooterLink>
                       <FooterLink href="#" target="_blank" underline="none">
-                        Discover Law On Earth for Advisors
+                        Discover lorem ipsum for Advisors
                       </FooterLink>
                       <FooterLink href="#" target="_blank" underline="none">
                         How to join as an advisor
