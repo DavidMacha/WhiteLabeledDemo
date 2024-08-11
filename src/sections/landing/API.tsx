@@ -39,7 +39,6 @@ const RegisterComponent = () => {
         url: 'http://13.212.101.33/api/auth/partner/register',
         headers: {
           'COMPANY-CODE': 'def-mc-partner',
-          'FRONTEND-KEY': 'XXX', // Replace with your actual FRONTEND-KEY
           'X-Requested-With': 'XMLHttpRequest',
           'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
         },
