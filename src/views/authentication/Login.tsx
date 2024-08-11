@@ -1,3 +1,4 @@
+/*
 // NEXT
 "use client";
 import { useState } from 'react';
@@ -114,9 +115,9 @@ const Login = () => {
 };
 
 export default Login;
+*/
 
 
-/*
 // NEXT
 "use client"
 import Link from 'next/link';
@@ -155,4 +156,3 @@ const Login = () => {
 export default Login;
 
 // line 28 is AuthLogin component tag
-*/
