@@ -1,3 +1,57 @@
+
+import axios from 'axios';
+import FormData from 'form-data';
+import { useState } from 'react';
+
+export default function RegisterComponent() {
+    const [response, setResponse] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleRegister = async () => {
+        const data = new FormData();
+        data.append('pers_fName', 'Client');
+        data.append('pers_mName', '');
+        data.append('pers_lName', 'Clt');
+        data.append('email', 'clt@gmail.com');
+        data.append('password', 'aAertyuiop@1');
+        data.append('password_confirmation', 'aAertyuiop@1');
+        data.append('pers_preferredTimezone', 'UTC');
+        data.append('redirectUrl', 'http://lawonearth.org/');
+
+        const config = {
+            method: 'post',
+            url: 'http://13.212.101.33/api/auth/partner/register',
+            headers: { 
+                'COMPANY-CODE': 'def-mc-partner', 
+                'FRONTEND-KEY': 'XXX', 
+                'X-Requested-With': 'XMLHttpRequest', 
+                'User-Agent': 'Apidog/1.0.0 (https://apidog.com)', 
+                ...data.getHeaders()
+            },
+            data: data
+        };
+
+        try {
+            const response = await axios(config);
+            setResponse(response.data);
+        } catch (error: any) {
+            setError(error.message || 'An error occurred');
+        }
+    };
+
+    return (
+        <div>
+            <button onClick={handleRegister}>Register</button>
+            {response && <div>Success: {JSON.stringify(response)}</div>}
+            {error && <div>Error: {error}</div>}
+        </div>
+    );
+}
+
+
+
+
+/*
 // sections/landing/ApiData.tsx
 
 import React, { useState, useEffect } from 'react';
@@ -10,17 +64,17 @@ const ApiData: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'http://13.212.101.33/api/auth/core/login';
+      const url = 'http://13.212.101.33/api/auth/partner/register';
 
       // Define the headers
       const myHeaders = new Headers();
-      myHeaders.append("COMPANY-CODE", "def-mc-admin");
+      myHeaders.append("COMPANY-CODE", "def-mc-partner");
       myHeaders.append("FRONTEND-KEY", "XXX");
       myHeaders.append("User-Agent", "Apidog/1.0.0 (https://apidog.com)");
 
       // Create the form data
       const formData = new FormData();
-      formData.append("email", "ltm9373@gmail.com");
+      formData.append("email", "clt@gmail.com");
       formData.append("password", "aAertyuiop@1");
 
       // Define the request options
@@ -71,3 +125,4 @@ const ApiData: React.FC = () => {
 };
 
 export default ApiData;
+*/

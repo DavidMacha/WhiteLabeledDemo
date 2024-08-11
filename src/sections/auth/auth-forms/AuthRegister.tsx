@@ -34,7 +34,7 @@ import { StringColorProps } from 'types/password';
 
 // ASSETS
 import { Eye, EyeSlash } from 'iconsax-react';
-//import { ClerkProvider } from "@clerk/nextjs";
+//import {  } from "@clerk/nextjs";
 
 
 // ============================|| JWT - REGISTER ||============================ //

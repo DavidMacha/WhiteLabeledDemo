@@ -4,6 +4,9 @@ import Hero from 'sections/landing/Header';
 import Technologies from 'sections/landing/Technologies';
 import Combo from 'sections/landing/Combo';
 import Apps from 'sections/landing/Apps';
+
+import RegisterComponent from 'sections/landing/API'
+
 // import Testimonial from 'sections/landing/Testimonial';<Testimonial />
 import Partner from 'sections/landing/Partner';
 // import ContactUs from 'sections/landing/ContactUs';<ContactUs />
@@ -22,6 +25,9 @@ const Landing = () => {
     <SimpleLayout>
       <Header refs={{ aboutRef, servicesRef, pricingRef }} />
       <Hero />
+
+      <RegisterComponent/>
+
       <Apps />
       <div ref={servicesRef}>
         <Technologies />
