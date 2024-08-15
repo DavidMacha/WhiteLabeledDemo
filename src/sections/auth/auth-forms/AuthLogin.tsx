@@ -72,7 +72,7 @@ const AuthLogin = ({ forgot }: AuthLoginProps) => {
             formData,
             {
               headers: {
-                'COMPANY-CODE': 'def-mc-partner',
+                'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
                 'FRONTEND-KEY': 'XXX',
                 'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
                 // 'Content-Type': 'application/x-www-form-urlencoded', // Use this if the server expects URL-encoded data
