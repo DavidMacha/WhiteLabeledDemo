@@ -257,8 +257,6 @@ export default AuthLogin;
 
 
 
-
-
 /* 
 
 old version simple one

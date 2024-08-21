@@ -1,9 +1,9 @@
 // PROJECT IMPORTS
 import ComponentLayout from 'layout/ComponentLayout';
-//import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 // ==============================|| COMPONENT - LAYOUT ||============================== //
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <ComponentLayout>{children}</ComponentLayout>;
+  return <ClerkProvider><ComponentLayout>{children}</ComponentLayout></ClerkProvider>;
 }
