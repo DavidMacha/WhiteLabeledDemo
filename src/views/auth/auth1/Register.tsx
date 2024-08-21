@@ -52,10 +52,6 @@ const fetchData = async () => {
   formData.append('es_encryption', "ssl");
   formData.append('es_port', "465");
 
-  'es_protocol': 'smtp',                                      # Email server protocol
-  'es_encryption': 'ssl',                                     # Email server encryption
-  'es_port': 465,
-
   // Define the request options
   const requestOptions: RequestInit = {
     method: 'POST',

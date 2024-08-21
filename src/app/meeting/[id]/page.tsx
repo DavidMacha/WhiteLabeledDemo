@@ -9,6 +9,7 @@ import { useUser } from "@clerk/nextjs";
 import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const Meeting = ({ params }: { params: { id: string } }) => {
   const { id } = useParams();
@@ -34,6 +35,7 @@ const Meeting = ({ params }: { params: { id: string } }) => {
     return <Alert title="You are not allowed to join this meeting" />;
 
   return (
+    <ClerkProvider>
     <main className="h-screen w-full">
       <StreamCall call={call}>
         <StreamTheme>
@@ -45,6 +47,7 @@ const Meeting = ({ params }: { params: { id: string } }) => {
         </StreamTheme>
       </StreamCall>
     </main>
+    </ClerkProvider>
   );
 };
 
