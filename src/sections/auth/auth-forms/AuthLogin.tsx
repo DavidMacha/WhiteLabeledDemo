@@ -43,9 +43,9 @@ const ApiData: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
 const fetchData = async () => {
-  const url = 'http://13.212.101.33/api/auth/core/login';
-
-  // Define the headers
+  const url = 'https://lawonearth.co.uk/api/auth/core/login';
+  
+  // Define the headers 
   const myHeaders = new Headers();
   myHeaders.append("COMPANY-CODE", "def-mc-admin");
   myHeaders.append("Authorization", "MC-H3HBRZU6ZK5744S");
@@ -122,7 +122,7 @@ const AuthLogin = ({ forgot }: AuthLoginProps) => {
           formData.append('password', values.password);
 
           const response = await axios.post(
-            'http://13.212.101.33/api/auth/partner/login',
+            'https://lawonearth.co.uk/api/auth/partner/login',
             formData,
             {
               headers: {

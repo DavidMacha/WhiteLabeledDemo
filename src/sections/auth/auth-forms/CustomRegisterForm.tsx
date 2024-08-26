@@ -46,7 +46,7 @@ const CustomRegisterForm: React.FC = () => {
       Object.keys(formData).forEach(key => data.append(key, formData[key as keyof FormDataState]));
 
       const response = await axios.post(
-        'http://13.212.101.33/api/auth/partner/register',
+        'https://lawonearth.co.uk/api/auth/partner/register',
         data,
         {
           headers: {

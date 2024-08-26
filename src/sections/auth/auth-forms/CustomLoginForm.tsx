@@ -58,7 +58,7 @@ const CustomLoginForm = () => {
           formData.append('password', values.password);
 
           const response = await axios.post(
-            'http://13.212.101.33/api/auth/partner/login',
+            'https://lawonearth.co.uk/api/auth/partner/login',
             formData,
             {
               headers: {

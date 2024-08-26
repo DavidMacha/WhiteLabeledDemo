@@ -10,7 +10,7 @@ const ApiData: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'http://13.212.101.33/api/auth/core/login';
+      const url = 'https://lawonearth.co.uk/api/auth/core/login';
 
       // Define the headers
       const myHeaders = new Headers();
