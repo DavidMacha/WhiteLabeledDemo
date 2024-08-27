@@ -1,7 +1,8 @@
 'use client';
 
 
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent, useEffect } from 'react';
+
 import { useRouter } from 'next/router'; // Step 1: Import useRouter
 // NEXT
 import Link from 'next/link';
@@ -39,7 +40,15 @@ interface AuthLoginProps {
 }
 
 const AuthLogin = ({ forgot }: AuthLoginProps) => {
+
+
   const router = useRouter(); // Step 2: Initialize useRouter
+  useEffect(() => {
+    if (router.isReady) {
+      // Perform some client-side navigation or operation
+      router.push('/dashboard/default');
+    }
+  }, [router.isReady]);
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
