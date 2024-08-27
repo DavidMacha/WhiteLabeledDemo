@@ -175,7 +175,7 @@ const CustomLoginForm = () => {
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button disableElevation fullWidth size="large" type="submit" variant="contained" color="primary">
                   Login
                 </Button>
               </AnimateButton>

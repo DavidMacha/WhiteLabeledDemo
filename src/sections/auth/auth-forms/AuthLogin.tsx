@@ -1,27 +1,21 @@
-'use client';
-
 import { useState, SyntheticEvent } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
-import Link from 'next/link';
+// THIRD - PARTY
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import axios from 'axios';
 
 // MATERIAL - UI
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
-import Links from '@mui/material/Link';
 import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
-// THIRD - PARTY
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import axios from 'axios';
-
+import Link from 'next/link';
 // PROJECT IMPORTS
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
@@ -32,12 +26,7 @@ import { Eye, EyeSlash } from 'iconsax-react';
 
 // ============================|| CUSTOM LOGIN ||============================ //
 
-interface AuthLoginProps {
-  forgot?: string; // Add the forgot prop
-}
-
-const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
-  const router = useRouter(); // Initialize useRouter
+const AuthLogin = () => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -73,10 +62,10 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
             formData,
             {
               headers: {
-                'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
+                'COMPANY-CODE': 'def-mc-partner',
                 'FRONTEND-KEY': 'XXX',
                 'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
-                // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if needed
+                // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if server expects URL-encoded data
               }
             }
           );
@@ -86,10 +75,10 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
             setStatus({ success: true });
             setSubmitting(false);
             setLoginError(null);
-            router.push('/dashboard/default'); // Redirect on success
+            // Redirect or show success message
           } else {
             // Handle login failure
-            throw new Error(response.data.message || 'Login failed');
+            throw new Error('Login failed');
           }
         } catch (err: any) {
           if (scriptedRef.current) {
@@ -150,7 +139,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
                       </IconButton>
                     </InputAdornment>
                   }
-                  placeholder="Enter password"
+                  placeholder="Enter password..."
                 />
                 {touched.password && errors.password && (
                   <FormHelperText error id="standard-weight-helper-text-password-login">
@@ -174,11 +163,9 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
                   }
                   label={<Typography variant="h6">Keep me signed in</Typography>}
                 />
-                {forgot && (
-                  <Links variant="h6" component={Link} href={forgot} color="text.primary">
-                    Forgot Password?
-                  </Links>
-                )}
+                <Typography variant="h6" component={Link} href='/forgot-password' color="text.primary">
+                  Forgot Password?
+                </Typography>
               </Stack>
             </Grid>
             {loginError && (
@@ -201,6 +188,7 @@ const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
 };
 
 export default AuthLogin;
+
 
 
 
