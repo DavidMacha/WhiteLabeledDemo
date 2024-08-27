@@ -47,7 +47,7 @@ const applications: NavItemType = {
       id: 'Genarate Legal Document',
       title: <FormattedMessage id="Genarate Legal Document" />,
       type: 'item',
-      url: '/widget/chart',
+      url: '/forms/DocGen',
       icon: icons.statistics
     },
     /*
