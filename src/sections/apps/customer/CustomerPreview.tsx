@@ -557,7 +557,7 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                         </Typography>
                       </MainCard>
                     </Grid>
-                    {/* Additional Information Sections */}
+                   
                     <Grid item xs={12}>
                       <MainCard title="Upcoming Meetings">
                         <List>
