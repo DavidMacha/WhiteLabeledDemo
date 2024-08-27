@@ -65,6 +65,7 @@ const CustomerModal = ({ open, modalToggler, customer }: Props) => {
       )}
     </>
   );
+  
 };
 
 export default CustomerModal;
