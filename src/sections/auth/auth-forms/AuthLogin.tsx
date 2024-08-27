@@ -1,10 +1,7 @@
 'use client';
 
-
-import { useState, SyntheticEvent, useEffect } from 'react';
-
-import { useRouter } from 'next/router'; // Step 1: Import useRouter
-// NEXT
+import { useState, SyntheticEvent } from 'react';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
 import Link from 'next/link';
 
 // MATERIAL - UI
@@ -39,16 +36,8 @@ interface AuthLoginProps {
   forgot?: string; // Add the forgot prop
 }
 
-const AuthLogin = ({ forgot }: AuthLoginProps) => {
-
-
-  const router = useRouter(); // Step 2: Initialize useRouter
-  useEffect(() => {
-    if (router.isReady) {
-      // Perform some client-side navigation or operation
-      router.push('/dashboard/default');
-    }
-  }, [router.isReady]);
+const AuthLogin: React.FC<AuthLoginProps> = ({ forgot }) => {
+  const router = useRouter(); // Initialize useRouter
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -87,6 +76,7 @@ const AuthLogin = ({ forgot }: AuthLoginProps) => {
                 'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
                 'FRONTEND-KEY': 'XXX',
                 'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+                // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if needed
               }
             }
           );
@@ -96,12 +86,10 @@ const AuthLogin = ({ forgot }: AuthLoginProps) => {
             setStatus({ success: true });
             setSubmitting(false);
             setLoginError(null);
-            
-            // Step 3: Redirect to dashboard after successful login
-            router.push('/dashboard/default'); 
+            router.push('/dashboard/default'); // Redirect on success
           } else {
             // Handle login failure
-            throw new Error('Login failed');
+            throw new Error(response.data.message || 'Login failed');
           }
         } catch (err: any) {
           if (scriptedRef.current) {
