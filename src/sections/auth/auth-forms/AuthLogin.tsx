@@ -42,11 +42,15 @@ const AuthLogin = () => {
 
   return (
     <Formik
-      initialValues={{
-        email: '',
+      initialValues={{ //
+        email: '', 
         password: '',
-        submit: null
+        submit: null // 4 (sucess, failed, waiting, default)
+        // if submit is not NULL >> disable the bottom to save API rates 
+        // opposite is NULL >> enable the submit bottom
       }}
+
+      // provided by API side and swap with credentials results
       validationSchema={Yup.object().shape({
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: Yup.string().max(255).required('Password is required')
@@ -59,27 +63,62 @@ const AuthLogin = () => {
 
           const response = await axios.post(
             'https://lawonearth.co.uk/api/auth/partner/login',
+            // 1st - https...../api (or) 2nd - load from env link to API (or) 3rd env up the path {/auth/partner/login}
+            // todo do- centralize
             formData,
             {
               headers: {
                 'COMPANY-CODE': 'def-mc-partner',
                 'FRONTEND-KEY': 'XXX',
-                'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+                //'User-Agent': 'Apidog/1.0.0 (https://apidog.com)', // automatically set by browser no need to manual
                 // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if server expects URL-encoded data
+              /* will centralize the calls from a common private variable
+               also there should be 2 parts, URL + {PATH}
+               We can set a string ( any ) for checkup and if matched >>
+               can concatinate the URL + corresponding path
+               and return the results via function or "export const"
+               then fetch from here to centralize and for better debugging and changes
+              
+               Headers should be encapsulated too similarly
+              
+               */
               }
             }
           );
 
+          // current one >> relay on success
+          /* do a test on HTTP response code 
+            200,400,500,... (3 types)
+            so I can make a coditional to check the response code?
+            and handle each part
+            if success 200,> will set processing steps
+            and if failed raise a noti or toast or alert!
+            and keep in same page.
+
+          */
+
           if (response.data.status === 'treatmentSuccess') {
+            // showing a toast to user to tell him success
             // Handle successful login
             setStatus({ success: true });
             setSubmitting(false);
             setLoginError(null);
             // Redirect or show success message
-          } else {
-            // Handle login failure
+          } 
+          else if (response.data.status === 'treatmentFailure') {
+            /*
             throw new Error('Login failed');
+            */      
           }
+          else if (response.data.status === 'validationError') {
+            // in each case > process
+            // return a toast or may be alert or noti
+          }
+          else {
+            // edge case (rare case)
+            // log into cloudware
+          }
+
         } catch (err: any) {
           if (scriptedRef.current) {
             setStatus({ success: false });
@@ -87,7 +126,9 @@ const AuthLogin = () => {
             setLoginError(err.message);
             setSubmitting(false);
           }
+          // log into cloudwatch to see what happened (pop up noti or similar)
         }
+
       }}
     >
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
