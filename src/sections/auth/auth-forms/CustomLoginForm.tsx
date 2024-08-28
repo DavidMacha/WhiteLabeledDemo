@@ -62,7 +62,7 @@ const CustomLoginForm = () => {
             formData,
             {
               headers: {
-                'COMPANY-CODE': 'def-mc-partner',
+                'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
                 'FRONTEND-KEY': 'XXX',
                 'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
                 // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if server expects URL-encoded data
@@ -175,7 +175,7 @@ const CustomLoginForm = () => {
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                   Login
                 </Button>
               </AnimateButton>

@@ -50,7 +50,7 @@ const CustomRegisterForm: React.FC = () => {
         data,
         {
           headers: {
-            'COMPANY-CODE': 'def-mc-partner',
+            'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
             'FRONTEND-KEY': 'XXX',
             'X-Requested-With': 'XMLHttpRequest',
             ...data.getHeaders(),
