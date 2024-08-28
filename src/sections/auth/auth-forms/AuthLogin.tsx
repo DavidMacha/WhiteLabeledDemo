@@ -42,7 +42,7 @@ const AuthLogin = () => {
 
   return (
     <Formik
-      initialValues={{ //
+      initialValues={{ 
         email: '', 
         password: '',
         submit: null // 4 (sucess, failed, waiting, default)
@@ -68,7 +68,7 @@ const AuthLogin = () => {
             formData,
             {
               headers: {
-                'COMPANY-CODE': 'def-mc-partner',
+                'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
                 'FRONTEND-KEY': 'XXX',
                 //'User-Agent': 'Apidog/1.0.0 (https://apidog.com)', // automatically set by browser no need to manual
                 // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if server expects URL-encoded data
