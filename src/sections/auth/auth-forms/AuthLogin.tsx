@@ -1,3 +1,4 @@
+/*
 import { useState, SyntheticEvent } from 'react';
 // THIRD - PARTY
 import * as Yup from 'yup';
@@ -81,7 +82,7 @@ const AuthLogin = () => {
               
                Headers should be encapsulated too similarly
               
-               */
+              
               }
             }
           );
@@ -95,7 +96,7 @@ const AuthLogin = () => {
             and if failed raise a noti or toast or alert!
             and keep in same page.
 
-          */
+          
 
           if (response.data.status === 'treatmentSuccess') {
             // showing a toast to user to tell him success
@@ -106,9 +107,9 @@ const AuthLogin = () => {
             // Redirect or show success message
           } 
           else if (response.data.status === 'treatmentFailure') {
-            /*
+            
             throw new Error('Login failed');
-            */      
+              
           }
           else if (response.data.status === 'validationError') {
             // in each case > process
@@ -230,12 +231,12 @@ const AuthLogin = () => {
 
 export default AuthLogin;
 
+*/
 
 
+ 
 
-/* 
-
-old version simple one
+//old version simple one
 'use client'; 
 
 import { useState, SyntheticEvent } from 'react';
@@ -290,8 +291,8 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
   
     <Formik
       initialValues={{
-        email: 'info@phoenixcoded.co',
-        password: '123456',
+        email: 'minmattral@gmail.com',
+        password: 'aAertyuiop@1',
         submit: null
       }}
       validationSchema={Yup.object().shape({
@@ -414,4 +415,3 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 };
 
 export default AuthLogin;
-*/
