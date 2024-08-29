@@ -3,6 +3,7 @@ import { useState, SyntheticEvent } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import axios from 'axios';
+import { useSession, signIn } from 'next-auth/react';
 
 // MATERIAL - UI
 import Grid from '@mui/material/Grid';
@@ -20,7 +21,7 @@ import Link from 'next/link';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 import useScriptRef from 'hooks/useScriptRef';
-
+import Links from '@mui/material/Link';
 // ASSETS
 import { Eye, EyeSlash } from 'iconsax-react';
 
@@ -29,6 +30,7 @@ import { Eye, EyeSlash } from 'iconsax-react';
 const AuthLogin = () => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
+  const { data: session } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -211,9 +213,9 @@ const AuthLogin = () => {
                   }
                   label={<Typography variant="h6">Keep me signed in</Typography>}
                 />
-                <Typography variant="h6" component={Link} href='/forgot-password' color="text.primary">
+                <Links variant="h6" component={Link} href={session ? '/auth/forgot-password' : '/forgot-password'} color="text.primary">
                   Forgot Password?
-                </Typography>
+                </Links>
               </Stack>
             </Grid>
             {loginError && (
