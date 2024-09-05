@@ -30,7 +30,7 @@ import { Formik } from 'formik';
 // PROJECT IMPORTS
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
-//import { APP_DEFAULT_PATH } from 'config';
+import { APP_DEFAULT_PATH } from 'config';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // TYPES
@@ -173,7 +173,7 @@ const AuthRegister = () => {
                 <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
                 <OutlinedInput
                   id="firstname-login"
-                  type="firstname"
+                  type="text"
                   value={values.pers_fName}
                   name="firstname"
                   onBlur={handleBlur}
@@ -196,7 +196,7 @@ const AuthRegister = () => {
                   fullWidth
                   error={Boolean(touched.pers_lName && errors.pers_lName)}
                   id="lastname-signup"
-                  type="lastname"
+                  type="text"
                   value={values.pers_lName}
                   name="lastname"
                   onBlur={handleBlur}
@@ -218,6 +218,7 @@ const AuthRegister = () => {
                   fullWidth
                   error={Boolean(touched.pers_mName && errors.pers_mName)}
                   id="company-signup"
+                  type="text"
                   value={values.pers_mName}
                   name="company"
                   onBlur={handleBlur}
