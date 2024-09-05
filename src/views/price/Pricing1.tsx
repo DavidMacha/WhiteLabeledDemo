@@ -64,6 +64,7 @@ const Pricing1Page = () => {
   const [commonTexts, setCommonTexts] = useState(initialCommonTexts);
 
   // Open modal dialog
+  
   const handleClickOpen = () => {
     setFormValues(plans);
     setOpen(true);

@@ -1,10 +1,14 @@
 'use client';
 
 import { useEffect, useState, SyntheticEvent } from 'react';
-
+import useScriptRef from 'hooks/useScriptRef';
+import axios from 'axios';
+import { useAuth } from './AuthContext';
+import { fetcher } from 'utils/axios';
+import { preload } from 'swr';
 // NEXT
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 
 // MATERIAL - UI
 import Box from '@mui/material/Box';
@@ -41,7 +45,11 @@ import { Eye, EyeSlash } from 'iconsax-react';
 
 const AuthRegister = () => {
   const [level, setLevel] = useState<StringColorProps>();
+  const scriptedRef = useScriptRef();
+  const [checked, setChecked] = useState(false);
+  const { data: session } = useSession();
   const [showPassword, setShowPassword] = useState(false);
+  const { setAuthData } = useAuth(); // Get setAuthData from context
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -63,34 +71,95 @@ const AuthRegister = () => {
     
     <Formik
       initialValues={{
-        firstname: '',
-        lastname: '',
+        pers_fName: '',
+        pers_lName: '',
         email: '',
-        company: '',
+        pers_mName: '',
         password: '',
+        password_confirmation:'',
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        firstname: Yup.string().max(255).required('First Name is required'),
-        lastname: Yup.string().max(255).required('Last Name is required'),
+        pers_fName: Yup.string().max(255).required('First Name is required'),
+        pers_lName: Yup.string().max(255).required('Last Name is required'),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        password: Yup.string().max(255).required('Password is required')
+        password: Yup.string().max(255).required('Password is required'),
+        password_confirmation: Yup.string().max(255).required('Password is required')
       })}
+
+
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-        signIn('register', {
-          redirect: false,
-          firstname: values.firstname,
-          lastname: values.lastname,
-          email: values.email,
-          password: values.password,
-          company: values.company,
-          callbackUrl: APP_DEFAULT_PATH
-        }).then((res: any) => {
-          if (res?.error) {
-            setErrors({ submit: res.error });
+        try {
+          const data = new FormData();
+          data.append('email', values.email);
+          data.append('password', values.password);
+          data.append('password_confirmation', values.password_confirmation);
+          data.append('pers_fName', values.pers_fName);
+          data.append('pers_mName', values.pers_mName);
+          data.append('pers_lName', values.pers_lName);
+          //data.append('redirectUrl', '');
+      
+          const config = {
+            method: 'post',
+            url: 'https://lawonearth.co.uk/api/auth/core/login',
+            headers: {
+              'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
+              'FRONTEND-KEY': 'XXX', 
+              'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+            },
+            data: data,
+          };
+      
+          const response = await axios(config);
+      
+          if (response.status === 200 && response.data.status === 'treatmentSuccess') {
+            setAuthData(response.data);
+            localStorage.setItem('authData', JSON.stringify(response.data));
+            sessionStorage.setItem('authData', JSON.stringify(response.data));
+            
+            const signInResult = await signIn('credentials', {
+              redirect: false, // Prevent automatic redirect and doing manual
+              email: values.email,
+              password: values.password,
+              callbackUrl: '/dashboard/default'
+            });
+      
+            if (signInResult?.error) {
+              if (scriptedRef.current) {
+                setStatus({ success: false });
+                setErrors({ submit: signInResult.error || 'Login failed' });
+                setSubmitting(false);
+              }
+            } else {
+              if (scriptedRef.current) {
+                setStatus({ success: true });
+                setSubmitting(false);
+                preload('api/menu/dashboard', fetcher); // Preload dashboard menu on login success
+                window.location.href = '/dashboard/default'; // Manually redirect to the desired page
+              }
+            }
+          } else {
+            if (scriptedRef.current) {
+              setStatus({ success: false });
+              setErrors({ submit: response.data.message || 'Login failed' });
+              setSubmitting(false);
+            }
+          }
+        } catch (error: unknown) {
+          if (scriptedRef.current) {
+            setStatus({ success: false });
+      
+            if (axios.isAxiosError(error)) {
+              setErrors({ submit: error.response?.data?.message || error.message || 'An error occurred' });
+            } else if (error instanceof Error) {
+              setErrors({ submit: error.message });
+            } else {
+              setErrors({ submit: 'An unknown error occurred' });
+            }
+      
             setSubmitting(false);
           }
-        });
+        }
       }}
     >
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -102,17 +171,17 @@ const AuthRegister = () => {
                 <OutlinedInput
                   id="firstname-login"
                   type="firstname"
-                  value={values.firstname}
+                  value={values.pers_fName}
                   name="firstname"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder="John"
                   fullWidth
-                  error={Boolean(touched.firstname && errors.firstname)}
+                  error={Boolean(touched.pers_fName && errors.pers_fName)}
                 />
-                {touched.firstname && errors.firstname && (
+                {touched.pers_fName && errors.pers_fName && (
                   <FormHelperText error id="helper-text-firstname-signup">
-                    {errors.firstname}
+                    {errors.pers_fName}
                   </FormHelperText>
                 )}
               </Stack>
@@ -122,40 +191,40 @@ const AuthRegister = () => {
                 <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(touched.lastname && errors.lastname)}
+                  error={Boolean(touched.pers_lName && errors.pers_lName)}
                   id="lastname-signup"
                   type="lastname"
-                  value={values.lastname}
+                  value={values.pers_lName}
                   name="lastname"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder="Doe"
                   inputProps={{}}
                 />
-                {touched.lastname && errors.lastname && (
+                {touched.pers_lName && errors.pers_lName && (
                   <FormHelperText error id="helper-text-lastname-signup">
-                    {errors.lastname}
+                    {errors.pers_lName}
                   </FormHelperText>
                 )}
               </Stack>
             </Grid>
             <Grid item xs={12}>
               <Stack spacing={1}>
-                <InputLabel htmlFor="company-signup">Company</InputLabel>
+                <InputLabel htmlFor="company-signup">Middle Name</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(touched.company && errors.company)}
+                  error={Boolean(touched.pers_mName && errors.pers_mName)}
                   id="company-signup"
-                  value={values.company}
+                  value={values.pers_mName}
                   name="company"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder="Demo Inc."
+                  placeholder="..."
                   inputProps={{}}
                 />
-                {touched.company && errors.company && (
+                {touched.pers_mName && errors.pers_mName && (
                   <FormHelperText error id="helper-text-company-signup">
-                    {errors.company}
+                    {errors.pers_mName}
                   </FormHelperText>
                 )}
               </Stack>
@@ -232,6 +301,58 @@ const AuthRegister = () => {
                 </Grid>
               </FormControl>
             </Grid>
+
+            <Grid item xs={12}>
+              <Stack spacing={1}>
+                <InputLabel htmlFor="password-signup">Confirm Password</InputLabel>
+                <OutlinedInput
+                  fullWidth
+                  error={Boolean(touched.password_confirmation && errors.password_confirmation)}
+                  id="password-signup"
+                  type={showPassword ? 'text' : 'password'}
+                  value={values.password_confirmation}
+                  name="password"
+                  onBlur={handleBlur}
+                  onChange={(e) => {
+                    handleChange(e);
+                    changePassword(e.target.value);
+                  }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                        color="secondary"
+                      >
+                        {showPassword ? <Eye /> : <EyeSlash />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  placeholder="******"
+                  inputProps={{}}
+                />
+                {touched.password_confirmation && errors.password_confirmation && (
+                  <FormHelperText error id="helper-text-password-signup">
+                    {errors.password_confirmation}
+                  </FormHelperText>
+                )}
+              </Stack>
+              <FormControl fullWidth sx={{ mt: 2 }}>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item>
+                    <Box sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }} />
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1" fontSize="0.75rem">
+                      {level?.label}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </FormControl>
+            </Grid>
+
             <Grid item xs={12}>
               <Typography variant="body2">
                 By Signing up, you agree to our &nbsp;
