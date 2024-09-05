@@ -142,7 +142,7 @@ const RegisterPage = () => {
           </Stack>
         </Grid>
         <Grid item xs={12}>
-          <CustomRegisterForm /> {/* Updated component */}
+          <CustomRegisterForm /> {/* Updated component }
         </Grid>
       </Grid>
     </AuthWrapper>
@@ -243,4 +243,4 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-*/
+
