@@ -1,5 +1,4 @@
 'use client'; 
-
 import { useState, SyntheticEvent } from 'react';
 //import { ClerkProvider } from "@clerk/nextjs";
 // NEXT

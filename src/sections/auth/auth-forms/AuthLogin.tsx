@@ -1,4 +1,3 @@
-
 'use client';
 import { useState, SyntheticEvent } from 'react';
 import Link from 'next/link';
