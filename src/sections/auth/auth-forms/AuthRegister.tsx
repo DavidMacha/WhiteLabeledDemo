@@ -172,8 +172,6 @@ const AuthRegister = () => {
               <Stack spacing={1}>
                 <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
                 <OutlinedInput
-                  id="firstname-login"
-                  type="text"
                   value={values.pers_fName}
                   name="firstname"
                   onBlur={handleBlur}
@@ -194,9 +192,6 @@ const AuthRegister = () => {
                 <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(touched.pers_lName && errors.pers_lName)}
-                  id="lastname-signup"
-                  type="text"
                   value={values.pers_lName}
                   name="lastname"
                   onBlur={handleBlur}
@@ -216,9 +211,6 @@ const AuthRegister = () => {
                 <InputLabel htmlFor="company-signup">Middle Name</InputLabel>
                 <OutlinedInput
                   fullWidth
-                  error={Boolean(touched.pers_mName && errors.pers_mName)}
-                  id="company-signup"
-                  type="text"
                   value={values.pers_mName}
                   name="company"
                   onBlur={handleBlur}
