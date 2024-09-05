@@ -105,14 +105,14 @@ const HeaderPage = () => {
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item>
                     <AnimateButton>
-                      <Button component={Link} href="/login" size="large" color="secondary" variant="outlined">
+                      <Button component={Link} href="auth/register" size="large" color="secondary" variant="outlined">
                         Sign in
                       </Button>
                     </AnimateButton>
                   </Grid>
                   <Grid item>
                     <AnimateButton>
-                      <Button component={Link} href="/login" target="_blank" size="large" color="primary" variant="contained">
+                      <Button component={Link} href="auth/login" target="_blank" size="large" color="primary" variant="contained">
                         Sign up
                       </Button>
                     </AnimateButton>
