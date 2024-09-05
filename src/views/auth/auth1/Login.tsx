@@ -68,6 +68,7 @@ const LoginPage = () => {
         <Grid item xs={12}>
           <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
             <Typography variant="h3">Login</Typography>
+            <AuthLogin1 login="/auth/AuthLogin1" />
             <Typography
               component={Link}
               href={user ? '/auth/register' : '/register'}
