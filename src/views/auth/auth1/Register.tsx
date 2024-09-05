@@ -1,3 +1,5 @@
+/*
+
 // pages/register.js
 import Link from 'next/link';
 import Image from 'next/image';
@@ -149,7 +151,7 @@ const RegisterPage = () => {
 
 export default RegisterPage;
 
-/*
+*/
 'use client';
 
 // NEXT
