@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
+import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
@@ -39,8 +40,10 @@ import Avatar from 'components/@extended/Avatar';
 import IconButton from 'components/@extended/IconButton';
 
 import {
+  CSVExport,
   HeaderSort,
   IndeterminateCheckbox,
+  SortingSelect,
   TablePagination,
   TableRowSelection
 } from 'components/third-party/ReactTable';
@@ -53,7 +56,7 @@ import { useGetCustomer } from 'api/customer';
 import { renderFilterTypes, GlobalFilter } from 'utils/react-table';
 
 // ASSETS
-import { Add, Eye, Trash } from 'iconsax-react';
+import { Add, Edit, Eye, Trash } from 'iconsax-react';
 
 // TYPES
 import { ThemeMode } from 'types/config';
@@ -83,6 +86,7 @@ function ReactTable({ columns, data, renderRowSubComponent, modalToggler }: Prop
     headerGroups,
     prepareRow,
     setHiddenColumns,
+    allColumns,
     visibleColumns,
     rows,
     page,
@@ -90,7 +94,9 @@ function ReactTable({ columns, data, renderRowSubComponent, modalToggler }: Prop
     setPageSize,
     state: { globalFilter, selectedRowIds, pageIndex, pageSize, expanded },
     preGlobalFilteredRows,
-    setGlobalFilter
+    setGlobalFilter,
+    setSortBy,
+    selectedFlatRows
   } = useTable(
     {
       columns,
@@ -127,7 +133,16 @@ function ReactTable({ columns, data, renderRowSubComponent, modalToggler }: Prop
           sx={{ p: 3, pb: 0 }}
         >
           <GlobalFilter preGlobalFilteredRows={preGlobalFilteredRows} globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
-
+          <Stack direction={matchDownSM ? 'column' : 'row'} alignItems="center" spacing={2}>
+            <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
+            <Button variant="contained" startIcon={<Add />} onClick={modalToggler} size="large">
+              Add Customer
+            </Button>
+            <CSVExport
+              data={selectedFlatRows.length > 0 ? selectedFlatRows.map((d: Row) => d.original) : data}
+              filename={'customer-list.csv'}
+            />
+          </Stack>
         </Stack>
         <Table {...getTableProps()}>
           <TableHead>
@@ -275,13 +290,52 @@ const CustomerList = () => {
         className: 'cell-center',
         disableSortBy: true,
         Cell: ({ row }: { row: Row<{}> }) => {
-
-          // @ts-ignore
           const collapseIcon = row.isExpanded ? <Add style={{ color: theme.palette.error.main, transform: 'rotate(45deg)' }} /> : <Eye />;
           return (
             <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
-
-
+              <Tooltip
+                componentsProps={{
+                  tooltip: {
+                    sx: {
+                      backgroundColor: mode === ThemeMode.DARK ? theme.palette.grey[50] : theme.palette.grey[700],
+                      opacity: 0.9
+                    }
+                  }
+                }}
+                title="View"
+              >
+                <IconButton
+                  color="secondary"
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                    e.stopPropagation();
+                    row.toggleRowExpanded();
+                  }}
+                >
+                  {collapseIcon}
+                </IconButton>
+              </Tooltip>
+              <Tooltip
+                componentsProps={{
+                  tooltip: {
+                    sx: {
+                      backgroundColor: mode === ThemeMode.DARK ? theme.palette.grey[50] : theme.palette.grey[700],
+                      opacity: 0.9
+                    }
+                  }
+                }}
+                title="Edit"
+              >
+                <IconButton
+                  color="primary"
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                    e.stopPropagation();
+                    setCustomer(row.original);
+                    setCustomerModal(true);
+                  }}
+                >
+                  <Edit />
+                </IconButton>
+              </Tooltip>
               <Tooltip
                 componentsProps={{
                   tooltip: {
@@ -334,5 +388,6 @@ const CustomerList = () => {
     </MainCard>
   );
 };
+
 
 export default CustomerList;

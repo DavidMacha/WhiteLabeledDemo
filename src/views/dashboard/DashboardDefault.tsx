@@ -1,4 +1,5 @@
 "use client";
+
 import { useRef } from 'react';
 import Hero from 'sections/landing/Header';
 import Technologies from 'sections/landing/Technologies';
@@ -20,8 +21,10 @@ const Landing = () => {
 
   return (
     <SimpleLayout>
+
       <Header refs={{ aboutRef, servicesRef, pricingRef }} />
       <Hero />
+      
       <Apps />
       <div ref={servicesRef}>
         <Technologies />

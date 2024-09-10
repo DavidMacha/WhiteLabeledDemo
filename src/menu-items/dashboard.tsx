@@ -1,12 +1,14 @@
 import { FormattedMessage } from 'react-intl';
-import { Home3, HomeTrendUp, Box1, Airplane } from 'iconsax-react';
+import { Home3, HomeTrendUp, Box1, Airplane, Profile2User, Story } from 'iconsax-react';
 import { NavItemType } from 'types/menu';
-import { useGetMenu } from 'api/menu';
+//import { useGetMenu } from 'api/menu';
 
 const icons = {
   dashboard: HomeTrendUp,
   components: Box1,
+  customer: Profile2User,
   loading: Home3,
+  statistics: Story,
   landing: Airplane
 };
 
@@ -24,15 +26,55 @@ const MenuFromAPI : NavItemType = {
       icon: icons.dashboard,
     },
     {
-      id: 'landing',
-      title: <FormattedMessage id="landing" />,
+      id: 'CreateNew',
+      title: <FormattedMessage id="CreateNew" />,
+      type: 'item',
+      icon: icons.statistics,
+      url: '/dashboard/analytics'
+    },
+    {
+      id: 'CreateNew',
+      title: <FormattedMessage id="Apps" />,
       type: 'item',
       icon: icons.landing,
-      url: '/landing'
+      url: '/dashboard/AppCards'
+    },
+    {
+      id: 'customer',
+      title: <FormattedMessage id="Advisors" />,
+      type: 'collapse',
+      icon: icons.customer,
+      children: [
+        {
+          id: 'customer-list',
+          title: <FormattedMessage id="Dummy List" />,
+          type: 'item',
+          url: '/apps/customer/customer-list'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Advisors" />,
+          type: 'item',
+          url: '/apps/customer/advisor-list'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Client" />,
+          type: 'item',
+          url: '/apps/customer/client-list'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Managers" />,
+          type: 'item',
+          url: '/apps/customer/manager-list'
+        }
+      ]
     }
   ]
 };
 export default MenuFromAPI 
+
 
 // test
 

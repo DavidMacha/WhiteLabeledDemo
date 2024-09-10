@@ -18,7 +18,7 @@ import { CustomerList } from 'types/customer';
 interface Props {
   open: boolean;
   modalToggler: (state: boolean) => void;
-  customer?: CustomerList | any; //from null to any changed!
+  customer?: CustomerList | null;
 }
 
 // ==============================|| CUSTOMER ADD / EDIT ||============================== //
@@ -65,7 +65,6 @@ const CustomerModal = ({ open, modalToggler, customer }: Props) => {
       )}
     </>
   );
-  
 };
 
 export default CustomerModal;

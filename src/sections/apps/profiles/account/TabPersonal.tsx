@@ -112,19 +112,19 @@ const TabPersonal = () => {
             <Grid item xs={12} sm={6}>
               <Stack spacing={1.25}>
                 <InputLabel htmlFor="personal-first-name">First Name</InputLabel>
-                <TextField fullWidth defaultValue="Lorem" id="personal-first-name" placeholder="First Name" autoFocus />
+                <TextField fullWidth defaultValue="Anshan" id="personal-first-name" placeholder="First Name" autoFocus />
               </Stack>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Stack spacing={1.25}>
                 <InputLabel htmlFor="personal-first-name">Last Name</InputLabel>
-                <TextField fullWidth defaultValue="Ipsum" id="personal-first-name" placeholder="Last Name" />
+                <TextField fullWidth defaultValue="Handgun" id="personal-first-name" placeholder="Last Name" />
               </Stack>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Stack spacing={1.25}>
                 <InputLabel htmlFor="personal-location">Country</InputLabel>
-                <TextField fullWidth defaultValue="England" id="personal-location" placeholder="Location" />
+                <TextField fullWidth defaultValue="New York" id="personal-location" placeholder="Location" />
               </Stack>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -140,7 +140,7 @@ const TabPersonal = () => {
                   fullWidth
                   multiline
                   rows={3}
-                  defaultValue="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."
+                  defaultValue="Hello, I’m Anshan Handgun Creative Graphic Designer & User Experience Designer based in Website, I create digital Products a more Beautiful and usable place. Morbid accusant ipsum. Nam nec tellus at."
                   id="personal-location"
                   placeholder="Location"
                 />
@@ -242,13 +242,13 @@ const TabPersonal = () => {
                 <Grid item xs={12} md={6}>
                   <Stack spacing={1.25}>
                     <InputLabel htmlFor="personal-email">Email Address</InputLabel>
-                    <TextField type="email" fullWidth defaultValue="someone@gmail.com" id="personal-email" placeholder="Email Address" />
+                    <TextField type="email" fullWidth defaultValue="stebin.ben@gmail.com" id="personal-email" placeholder="Email Address" />
                   </Stack>
                 </Grid>
                 <Grid item xs={12}>
                   <Stack spacing={1.25}>
                     <InputLabel htmlFor="personal-email">Portfolio URL</InputLabel>
-                    <TextField fullWidth defaultValue="https://someone.url" id="personal-url" placeholder="Portfolio URL" />
+                    <TextField fullWidth defaultValue="https://anshan.dh.url" id="personal-url" placeholder="Portfolio URL" />
                   </Stack>
                 </Grid>
                 <Grid item xs={12}>
@@ -256,7 +256,7 @@ const TabPersonal = () => {
                     <InputLabel htmlFor="personal-address">Address</InputLabel>
                     <TextField
                       fullWidth
-                      defaultValue="Street Somewhere, M.P. New York"
+                      defaultValue="Street 110-B Kalians Bag, Dewan, M.P. New York"
                       id="personal-address"
                       placeholder="Address"
                     />

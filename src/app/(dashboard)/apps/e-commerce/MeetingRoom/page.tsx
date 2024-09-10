@@ -10,8 +10,6 @@ import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
-import styles from './MeetingRoom.module.css';
-
 const Meeting = ({ params }: { params: { id: string } }) => {
   const { id } = useParams();
   const { isLoaded, user } = useUser();
@@ -51,6 +49,7 @@ const Meeting = ({ params }: { params: { id: string } }) => {
 };
 
 export default Meeting;
+
 
 
 
