@@ -1,4 +1,4 @@
-/*
+
 'use client';
 import { useState } from 'react';
 import { Stepper, Step, StepLabel } from '@mui/material';
@@ -8,16 +8,6 @@ import RequestEmailServerActivationOTPForm from './RequestEmailServerActivationO
 import Landing from "./Landing"
 //import { Button } from '@mui/material';
 
-
-// Import the components to be shown at the fourth step
-import Hero from 'sections/landing/Header';
-import Apps from 'sections/landing/Apps';
-import Technologies from 'sections/landing/Technologies';
-import Combo from 'sections/landing/Combo';
-import Pricing1Page from 'views/price/Pricing1';
-import About from 'sections/landing/About';
-import Partner from 'sections/landing/Partner';
-import FooterBlock from 'sections/landing/FB';
 
 const steps = [
   'Create Web Server', 
@@ -64,10 +54,10 @@ const MultiStepForm = () => {
 };
 
 export default MultiStepForm;
-*/
 
 
 
+/*
 'use client';
 
 import { useState, ReactNode } from 'react';
@@ -642,3 +632,4 @@ const MultiStepForm = () => {
 
 export default MultiStepForm;
 
+*/
