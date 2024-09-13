@@ -1,4 +1,84 @@
 'use client';
+import { useState } from 'react';
+import { Stepper, Step, StepLabel } from '@mui/material';
+import CreateWebServerForm from './CreateWebServerForm';
+import CreateEmailServerForm from './CreateEmailServerForm';
+import RequestEmailServerActivationOTPForm from './RequestEmailServerActivationOTPForm';
+
+
+// Import the components to be shown at the fourth step
+import Hero from 'sections/landing/Header';
+import Apps from 'sections/landing/Apps';
+import Technologies from 'sections/landing/Technologies';
+import Combo from 'sections/landing/Combo';
+import Pricing1Page from 'views/price/Pricing1';
+import About from 'sections/landing/About';
+import Partner from 'sections/landing/Partner';
+import FooterBlock from 'sections/landing/FB';
+
+const steps = [
+  'Create Web Server', 
+  'Create Email Server', 
+  'Request Email Server Activation OTP', 
+  'Final Configuration and Setup'
+];
+const MultiStepForm = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [formData, setFormData] = useState({});
+
+  const handleNext = () => setActiveStep((prev) => prev + 1);
+  const handleBack = () => setActiveStep((prev) => prev - 1);
+
+  return (
+    <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
+      {/* Step 1: Create Web Server */}
+      {activeStep === 0 && <CreateWebServerForm handleNext={handleNext} formData={formData} setFormData={setFormData} />}
+      
+      {/* Step 2: Create Email Server */}
+      {activeStep === 1 && (
+        <CreateEmailServerForm handleNext={handleNext} handleBack={handleBack} formData={formData} setFormData={setFormData} />
+      )}
+      
+      {/* Step 3: Request Email Server Activation OTP */}
+      {activeStep === 2 && (
+        <RequestEmailServerActivationOTPForm handleNext={handleNext} handleBack={handleBack} formData={formData} setFormData={setFormData} />
+      )}
+
+      {/* Step 4: Final Configuration and Setup */}
+      {activeStep === 3 && (
+        <>
+          {/* Add your final components here */}
+          <Hero />
+          <Apps />
+          <Technologies />
+          <Combo />
+          <Pricing1Page />
+          <About />
+          <Partner />
+          <FooterBlock />
+          {/* Navigation Buttons */}
+          <button onClick={handleBack}>Back</button>
+          <button onClick={handleNext}>Finish</button>
+        </>
+      )}
+    </>
+  );
+};
+
+export default MultiStepForm;
+
+
+
+/*
+'use client';
 
 import { useState, ReactNode } from 'react';
 
@@ -103,7 +183,7 @@ const CreateWebServerForm = ({ handleNext, setErrorIndex, formData, setFormData 
           />
         </Stack>
       </Grid>
-      {/* Other fields follow a similar pattern */}
+      
       <Grid item xs={12} sm={6}>
         <Stack spacing={1}>
           <InputLabel>FTP Host</InputLabel>
@@ -229,7 +309,7 @@ const CreateWebServerForm = ({ handleNext, setErrorIndex, formData, setFormData 
           />
         </Stack>
       </Grid>
-      {/* Your form fields here */}
+      
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
         <Stack spacing={2} sx={{ flexGrow: 1, alignItems: 'center' }}>
           <Button variant="contained" color="secondary" onClick={handleSubmit}>Submit</Button>
@@ -294,7 +374,7 @@ const CreateEmailServerForm = ({ handleNext, handleBack, setErrorIndex, formData
         </Stack>
       </Grid>
 
-      {/* Other fields follow a similar pattern */}
+      
 
       <Grid item xs={12} sm={6}>
         <Stack spacing={1}>
@@ -422,8 +502,7 @@ const CreateEmailServerForm = ({ handleNext, handleBack, setErrorIndex, formData
         </Stack>
       </Grid>
 
-      {/* Repeat for other required fields if any */}
-
+      
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
       <Stack spacing={2} sx={{ flexGrow: 1, alignItems: 'center' }}>
         <Button variant="contained" color="secondary">
@@ -475,7 +554,7 @@ const RequestEmailServerActivationOTPForm = ({ handleNext, handleBack, setErrorI
       </Stack>
     </Grid>
 
-    {/* Other fields follow a similar pattern */}
+
     <Grid item xs={12}>
     <Stack spacing={2} sx={{ flexGrow: 1, alignItems: 'center' }}>
         <Button variant="contained" color="secondary">
@@ -572,3 +651,5 @@ const MultiStepForm = () => {
 };
 
 export default MultiStepForm;
+
+*/
