@@ -76,8 +76,12 @@ export default function DashboardDomain2() {
     }
     formDataForApi.append("fc_data", fc_data);
     formDataForApi.append("s_code", s_code);
-    formDataForApi.append("dom_codes", JSON.stringify(dom_codes));
+    //formDataForApi.append("dom_codes", JSON.stringify(dom_codes));
+    formDataForApi.append("dom_codes[0]", dom_codes[0]);    
     formDataForApi.append("s_codes", JSON.stringify(s_codes));
+
+
+
 
     try {
       setLoading(true);

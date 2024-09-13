@@ -6,8 +6,20 @@ import CreateWebServerForm from './CreateWebServerForm';
 import CreateEmailServerForm from './CreateEmailServerForm';
 import RequestEmailServerActivationOTPForm from './RequestEmailServerActivationOTPForm';
 import Landing from "./Landing"
-//import { Button } from '@mui/material';
+import { Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import AnimateButton from 'components/@extended/AnimateButton';
 
+import Hero from 'sections/landing/Header';
+import Technologies from 'sections/landing/Technologies';
+import Combo from 'sections/landing/Combo';
+import Apps from 'sections/landing/Apps';
+import Partner from 'sections/landing/Partner';
+import SimpleLayout from 'layout/SimpleLayout';
+import Pricing1Page from 'views/price/Pricing1';
+import About from 'sections/landing/About';
+import FooterBlock from 'sections/landing/FB';
 
 const steps = [
   'Create Web Server', 
@@ -47,15 +59,36 @@ const MultiStepForm = () => {
 
      
       {activeStep === 3 && (
-        <Landing/>
+        <>
+        {/* Add your final components here */}
+        <Hero />
+        <Apps />
+        <Technologies />
+        <Combo />
+        <Pricing1Page />
+        <About />
+        <Partner />
+        <FooterBlock />
+        {/* Navigation Buttons */}
+
+        <Button onClick={handleBack} variant="contained" color="primary">
+          back
+        </Button>
+        <Button onClick={handleNext} variant="contained" color="primary">
+          Finish
+        </Button>
+      </>
       )}
+
     </>
   );
 };
 
 export default MultiStepForm;
 
+/*
 
+/*
 
 /*
 'use client';

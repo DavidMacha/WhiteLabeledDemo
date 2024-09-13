@@ -1,4 +1,5 @@
 "use client";
+import { Button } from '@mui/material';
 
 import { useRef, useState } from 'react';
 import Hero from 'sections/landing/Header';
@@ -32,55 +33,24 @@ const Landing = () => {
 
   return (
     <SimpleLayout>
-      {/* Step 1: OTP Verification Step */}
-      {currentStep === 1 && (
-        <div>
-          {/* Your OTP component here */}
-          <h2>OTP Step</h2>
-          <button onClick={handleNext}>Next</button>
-        </div>
-      )}
+          {/* Navigation Buttons */}
+          <Button onClick={handleBack} variant="contained" color="primary">Back</Button>
+          <Button onClick={handleNext} variant="contained" color="primary">Finish</Button>
 
-      {/* Step 2: Hero and other components */}
-      {currentStep === 2 && (
-        <>
-          <Header refs={{ aboutRef, servicesRef, pricingRef }} />
+          {/* Add your final components here */}
           <Hero />
           <Apps />
-          <div ref={servicesRef}>
-            <Technologies />
-          </div>
+          <Technologies />
           <Combo />
-          <div ref={pricingRef}>
-            <Pricing1Page />
-          </div>
-          <div ref={aboutRef}>
-            <About />
-          </div>
+          <Pricing1Page />
+          <About />
           <Partner />
           <FooterBlock />
-          <button onClick={handleBack}>Back</button>
-          <button onClick={handleNext}>Next</button>
-        </>
-      )}
+          {/* Navigation Buttons */}
+          <Button onClick={handleBack} variant="contained" color="primary">Back</Button>
+          <Button onClick={handleNext} variant="contained" color="primary">Finish</Button>
 
-      {/* Step 3: Any additional steps */}
-      {currentStep === 3 && (
-        <div>
-          {/* Example for a third step */}
-          <h2>Third Step Content</h2>
-          <button onClick={handleBack}>Back</button>
-          <button onClick={handleNext}>Next</button>
-        </div>
-      )}
 
-      {/* Step 4: Final step */}
-      {currentStep === 4 && (
-        <div>
-          <h2>Final Step Content</h2>
-          <button onClick={handleBack}>Back</button>
-        </div>
-      )}
     </SimpleLayout>
   );
 };
