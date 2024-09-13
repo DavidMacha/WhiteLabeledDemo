@@ -4,6 +4,8 @@ import { Stepper, Step, StepLabel } from '@mui/material';
 import CreateWebServerForm from './CreateWebServerForm';
 import CreateEmailServerForm from './CreateEmailServerForm';
 import RequestEmailServerActivationOTPForm from './RequestEmailServerActivationOTPForm';
+import Landing from "./Landing"
+//import { Button } from '@mui/material';
 
 
 // Import the components to be shown at the fourth step
@@ -54,20 +56,7 @@ const MultiStepForm = () => {
 
       {/* Step 4: Final Configuration and Setup */}
       {activeStep === 3 && (
-        <>
-          {/* Add your final components here */}
-          <Hero />
-          <Apps />
-          <Technologies />
-          <Combo />
-          <Pricing1Page />
-          <About />
-          <Partner />
-          <FooterBlock />
-          {/* Navigation Buttons */}
-          <button onClick={handleBack}>Back</button>
-          <button onClick={handleNext}>Finish</button>
-        </>
+        <Landing/>
       )}
     </>
   );
