@@ -1,3 +1,4 @@
+/*
 'use client';
 import { useState } from 'react';
 import { Stepper, Step, StepLabel } from '@mui/material';
@@ -41,20 +42,20 @@ const MultiStepForm = () => {
         ))}
       </Stepper>
 
-      {/* Step 1: Create Web Server */}
+      
       {activeStep === 0 && <CreateWebServerForm handleNext={handleNext} formData={formData} setFormData={setFormData} />}
       
-      {/* Step 2: Create Email Server */}
+     
       {activeStep === 1 && (
         <CreateEmailServerForm handleNext={handleNext} handleBack={handleBack} formData={formData} setFormData={setFormData} />
       )}
       
-      {/* Step 3: Request Email Server Activation OTP */}
+     
       {activeStep === 2 && (
         <RequestEmailServerActivationOTPForm handleNext={handleNext} handleBack={handleBack} formData={formData} setFormData={setFormData} />
       )}
 
-      {/* Step 4: Final Configuration and Setup */}
+     
       {activeStep === 3 && (
         <Landing/>
       )}
@@ -63,10 +64,10 @@ const MultiStepForm = () => {
 };
 
 export default MultiStepForm;
+*/
 
 
 
-/*
 'use client';
 
 import { useState, ReactNode } from 'react';
@@ -641,4 +642,3 @@ const MultiStepForm = () => {
 
 export default MultiStepForm;
 
-*/
