@@ -47,7 +47,7 @@ const PersonalRoom = () => {
       });
     }
 
-    router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`);
+    router.push(`/meeting/${meetingId}?personal=true`);
   };
 
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`;

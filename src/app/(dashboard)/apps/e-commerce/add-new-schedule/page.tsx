@@ -1,10 +1,10 @@
 // PROJECT IMPORTS
-import ZoomSession from 'views/apps/ZoomSession';
+import AddNewProduct from 'views/apps/AddNewProduct';
 
 // ==============================|| ECOMMERCE - ADD PRODUCT ||============================== //
 
 function AddNewProductPage() {
-  return <ZoomSession />;
+  return <AddNewProduct />;
 }
 
 export default AddNewProductPage;

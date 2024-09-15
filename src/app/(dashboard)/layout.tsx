@@ -8,10 +8,10 @@ import { StreamVideoProvider } from "providers/StreamClientProvider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-   <ClerkProvider>
-    <AuthGuard>
-      <DashboardLayout><StreamVideoProvider>{children}</StreamVideoProvider></DashboardLayout>
-    </AuthGuard>
+    <ClerkProvider>
+      <AuthGuard>
+        <DashboardLayout><StreamVideoProvider>{children}</StreamVideoProvider></DashboardLayout>
+      </AuthGuard>
     </ClerkProvider>
   );
 }

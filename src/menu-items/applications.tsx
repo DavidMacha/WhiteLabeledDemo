@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // ASSETS
-import { KyberNetwork, Messages2, Story, Calendar1, Profile2User, Bill, UserSquare, ShoppingBag } from 'iconsax-react';
+import { KyberNetwork, Story, Messages2, Calendar1, Profile2User, Bill, UserSquare, ShoppingBag } from 'iconsax-react';
 
 // TYPE
 import { NavItemType } from 'types/menu';
@@ -11,10 +11,10 @@ import { NavItemType } from 'types/menu';
 const icons = {
   applications: KyberNetwork,
   chat: Messages2,
-  statistics: Story,
   calendar: Calendar1,
   customer: Profile2User,
   invoice: Bill,
+  statistics: Story,
   profile: UserSquare,
   ecommerce: ShoppingBag
 };
@@ -43,13 +43,6 @@ const applications: NavItemType = {
       url: '/apps/calendar',
       icon: icons.calendar
     },
-    {
-      id: 'Genarate Legal Document',
-      title: <FormattedMessage id="Genarate Legal Document" />,
-      type: 'item',
-      url: '/forms/DocGen',
-      icon: icons.statistics
-    },
     /*
     {
       id: 'kanban',
@@ -59,32 +52,17 @@ const applications: NavItemType = {
       url: '/apps/kanban/board',
       breadcrumbs: false
     },
+
     */
     {
-      id: 'customer',
-      title: <FormattedMessage id="Advisors" />,
-      type: 'collapse',
-      icon: icons.customer,
-      children: [
-        {
-          id: 'customer-list',
-          title: <FormattedMessage id="list" />,
-          type: 'item',
-          url: '/apps/customer/customer-list'
-        },
-        {
-          id: 'customer-card',
-          title: <FormattedMessage id="cards" />,
-          type: 'item',
-          url: '/apps/customer/customer-card'
-        }
-      ]
+      id: 'Generate Legal Document',
+      title: <FormattedMessage id="Generate Legal Document" />,
+      type: 'item',
+      url: '/forms/DocGen',
+      icon: icons.statistics
     },
-    /*
 
-    */
-
-    /*
+    
     {
       id: 'profile',
       title: <FormattedMessage id="profile" />,
@@ -107,8 +85,7 @@ const applications: NavItemType = {
         }
       ]
     },
-    */
-
+    
     {
       id: 'e-commerce',
       title: <FormattedMessage id="Video Call" />,
@@ -141,19 +118,14 @@ const applications: NavItemType = {
           url: '/apps/e-commerce/product-list'
         },
         {
-          id: 'Session Mode',
-          title: <FormattedMessage id="Session Mode" />,
+          id: 'add-new-schedule',
+          title: <FormattedMessage id="add-new-schedule" />,
           type: 'item',
           url: '/apps/e-commerce/add-new-schedule'
         },
-        {
-          id: 'checkout',
-          title: <FormattedMessage id="Statistics and History" />,
-          type: 'item',
-          url: '/widget/statistics'
-        }
       ]
     }
+
   ]
 };
 

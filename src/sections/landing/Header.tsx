@@ -8,12 +8,14 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 
 // THIRD - PARTY
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 // ASSETS
 import AnimateButton from 'components/@extended/AnimateButton';
@@ -22,9 +24,35 @@ import AnimateButton from 'components/@extended/AnimateButton';
 
 const HeaderPage = () => {
   const theme = useTheme();
-  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." +
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+  const [text, setText] = useState<string>(
+    "Browse the Learning Centre to access hundreds of articles & guides. Prepare documents & contracts in just a few clicks. " +
+    "Connect with legal advisors in affordable video sessions. " +
+    "With Law On Earth, you'll be able to understand your legal matter and self-act safely and affordably."
+  );
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [previousText, setPreviousText] = useState<string>(text); // Track previous text for cancel functionality
+
+  const handleEditClick = (index: number) => {
+    setIsEditing(true);
+    setHoverIndex(index);
+    setPreviousText(text); // Save the current text before editing
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    setHoverIndex(null);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setHoverIndex(null);
+    setText(previousText); // Revert to previous text
+  };
+
+  const handleAddTextClick = () => {
+    setText(previousText); // Restore the last text if the current text is empty
+  };
 
   return (
     <Container sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
@@ -79,15 +107,55 @@ const HeaderPage = () => {
                     delay: 0.2
                   }}
                 >
-                  <Box sx={{ position: 'relative' }}>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{ fontSize: { xs: '0.875rem', md: '1rem' }, fontWeight: 400, lineHeight: { xs: 1.4, md: 1.4 } }}
+                  {isEditing && hoverIndex === 0 ? (
+                    <TextField
+                      fullWidth
+                      multiline
+                      minRows={4}
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                      variant="outlined"
+                    />
+                  ) : (
+                    <Box
+                      onMouseEnter={() => setHoverIndex(0)}
+                      onMouseLeave={() => setHoverIndex(null)}
+                      sx={{ position: 'relative' }}
                     >
-                      {text}
-                    </Typography>
-                  </Box>
+                      <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ fontSize: { xs: '0.875rem', md: '1rem' }, fontWeight: 400, lineHeight: { xs: 1.4, md: 1.4 } }}
+                      >
+                        {text || (
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={handleAddTextClick}
+                            sx={{ marginTop: '8px' }}
+                          >
+                            Add Text
+                          </Button>
+                        )}
+                      </Typography>
+                      {hoverIndex === 0 && !isEditing && (
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => handleEditClick(0)}
+                          sx={{
+                            position: 'absolute',
+                            top: 0,
+                            right: 0,
+                            transform: 'translateY(-100%)',
+                            marginBottom: '8px',
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      )}
+                    </Box>
+                  )}
                 </motion.div>
               </Grid>
             </Grid>
@@ -106,7 +174,7 @@ const HeaderPage = () => {
                   <Grid item>
                     <AnimateButton>
                       <Button component={Link} href="auth/register" size="large" color="secondary" variant="outlined">
-                        Sign in
+                        Register
                       </Button>
                     </AnimateButton>
                   </Grid>
@@ -163,10 +231,36 @@ const HeaderPage = () => {
                       </span>
                     </Typography>
                   </Grid>
-                  
                 </Grid>
               </motion.div>
             </Grid>
+            {isEditing && (
+              <Grid item xs={12}>
+                <motion.div
+                  initial={{ opacity: 0, translateY: 550 }}
+                  animate={{ opacity: 1, translateY: 0 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 150,
+                    damping: 30,
+                    delay: 0.6
+                  }}
+                >
+                  <Grid container spacing={2} justifyContent="center">
+                    <Grid item>
+                      <Button variant="contained" color="primary" onClick={handleSaveClick}>
+                        Save
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button variant="outlined" color="secondary" onClick={handleCancelClick}>
+                        Cancel
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </motion.div>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>
@@ -184,14 +278,12 @@ const HeaderPage = () => {
           borderBottom: `1px solid ${theme.palette.divider}`
         }}
       >
-        
       </Box>
     </Container>
   );
 };
 
-export default HeaderPage;
-
+export default HeaderPage 
 
 /*
 'use client';

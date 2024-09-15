@@ -227,4 +227,3 @@ const CustomerCard = ({ customer }: { customer: CustomerList }) => {
 };
 
 export default CustomerCard;
- 

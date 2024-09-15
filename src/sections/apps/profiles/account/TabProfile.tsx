@@ -80,7 +80,7 @@ const TabProfile = () => {
                         <Sms size={18} />
                       </ListItemIcon>
                       <ListItemSecondaryAction>
-                        <Typography align="right">minmattral@gmail.com</Typography>
+                        <Typography align="right">anshan.dh81@gmail.com</Typography>
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -88,7 +88,7 @@ const TabProfile = () => {
                         <CallCalling size={18} />
                       </ListItemIcon>
                       <ListItemSecondaryAction>
-                        <Typography align="right">(+??) 999 888 777</Typography>
+                        <Typography align="right">(+1-876) 8654 239 581</Typography>
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -124,31 +124,31 @@ const TabProfile = () => {
                   <LinearWithLabel value={30} />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography color="secondary">Legal Advisor</Typography>
+                  <Typography color="secondary">UX Reseacher</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <LinearWithLabel value={80} />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography color="secondary">Estate Law</Typography>
+                  <Typography color="secondary">Wordpress</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <LinearWithLabel value={90} />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography color="secondary">Tax Law</Typography>
+                  <Typography color="secondary">HTML</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <LinearWithLabel value={30} />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography color="secondary">Insurance Law</Typography>
+                  <Typography color="secondary">Graphic Design</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <LinearWithLabel value={95} />
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography color="secondary">Trade Law</Typography>
+                  <Typography color="secondary">Code Style</Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <LinearWithLabel value={75} />
@@ -163,9 +163,8 @@ const TabProfile = () => {
           <Grid item xs={12}>
             <MainCard title="About me">
               <Typography color="secondary">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
-              Cum sociis natoque penatibus et magnis dis parturient montes, 
-              nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Hello, I’m Anshan Handgun Creative Graphic Designer & User Experience Designer based in Website, I create digital Products a
+                more Beautiful and usable place. Morbid accusant ipsum. Nam nec tellus at.
               </Typography>
             </MainCard>
           </Grid>
@@ -182,8 +181,8 @@ const TabProfile = () => {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
-                        <Typography color="secondary">Company</Typography>
-                        <Typography>PTT</Typography>
+                        <Typography color="secondary">Father Name</Typography>
+                        <Typography>Mr. Deepen Handgun</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
@@ -201,7 +200,7 @@ const TabProfile = () => {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Country</Typography>
-                        <Typography>Australia</Typography>
+                        <Typography>New York</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
@@ -211,7 +210,7 @@ const TabProfile = () => {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Email</Typography>
-                        <Typography>someone@gmail.com</Typography>
+                        <Typography>anshan.dh81@gmail.com</Typography>
                       </Stack>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -225,7 +224,7 @@ const TabProfile = () => {
                 <ListItem>
                   <Stack spacing={0.5}>
                     <Typography color="secondary">Address</Typography>
-                    <Typography>Street somewhere, M.P. New York</Typography>
+                    <Typography>Street 110-B Kalians Bag, Dewan, M.P. New York</Typography>
                   </Stack>
                 </ListItem>
               </List>
@@ -292,7 +291,7 @@ const TabProfile = () => {
                   <Grid container spacing={matchDownMD ? 0.5 : 3}>
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
-                        <Typography color="secondary">Senior Lawyer (Year)</Typography>
+                        <Typography color="secondary">Senior UI/UX designer (Year)</Typography>
                         <Typography>2019-Current</Typography>
                       </Stack>
                     </Grid>
@@ -300,7 +299,8 @@ const TabProfile = () => {
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Job Responsibility</Typography>
                         <Typography>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                          Perform task related to project manager with the 100+ team under my observation. Team management is key role in
+                          this company.
                         </Typography>
                       </Stack>
                     </Grid>
@@ -310,14 +310,14 @@ const TabProfile = () => {
                   <Grid container spacing={matchDownMD ? 0.5 : 3}>
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
-                        <Typography color="secondary">Trade Lawyer (Year)</Typography>
+                        <Typography color="secondary">Trainee cum Project Manager (Year)</Typography>
                         <Typography>2017-2019</Typography>
                       </Stack>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Job Responsibility</Typography>
-                        <Typography>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</Typography>
+                        <Typography>Team management is key role in this company.</Typography>
                       </Stack>
                     </Grid>
                   </Grid>

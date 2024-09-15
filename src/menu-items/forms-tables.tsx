@@ -22,38 +22,27 @@ const icons = {
 
 const formsTables: NavItemType = {
   id: 'group-forms-tables',
-  title: <FormattedMessage id="Demo Forms" />,
+  title: <FormattedMessage id="forms-demo" />,
   icon: icons.formsTable,
   type: 'group',
   children: [
+    {
+      id: 'validation',
+      title: <FormattedMessage id="forms-validate-example" />,
+      type: 'item',
+      url: '/forms/validation',
+      icon: icons.validation
+    },
     {
       id: 'wizard',
       title: <FormattedMessage id="demo-payment-form" />,
       type: 'item',
       url: '/forms/wizard',
       icon: icons.wizard
-    },
-    {
-      id: 'forms-layout',
-      title: <FormattedMessage id="layout" />,
-      type: 'collapse',
-      icon: icons.layout,
-      children: [
-        {
-          id: 'basic',
-          title: <FormattedMessage id="basic" />,
-          type: 'item',
-          url: '/forms/layout/basic'
-        },
-        {
-          id: 'multi-column',
-          title: <FormattedMessage id="multi-column" />,
-          type: 'item',
-          url: '/forms/layout/multi-column'
-        }
-      ]
     }
- 
+     
+    
+
   ]
 };
 

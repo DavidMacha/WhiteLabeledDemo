@@ -46,8 +46,8 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: '',
+        email: 'minmattral@gmail.com',
+        password: 'aAertyuiop@1',
         submit: null,
       }}
       validationSchema={Yup.object().shape({
@@ -57,18 +57,20 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
+          signIn('login', { redirect: false, email: values.email, password: values.password });
           const data = new FormData();
           data.append('email', values.email);
           data.append('password', values.password);
+
           //data.append('redirectUrl', '');
       
           const config = {
             method: 'post',
             url: 'https://lawonearth.co.uk/api/auth/core/login',
             headers: {
-              'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
+              'COMPANY-CODE': 'def-mc-admin',
               'FRONTEND-KEY': 'XXX', 
-              'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+              //'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
             },
             data: data,
           };
@@ -76,15 +78,19 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
           const response = await axios(config);
       
           if (response.status === 200 && response.data.status === 'treatmentSuccess') {
+            setStatus({ success: true });
+            setSubmitting(false);
+            preload('api/menu/dashboard', fetcher);
+            //save response
             setAuthData(response.data);
             localStorage.setItem('authData', JSON.stringify(response.data));
             sessionStorage.setItem('authData', JSON.stringify(response.data));
             
             const signInResult = await signIn('credentials', {
-              redirect: false, // Prevent automatic redirect and doing manual
+              redirect: false, // Prevent automatic redirect
               email: values.email,
               password: values.password,
-              callbackUrl: '/dashboard/default'
+              //callbackUrl: '/dashboard/default'
             });
       
             if (signInResult?.error) {
@@ -93,14 +99,14 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
                 setErrors({ submit: signInResult.error || 'Login failed' });
                 setSubmitting(false);
               }
-            } else {
+            } else 
               if (scriptedRef.current) {
                 setStatus({ success: true });
                 setSubmitting(false);
                 preload('api/menu/dashboard', fetcher); // Preload dashboard menu on login success
                 window.location.href = '/dashboard/default'; // Manually redirect to the desired page
               }
-            }
+            
           } else {
             if (scriptedRef.current) {
               setStatus({ success: false });
@@ -233,43 +239,53 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 
 export default AuthLogin;
 */
-//____________________________________________________________________
-/*
-import { useState, SyntheticEvent } from 'react';
-// THIRD - PARTY
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import axios from 'axios';
-import { useSession, signIn } from 'next-auth/react';
 
+
+//__________________________________________________________________________________________________
+
+/*
+"use client"
+import { useState, SyntheticEvent } from 'react';
+
+// NEXT
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { fetcher } from 'utils/axios';
+import { preload } from 'swr';
 // MATERIAL - UI
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
+import Links from '@mui/material/Link';
 import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from 'next/link';
+
+// THIRD - PARTY
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import axios from 'axios';
+import FormData from 'form-data';
+
 // PROJECT IMPORTS
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
-import useScriptRef from 'hooks/useScriptRef';
-import Links from '@mui/material/Link';
+
+
 // ASSETS
 import { Eye, EyeSlash } from 'iconsax-react';
+import useScriptRef from 'hooks/useScriptRef';
 
-// ============================|| CUSTOM LOGIN ||============================ //
-
-const AuthLogin = () => {
+const AuthLogin = ({ providers, csrfToken }: any) => {
+  // @ts-ignore
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(false);
   const { data: session } = useSession();
   const [showPassword, setShowPassword] = useState(false);
-  const [loginError, setLoginError] = useState<string | null>(null);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -281,51 +297,36 @@ const AuthLogin = () => {
 
   return (
     <Formik
-      initialValues={{ 
-        email: '', 
-        password: '',
-        submit: null // 4 (sucess, failed, waiting, default)
-        // if submit is not NULL >> disable the bottom to save API rates 
-        // opposite is NULL >> enable the submit bottom
+      initialValues={{
+        email: 'minmattral@gmail.com',
+        password: 'aAertyuiop@1',
+        submit: null,
       }}
-
-      // provided by API side and swap with credentials results
       validationSchema={Yup.object().shape({
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-        password: Yup.string().max(255).required('Password is required')
+        password: Yup.string().max(255).required('Password is required'),
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          const formData = new FormData();
-          formData.append('email', values.email);
-          formData.append('password', values.password);
+          const data = new FormData();
+          data.append('email', values.email);
+          data.append('password', values.password);
 
-          const response = await axios.post(
-            'https://lawonearth.co.uk/api/auth/partner/login',
-            // 1st - https...../api (or) 2nd - load from env link to API (or) 3rd env up the path {/auth/partner/login}
-            // todo do- centralize
-            formData,
-            {
-              headers: {
-                'COMPANY-CODE': 'MC-H3HBRZU6ZK5744S',
-                'FRONTEND-KEY': 'XXX',
-                //'User-Agent': 'Apidog/1.0.0 (https://apidog.com)', // automatically set by browser no need to manual
-                // 'Content-Type': 'application/x-www-form-urlencoded', // Uncomment if server expects URL-encoded data
-              /* will centralize the calls from a common private variable
-               also there should be 2 parts, URL + {PATH}
-               We can set a string ( any ) for checkup and if matched >>
-               can concatinate the URL + corresponding path
-               and return the results via function or "export const"
-               then fetch from here to centralize and for better debugging and changes
-              
-               Headers should be encapsulated too similarly
-              
-             
-              }
-            }
-          );
+          const config = {
+            method: 'post',
+            url: 'https://lawonearth.co.uk/api/auth/core/login',
+            headers: {
+              'COMPANY-CODE': 'def-mc-admin',
+              'FRONTEND-KEY': 'XXX', // Replace with actual FRONTEND-KEY
+              'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+              // No need to manually set Content-Type for FormData
+            },
+            
+            data: data,
+          };
 
-          // current one >> relay on success
+          const response = await axios(config);
+
           /* do a test on HTTP response code 
             200,400,500,... (3 types)
             so I can make a coditional to check the response code?
@@ -334,47 +335,21 @@ const AuthLogin = () => {
             and if failed raise a noti or toast or alert!
             and keep in same page.
 
-          
+        
 
           if (response.data.status === 'treatmentSuccess') {
-            // showing a toast to user to tell him success
-            // Handle successful login
             setStatus({ success: true });
-            setSubmitting(false);
-            setLoginError(null);
-            // Redirect or show success message
-          } 
-          else {
-          //handle error
-          }
-
-          /*
-          else if (response.data.status === 'treatmentFailure') {
-            /*
-            throw new Error('Login failed');
-                
-          }
-          else if (response.data.status === 'validationError') {
-            // in each case > process
-            // return a toast or may be alert or noti
-          }
-          else {
-            // edge case (rare case)
-            // log into cloudware
-          }
-       
-
-
-        } catch (err: any) {
-          if (scriptedRef.current) {
+            preload('api/menu/dashboard', fetcher);
+          } else {
             setStatus({ success: false });
-            setErrors({ submit: err.message });
-            setLoginError(err.message);
-            setSubmitting(false);
+            setErrors({ submit: response.data.message || 'Login failed' });
           }
-          // log into cloudwatch to see what happened (pop up noti or similar)
+        } catch (error: any) {
+          setStatus({ success: false });
+          setErrors({ submit: error.message || 'An error occurred' });
+        } finally {
+          setSubmitting(false);
         }
-
       }}
     >
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -426,7 +401,7 @@ const AuthLogin = () => {
                       </IconButton>
                     </InputAdornment>
                   }
-                  placeholder="Enter password..."
+                  placeholder="Enter password"
                 />
                 {touched.password && errors.password && (
                   <FormHelperText error id="standard-weight-helper-text-password-login">
@@ -455,14 +430,22 @@ const AuthLogin = () => {
                 </Links>
               </Stack>
             </Grid>
-            {loginError && (
+            {errors.submit && (
               <Grid item xs={12}>
-                <FormHelperText error>{loginError}</FormHelperText>
+                <FormHelperText error>{errors.submit}</FormHelperText>
               </Grid>
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
                   Login
                 </Button>
               </AnimateButton>
@@ -477,12 +460,15 @@ const AuthLogin = () => {
 export default AuthLogin;
 */
 
+//_______________________________________________________
 
 
-'use client'; 
+
+
+'use client';
 
 import { useState, SyntheticEvent } from 'react';
-//import { ClerkProvider } from "@clerk/nextjs";
+
 // NEXT
 import Link from 'next/link';
 import { useSession, signIn } from 'next-auth/react';
@@ -499,6 +485,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
+import axios from 'axios';
 
 // THIRD - PARTY
 import * as Yup from 'yup';
@@ -530,7 +518,6 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
   };
 
   return (
-  
     <Formik
       initialValues={{
         email: 'info@phoenixcoded.co',
@@ -544,6 +531,29 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           signIn('login', { redirect: false, email: values.email, password: values.password });
+          const data = new FormData();
+          data.append('email', values.email);
+          data.append('password', values.password);
+
+          //data.append('redirectUrl', '');
+      
+          const config = {
+            method: 'post',
+            url: 'https://lawonearth.co.uk/api/auth/core/login',
+            headers: {
+              'COMPANY-CODE': 'def-mc-admin',
+              'FRONTEND-KEY': 'XXX', 
+              //'User-Agent': 'Apidog/1.0.0 (https://apidog.com)',
+            },
+            data: data,
+          };
+          const response = await axios(config);
+          if (response.status === 200 && response.data.status === 'treatmentSuccess') {
+            setStatus({ success: true });
+            setSubmitting(false);
+            preload('api/menu/dashboard', fetcher);
+          }
+
           if (scriptedRef.current) {
             setStatus({ success: true });
             setSubmitting(false);
@@ -652,7 +662,6 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
         </form>
       )}
     </Formik>
-
   );
 };
 

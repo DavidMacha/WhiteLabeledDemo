@@ -15,24 +15,14 @@ const ApiData: React.FC = () => {
       // Define the headers
       const myHeaders = new Headers();
       myHeaders.append("COMPANY-CODE", "def-mc-admin");
-      myHeaders.append("Authorization", "MC-H3HBRZU6ZK5744S");
-      myHeaders.append("User-Agent", "Apidog/1.0.0 (https://apidog.com)");
-      myHeaders.append("es_code", "es-9cc51159-c706-414e-b4d2-db8f649772f6");
       myHeaders.append("FRONTEND-KEY", "XXX");
-      myHeaders.append("es_username", "7a64b5001@smtp-brevo.com");
+      myHeaders.append("User-Agent", "Apidog/1.0.0 (https://apidog.com)");
 
+      
       // Create the form data
       const formData = new FormData();
       formData.append("email", "minmattral@gmail.com");
       formData.append("password", "aAertyuiop@1");
-      formData.append('pers_fName', "Min");
-      formData.append('pers_mName', "Htet");
-      formData.append('pers_lName', "Myet");
-      formData.append('email', "minmattral@gmail.com");
-      formData.append('password', "aAertyuiop@1");
-      formData.append('password_confirmation', "aAertyuiop@1");
-      formData.append('pers_preferredTimezone', "UTC");
-      formData.append('redirectUrl', "http://lawonearth.org/");
 
       // Define the request options
       const requestOptions: RequestInit = {
