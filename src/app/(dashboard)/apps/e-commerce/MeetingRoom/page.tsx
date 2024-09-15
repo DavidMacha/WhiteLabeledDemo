@@ -1,3 +1,15 @@
+// PROJECT IMPORTS
+import IncoiceDashboard from 'views/apps/IncoiceDashboard';
+
+// ==============================|| INVOICE - DASHBOARD ||============================== //
+
+const Dashboard = () => {
+  return <IncoiceDashboard />;
+};
+
+export default Dashboard;
+
+/*
 "use client";
 
 import Alert from "components/Alert";
@@ -49,7 +61,7 @@ const Meeting = ({ params }: { params: { id: string } }) => {
 };
 
 export default Meeting;
-
+*/
 
 
 

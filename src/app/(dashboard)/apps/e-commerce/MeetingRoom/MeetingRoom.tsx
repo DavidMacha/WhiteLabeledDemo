@@ -1,3 +1,15 @@
+// PROJECT IMPORTS
+import IncoiceDashboard from 'views/apps/IncoiceDashboard';
+
+// ==============================|| INVOICE - DASHBOARD ||============================== //
+
+const Dashboard = () => {
+  return <IncoiceDashboard />;
+};
+
+export default Dashboard;
+
+/*
 // MeetingRoom.tsx
 
 import React from 'react';
@@ -10,10 +22,10 @@ interface MeetingRoomProps {
 const MeetingRoom: React.FC<MeetingRoomProps> = ({ call }) => {
   return (
     <div>
-      {/* Render meeting room with the call data */}
       <p>Meeting Room for call: {call.id}</p>
     </div>
   );
 };
 
 export default MeetingRoom;
+*/
