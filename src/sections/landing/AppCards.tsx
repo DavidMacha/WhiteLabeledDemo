@@ -1,7 +1,7 @@
 
 "use client";
 import { useState } from "react";
-import axios from "axios"; // Import axios for API integration
+import axios, { AxiosError } from "axios"; // Import axios for API integration
 import { useRouter } from "next/navigation";
 
 // Dummy state for company design and states of origin
@@ -25,8 +25,8 @@ export default function DashboardDomain2() {
     mc_logo: null,
     fc_data: "",
     s_code: "",
-    dom_codes: [] as string[],
-    s_codes: [] as string[],
+    dom_codes: [],
+    s_codes: [],
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -77,10 +77,18 @@ export default function DashboardDomain2() {
     formDataForApi.append("fc_data", fc_data);
     formDataForApi.append("s_code", s_code);
     //formDataForApi.append("dom_codes", JSON.stringify(dom_codes));
-    formDataForApi.append("dom_codes[0]", dom_codes[0]);    
-    formDataForApi.append("s_codes", JSON.stringify(s_codes));
+    //formDataForApi.append("dom_codes[0]", dom_codes[0]);
+    //formDataForApi.append("dom_codes[1]", dom_codes[1]);  
+    
+    for ( let i=0; i<dom_codes.length; i++) {
+      formDataForApi.append("dom_codes["+i+"]",dom_codes[i])
+    }
 
+    //formDataForApi.append("s_codes", JSON.stringify(s_codes));
 
+    for ( let i=0; i<s_codes.length; i++) {
+      formDataForApi.append("s_codes["+i+"]",s_codes[i])
+    }
 
 
     try {
@@ -88,7 +96,7 @@ export default function DashboardDomain2() {
 
       // API call using axios
       await axios.post(
-        "https://lawonearth.co.uk/api/back-office/core/apps/create", // Replace with actual API URL
+        "https://lawonearth.co.uk/api/back-office/core/apps/create", 
         formDataForApi,
         {
           headers: {
@@ -96,18 +104,25 @@ export default function DashboardDomain2() {
             "COMPANY-CODE": "def-mc-admin",
 
             "FRONTEND-KEY": "XXX",
-            "X-Requested-With": "XMLHttpRequest", // Identify Ajax request
+            "X-Requested-With": "XMLHttpRequest", 
             "Content-Type": "multipart/form-data", // Required for file uploads
           },
-        }
+        },
+
       );
 
       // On success, add new site to the list and reset form
       setSites((prev) => [...prev, { title: mc_name }]);
       resetForm();
-    } catch (error) {
+    } catch(error){ 
       console.error("Error saving the site:", error);
       alert("Failed to save the site.");
+
+      //console.log(typeof(error));
+      //let message = error.data;
+      //console.log(message);
+
+
     } finally {
       setLoading(false);
     }
