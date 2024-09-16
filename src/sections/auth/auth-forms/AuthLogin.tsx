@@ -1,4 +1,4 @@
-/*
+
 'use client';
 import { useState, SyntheticEvent } from 'react';
 import Link from 'next/link';
@@ -238,7 +238,7 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 };
 
 export default AuthLogin;
-*/
+
 
 
 //__________________________________________________________________________________________________
@@ -464,7 +464,7 @@ export default AuthLogin;
 
 
 
-
+/*
 'use client';
 
 import { useState, SyntheticEvent } from 'react';
@@ -666,3 +666,4 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 };
 
 export default AuthLogin;
+*/
