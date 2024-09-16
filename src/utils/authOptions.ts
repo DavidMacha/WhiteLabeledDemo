@@ -4,9 +4,15 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 let users = [
   {
     id: 1,
-    name: 'Min Htet',
+    name: 'Min Htet Myet',
     email: 'minmattral@gmail.com',
     password: 'aAertyuiop@1' // Plain password for simplicity
+  },
+  {
+    id: 2,
+    name: 'Mattral',
+    email: 'mattralminn@gmail.com',
+    password: '123456' // Plain password for simplicity
   }
 ];
 
