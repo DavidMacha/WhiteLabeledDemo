@@ -1,5 +1,5 @@
 // This file is the Dashboard's top header noti bar
-import { UserButton } from '@clerk/nextjs'
+//import { UserButton } from '@clerk/nextjs'
 import { useMemo } from 'react';
 
 // MATERIAL - UI
@@ -45,7 +45,7 @@ const HeaderContent = () => {
       <Notification />
       
       {!downLG && <Profile />}
-      {!downLG && <UserButton />}
+     
       {downLG && <MobileSection />}
     </>
   );
