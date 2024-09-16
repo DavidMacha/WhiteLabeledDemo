@@ -240,7 +240,6 @@ const AuthLogin = ({ providers, csrfToken }: any) => {
 export default AuthLogin;
 
 
-
 //__________________________________________________________________________________________________
 
 /*
