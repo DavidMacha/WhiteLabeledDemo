@@ -20,7 +20,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import EmptyUserCard from 'components/cards/skeleton/EmptyUserCard';
 import { DebouncedInput } from 'components/third-party/DebouncedInput';
 import CustomerCard from 'sections/apps/customer/CustomerCard';
-import CustomerModal from 'sections/apps/customer/CustomerModal';
+//import CustomerModal from 'sections/apps/customer/CustomerModal';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -258,9 +258,11 @@ const CustomerCardPage = () => {
           onChange={handleChangePage}
         />
       </Stack>
-      <CustomerModal open={customerModal} modalToggler={setCustomerModal} />
+      
     </>
   );
 };
 
 export default CustomerCardPage;
+
+//<CustomerModal open={customerModal} modalToggler={setCustomerModal} /> //in line 261

@@ -180,6 +180,12 @@ function StickyActionBarPage() {
                     <FormControlLabel control={<Checkbox />} label="Accounting" />
                     <FormControlLabel control={<Checkbox />} label="IT and Technology" />
                   </Grid>
+                  <Grid item xs={12} sm={9} lg={6}>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Currency" />
+                    <FormControlLabel control={<Checkbox />} label="USD" />
+                    <FormControlLabel control={<Checkbox />} label="Euro" />
+                    <FormControlLabel control={<Checkbox />} label="AUD" />
+                  </Grid>
 
                 </Grid>
               </Grid>
