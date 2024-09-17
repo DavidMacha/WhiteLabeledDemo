@@ -5,13 +5,13 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 let users = [
   {
     id: 1,
-    name: 'Min Htet Myet',
+    name: 'Mattral',
     email: 'minmattral@gmail.com',
     password: 'aAertyuiop@1' 
   },
   {
     id: 2,
-    name: 'Mattral',
+    name: 'Min Htet Myet',
     email: 'mattralminn@gmail.com',
     password: '123456'
   }
@@ -107,6 +107,8 @@ export const authOptions: NextAuthOptions = {
     newUser: '/register'
   }
 };
+
+
 
 /*
 import type { NextAuthOptions } from 'next-auth';

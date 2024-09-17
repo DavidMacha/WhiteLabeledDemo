@@ -26,22 +26,8 @@ const MenuFromAPI : NavItemType = {
       icon: icons.dashboard,
     },
     {
-      id: 'CreateNew',
-      title: <FormattedMessage id="CreateNew" />,
-      type: 'item',
-      icon: icons.statistics,
-      url: '/dashboard/analytics'
-    },
-    {
-      id: 'CreateNew',
-      title: <FormattedMessage id="Apps" />,
-      type: 'item',
-      icon: icons.landing,
-      url: '/dashboard/AppCards'
-    },
-    {
       id: 'customer',
-      title: <FormattedMessage id="Advisors" />,
+      title: <FormattedMessage id="Users" />,
       type: 'collapse',
       icon: icons.customer,
       children: [
@@ -68,6 +54,50 @@ const MenuFromAPI : NavItemType = {
           title: <FormattedMessage id="Managers" />,
           type: 'item',
           url: '/apps/customer/manager-list'
+        }
+      ]
+    },
+    {
+      id: 'customer',
+      title: <FormattedMessage id="Verification of Identiy" />,
+      type: 'collapse',
+      icon: icons.customer,
+      children: [
+        {
+          id: 'customer-list',
+          title: <FormattedMessage id="Verify as Client" />,
+          type: 'item',
+          url: '/forms/layout/basic'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Verify as Advisor" />,
+          type: 'item',
+          url: '/forms/layout/sticky-bar'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Client VOI list" />,
+          type: 'item',
+          url: '/apps/customer/client-list'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="Advisor VOI list" />,
+          type: 'item',
+          url: '/apps/customer/manager-list'
+        },
+        {
+          id: 'dropzone',
+          title: <FormattedMessage id="dropzone" />,
+          type: 'item',
+          url: '/forms/plugins/dropzone'
+        },
+        {
+          id: 'rt-empty',
+          title: <FormattedMessage id="empty" />,
+          type: 'item',
+          url: '/tables/react-table/empty'
         }
       ]
     }

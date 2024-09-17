@@ -62,6 +62,27 @@ const applications: NavItemType = {
       icon: icons.statistics
     },
 
+    {
+      id: 'customer',
+      title: <FormattedMessage id="customer" />,
+      type: 'collapse',
+      icon: icons.customer,
+      children: [
+        {
+          id: 'customer-list',
+          title: <FormattedMessage id="list" />,
+          type: 'item',
+          url: '/apps/customer/customer-list'
+        },
+        {
+          id: 'customer-card',
+          title: <FormattedMessage id="cards" />,
+          type: 'item',
+          url: '/apps/customer/customer-card'
+        }
+      ]
+    },
+
     
     {
       id: 'profile',
