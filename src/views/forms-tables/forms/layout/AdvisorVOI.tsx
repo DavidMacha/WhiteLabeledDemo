@@ -173,12 +173,12 @@ function StickyActionBarPage() {
                     <FormHelperText>Please state your Work Experience briefly</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Language :</InputLabel>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Domain :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="English" />
-                    <FormControlLabel control={<Checkbox />} label="French" />
-                    <FormControlLabel control={<Checkbox />} label="Dutch" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Legal" />
+                    <FormControlLabel control={<Checkbox />} label="Accounting" />
+                    <FormControlLabel control={<Checkbox />} label="IT and Technology" />
                   </Grid>
 
                 </Grid>

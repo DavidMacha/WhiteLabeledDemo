@@ -17,10 +17,13 @@ import {
   DialogContent,
   Card,
   CardContent,
-  Grid
+  Grid,
+  Button
 } from '@mui/material';
-import { Email, Search } from '@mui/icons-material';
+import { Email, Search, CheckCircle, Cancel, Chat, RemoveCircle } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Client {
   client: string;
@@ -29,8 +32,7 @@ interface Client {
   telephone: string;
 }
 
-// Sample data arrays
-const unverifiedData = [
+const initialUnverifiedData: Client[] = [
   {
     client: "Alpha",
     email: "alpha@gmail.com",
@@ -52,7 +54,7 @@ const unverifiedData = [
   //... other unverified clients
 ];
 
-const verifiedData = [
+const initialVerifiedData: Client[] = [
   {
     client: "Mattral",
     email: "mattral@gmail.com",
@@ -81,10 +83,12 @@ const verifiedData = [
 ];
 
 const ClientList: FC = () => {
-  const router = useRouter();
+  const [unverifiedData, setUnverifiedData] = useState<Client[]>(initialUnverifiedData);
+  const [verifiedData, setVerifiedData] = useState<Client[]>(initialVerifiedData);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [open, setOpen] = useState(false);
 
+  // Handle viewing client details
   const handleView = (client: Client) => {
     setSelectedClient(client);
     setOpen(true);
@@ -94,24 +98,60 @@ const ClientList: FC = () => {
     setOpen(false);
   };
 
-  const handleEmail = (email: string) => {
-    window.location.href = `mailto:${email}`;
+  // Handle verification action (move client from unverified to verified)
+  const handleVerify = (client: Client) => {
+    setUnverifiedData(unverifiedData.filter((item) => item.client !== client.client));
+    setVerifiedData([...verifiedData, client]);
+  };
+
+  // Handle remove verification (move client from verified to unverified)
+  const handleRemoveVerify = (client: Client) => {
+    setVerifiedData(verifiedData.filter((item) => item.client !== client.client));
+    setUnverifiedData([...unverifiedData, client]);
+  };
+
+  // Handle cancel action for unverified (show toast notification)
+  const handleCancel = (client: Client) => {
+    toast.info(`Notification sent to ${client.client} to submit more documents.`);
+  };
+
+  // Handle email/chat actions (show toast notification)
+  const handleMail = (client: Client) => {
+    window.location.href = `mailto:${client.email}`;
+  };
+
+  const handleChat = (client: Client) => {
+    toast.info(`Notification sent to ${client.client} to chat.`);
   };
 
   return (
     <Box>
+      <ToastContainer />
       <Typography variant="h4" gutterBottom>
-        Clients
+        Clients Management
       </Typography>
 
       <Box my={4}>
         <Typography variant="h6">Unverified Clients</Typography>
-        <ClientTable data={unverifiedData} handleView={handleView} handleEmail={handleEmail} />
+        <ClientTable
+          data={unverifiedData}
+          handleView={handleView}
+          handleVerify={handleVerify}
+          handleMail={handleMail}
+          handleCancel={handleCancel}
+          isVerified={false}
+        />
       </Box>
 
       <Box my={4}>
         <Typography variant="h6">Verified Clients</Typography>
-        <ClientTable data={verifiedData} handleView={handleView} handleEmail={handleEmail} />
+        <ClientTable
+          data={verifiedData}
+          handleView={handleView}
+          handleRemoveVerify={handleRemoveVerify}
+          handleMail={handleChat}
+          isVerified={true}
+        />
       </Box>
 
       {selectedClient && (
@@ -146,10 +186,14 @@ const ClientList: FC = () => {
 interface ClientTableProps {
   data: Client[];
   handleView: (client: Client) => void;
-  handleEmail: (email: string) => void;
+  handleVerify?: (client: Client) => void;
+  handleRemoveVerify?: (client: Client) => void;
+  handleMail: (client: Client) => void;
+  handleCancel?: (client: Client) => void;
+  isVerified: boolean;
 }
 
-const ClientTable: FC<ClientTableProps> = ({ data, handleView, handleEmail }) => (
+const ClientTable: FC<ClientTableProps> = ({ data, handleView, handleVerify, handleRemoveVerify, handleMail, handleCancel, isVerified }) => (
   <TableContainer component={Paper}>
     <Table>
       <caption>List of Clients</caption>
@@ -177,11 +221,38 @@ const ClientTable: FC<ClientTableProps> = ({ data, handleView, handleEmail }) =>
                   <Search />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Email">
-                <IconButton color="secondary" onClick={() => handleEmail(item.email)}>
-                  <Email />
-                </IconButton>
-              </Tooltip>
+              {isVerified ? (
+                <>
+                  <Tooltip title="Remove Verify">
+                    <IconButton color="secondary" onClick={() => handleRemoveVerify!(item)}>
+                      <RemoveCircle />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Chat">
+                    <IconButton color="default" onClick={() => handleMail(item)}>
+                      <Chat />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              ) : (
+                <>
+                  <Tooltip title="Verify">
+                    <IconButton color="success" onClick={() => handleVerify!(item)}>
+                      <CheckCircle />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Direct Mail">
+                    <IconButton color="secondary" onClick={() => handleMail(item)}>
+                      <Email />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Cancel">
+                    <IconButton color="default" onClick={() => handleCancel!(item)}>
+                      <Cancel />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
             </TableCell>
           </TableRow>
         ))}

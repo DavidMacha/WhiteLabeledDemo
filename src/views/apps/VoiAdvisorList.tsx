@@ -12,13 +12,27 @@ import {
   Typography,
   IconButton,
   Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Card,
+  CardContent,
+  Grid,
+  Button
 } from '@mui/material';
-import { Edit, Chat, Check, Cancel, RemoveCircle } from '@mui/icons-material';
-import { toast } from 'react-toastify';
+import { Email, Search, CheckCircle, Cancel, Chat, RemoveCircle } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// Sample data arrays
-const unverifiedData = [
+interface Client {
+  client: string;
+  email: string;
+  address: string;
+  telephone: string;
+}
+
+const initialUnverifiedData: Client[] = [
   {
     client: "Alpha",
     email: "alpha@gmail.com",
@@ -40,7 +54,7 @@ const unverifiedData = [
   //... other unverified clients
 ];
 
-const verifiedData = [
+const initialVerifiedData: Client[] = [
   {
     client: "Mattral",
     email: "mattral@gmail.com",
@@ -67,143 +81,183 @@ const verifiedData = [
   }
   //... other verified clients
 ];
+const ClientList: FC = () => {
+  const [unverifiedData, setUnverifiedData] = useState<Client[]>(initialUnverifiedData);
+  const [verifiedData, setVerifiedData] = useState<Client[]>(initialVerifiedData);
+  const [selectedClient, setSelectedClient] = useState<Client | null>(null);
+  const [open, setOpen] = useState(false);
 
-interface Client {
-    client: string;
-    email: string;
-    address: string;
-    telephone: string;
-  }
-  
-  const ClientList: FC = () => {
-    const router = useRouter();
-    const [unverifiedClients, setUnverifiedClients] = useState<Client[]>(unverifiedData);
-    const [verifiedClients, setVerifiedClients] = useState<Client[]>(verifiedData);
-  
-    const handleView = (client: Client) => {
-      alert(`Viewing client: ${client.client}\nEmail: ${client.email}\nAddress: ${client.address}\nTelephone: ${client.telephone}`);
-    };
-  
-    const handleVerify = (client: Client) => {
-      setUnverifiedClients(unverifiedClients.filter(c => c !== client));
-      setVerifiedClients([...verifiedClients, client]);
-      toast.success(`${client.client} has been verified!`);
-    };
-  
-    const handleRemoveVerify = (client: Client) => {
-      setVerifiedClients(verifiedClients.filter(c => c !== client));
-      setUnverifiedClients([...unverifiedClients, client]);
-      toast.info(`${client.client} has been moved to unverified!`);
-    };
-  
-    const handleCancel = () => {
-      toast.warning('Notification sent: Please submit more documents.');
-    };
-  
-    const handleChat = () => {
-      toast.info('Notification sent for chat.');
-      router.push('/apps/chat');
-    };
-  
-    return (
-      <Box>
-        <Typography variant="h4" gutterBottom>Advisors</Typography>
-  
-        {/* Unverified Clients */}
-        <Box my={4}>
-          <Typography variant="h6">Unverified Advisors</Typography>
-          <ClientTable
-            data={unverifiedClients}
-            onVerify={handleVerify}
-            onView={handleView}
-            onCancel={handleCancel}
-            onChat={handleChat}
-          />
-        </Box>
-  
-        {/* Verified Clients */}
-        <Box my={4}>
-          <Typography variant="h6">Verified Advisors</Typography>
-          <ClientTable
-            data={verifiedClients}
-            onRemoveVerify={handleRemoveVerify}
-            onView={handleView}
-            onChat={handleChat}
-          />
-        </Box>
-      </Box>
-    );
+  // Handle viewing client details
+  const handleView = (client: Client) => {
+    setSelectedClient(client);
+    setOpen(true);
   };
-  
-  interface ClientTableProps {
-    data: Client[];
-    onVerify?: (client: Client) => void;
-    onRemoveVerify?: (client: Client) => void;
-    onView: (client: Client) => void;
-    onCancel?: () => void;
-    onChat: () => void;
-  }
-  
-  const ClientTable: FC<ClientTableProps> = ({ data, onVerify, onRemoveVerify, onView, onCancel, onChat }) => (
-    <TableContainer component={Paper}>
-      <Table>
-        <caption>List of Clients</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>S/N</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Telephone</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{item.client}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{item.address}</TableCell>
-              <TableCell>{item.telephone}</TableCell>
-              <TableCell>
-                <Tooltip title="View">
-                  <IconButton color="primary" onClick={() => onView(item)}>
-                    <Edit />
-                  </IconButton>
-                </Tooltip>
-                {onVerify && (
-                  <>
-                    <Tooltip title="Verify">
-                      <IconButton color="success" onClick={() => onVerify(item)}>
-                        <Check />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Cancel">
-                      <IconButton color="error" onClick={onCancel}>
-                        <Cancel />
-                      </IconButton>
-                    </Tooltip>
-                  </>
-                )}
-                {onRemoveVerify && (
-                  <Tooltip title="Remove Verification">
-                    <IconButton color="warning" onClick={() => onRemoveVerify(item)}>
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Handle verification action (move client from unverified to verified)
+  const handleVerify = (client: Client) => {
+    setUnverifiedData(unverifiedData.filter((item) => item.client !== client.client));
+    setVerifiedData([...verifiedData, client]);
+  };
+
+  // Handle remove verification (move client from verified to unverified)
+  const handleRemoveVerify = (client: Client) => {
+    setVerifiedData(verifiedData.filter((item) => item.client !== client.client));
+    setUnverifiedData([...unverifiedData, client]);
+  };
+
+  // Handle cancel action for unverified (show toast notification)
+  const handleCancel = (client: Client) => {
+    toast.info(`Notification sent to ${client.client} to submit more documents.`);
+  };
+
+  // Handle email/chat actions (show toast notification)
+  const handleMail = (client: Client) => {
+    window.location.href = `mailto:${client.email}`;
+  };
+
+  const handleChat = (client: Client) => {
+    toast.info(`Notification sent to ${client.client} to chat.`);
+  };
+
+  return (
+    <Box>
+      <ToastContainer />
+      <Typography variant="h4" gutterBottom>
+        Clients Management
+      </Typography>
+
+      <Box my={4}>
+        <Typography variant="h6">Unverified Advisors</Typography>
+        <ClientTable
+          data={unverifiedData}
+          handleView={handleView}
+          handleVerify={handleVerify}
+          handleMail={handleMail}
+          handleCancel={handleCancel}
+          isVerified={false}
+        />
+      </Box>
+
+      <Box my={4}>
+        <Typography variant="h6">Verified Advisors</Typography>
+        <ClientTable
+          data={verifiedData}
+          handleView={handleView}
+          handleRemoveVerify={handleRemoveVerify}
+          handleMail={handleChat}
+          isVerified={true}
+        />
+      </Box>
+
+      {selectedClient && (
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Advisor Details</DialogTitle>
+          <DialogContent>
+            <Card>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">{selectedClient.client}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>Email: {selectedClient.email}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>Address: {selectedClient.address}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>Telephone: {selectedClient.telephone}</Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </DialogContent>
+        </Dialog>
+      )}
+    </Box>
+  );
+};
+
+interface ClientTableProps {
+  data: Client[];
+  handleView: (client: Client) => void;
+  handleVerify?: (client: Client) => void;
+  handleRemoveVerify?: (client: Client) => void;
+  handleMail: (client: Client) => void;
+  handleCancel?: (client: Client) => void;
+  isVerified: boolean;
+}
+
+const ClientTable: FC<ClientTableProps> = ({ data, handleView, handleVerify, handleRemoveVerify, handleMail, handleCancel, isVerified }) => (
+  <TableContainer component={Paper}>
+    <Table>
+      <caption>List of Clients</caption>
+      <TableHead>
+        <TableRow>
+          <TableCell>S/N</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Email</TableCell>
+          <TableCell>Address</TableCell>
+          <TableCell>Telephone</TableCell>
+          <TableCell>Actions</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((item, index) => (
+          <TableRow key={index}>
+            <TableCell>{index + 1}</TableCell>
+            <TableCell>{item.client}</TableCell>
+            <TableCell>{item.email}</TableCell>
+            <TableCell>{item.address}</TableCell>
+            <TableCell>{item.telephone}</TableCell>
+            <TableCell>
+              <Tooltip title="View">
+                <IconButton color="primary" onClick={() => handleView(item)}>
+                  <Search />
+                </IconButton>
+              </Tooltip>
+              {isVerified ? (
+                <>
+                  <Tooltip title="Remove Verify">
+                    <IconButton color="secondary" onClick={() => handleRemoveVerify!(item)}>
                       <RemoveCircle />
                     </IconButton>
                   </Tooltip>
-                )}
-                <Tooltip title="Chat">
-                  <IconButton color="default" onClick={onChat}>
-                    <Chat />
-                  </IconButton>
-                </Tooltip>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-  
-  export default ClientList;
+                  <Tooltip title="Chat">
+                    <IconButton color="default" onClick={() => handleMail(item)}>
+                      <Chat />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              ) : (
+                <>
+                  <Tooltip title="Verify">
+                    <IconButton color="success" onClick={() => handleVerify!(item)}>
+                      <CheckCircle />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Direct Mail">
+                    <IconButton color="secondary" onClick={() => handleMail(item)}>
+                      <Email />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Cancel">
+                    <IconButton color="default" onClick={() => handleCancel!(item)}>
+                      <Cancel />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);
+
+export default ClientList;
