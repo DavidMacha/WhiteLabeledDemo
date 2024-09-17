@@ -3,16 +3,16 @@
 import { useState } from 'react';
 
 // MATERIAL - UI
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import FormHelperText from '@mui/material/FormHelperText';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+//import Typography from '@mui/material/Typography';
 
 // PROJECT IMPORTS
 import MainCard from 'components/MainCard';
-import UploadAvatar from 'components/third-party/dropzone/Avatar';
-import UploadSingleFile from 'components/third-party/dropzone/SingleFile';
+//import UploadAvatar from 'components/third-party/dropzone/Avatar';
+//import UploadSingleFile from 'components/third-party/dropzone/SingleFile';
 import UploadMultiFile from 'components/third-party/dropzone/MultiFile';
 
 // THIRD - PARTY
@@ -77,6 +77,18 @@ const DropzonePage = () => {
           </Formik>
         </MainCard>
       </Grid>
+
+    </Grid>
+  );
+};
+
+export default DropzonePage;
+
+
+/*
+Single upload and image here!
+
+
       <Grid item xs={12}>
         <MainCard title="Upload Single File">
           <Formik
@@ -155,8 +167,6 @@ const DropzonePage = () => {
           </Formik>
         </MainCard>
       </Grid>
-    </Grid>
-  );
-};
 
-export default DropzonePage;
+
+*/

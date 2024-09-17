@@ -67,31 +67,25 @@ const MenuFromAPI : NavItemType = {
           id: 'customer-list',
           title: <FormattedMessage id="Verify as Client" />,
           type: 'item',
-          url: '/forms/layout/basic'
+          url: '/forms/VOI/Advisor'
         },
         {
           id: 'customer-card',
           title: <FormattedMessage id="Verify as Advisor" />,
           type: 'item',
-          url: '/forms/layout/sticky-bar'
+          url: '/forms/VOI/Client'
         },
         {
           id: 'customer-card',
           title: <FormattedMessage id="Client VOI list" />,
           type: 'item',
-          url: '/apps/customer/client-list'
+          url: '/apps/VOI/client-list'
         },
         {
           id: 'customer-card',
           title: <FormattedMessage id="Advisor VOI list" />,
           type: 'item',
-          url: '/apps/customer/manager-list'
-        },
-        {
-          id: 'dropzone',
-          title: <FormattedMessage id="dropzone" />,
-          type: 'item',
-          url: '/forms/plugins/dropzone'
+          url: '/apps/VOI/advisor-list'
         },
         {
           id: 'rt-empty',
