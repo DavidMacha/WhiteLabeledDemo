@@ -15,7 +15,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import DropzonePage from 'views/forms-tables/forms/plugins/DropzonePage';
+import DropzonePage from 'views/forms-tables/forms/plugins/ProfileUpload';
 
 // PROJECT IMPORTS
 import { HEADER_HEIGHT } from 'config';
@@ -141,49 +141,16 @@ function StickyActionBarPage() {
                   <Grid item xs={12} sm={3} lg={4} />
                   <Grid item xs={12} sm={9} lg={6}>
                     <Typography variant="h5" component="div" sx={{ mb: 3 }}>
-                      B. Educational Info:
+                      B. Additional Info:
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Degree Name :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Degree name" />
-                    <FormHelperText>Please enter your Degree name</FormHelperText>
-                  </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Passing Year :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Passing Year" />
-                    <FormHelperText>Please enter Passing Year</FormHelperText>
-                  </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>College or University :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter College name" />
-                    <FormHelperText>Please enter your College name or Highest level of Education</FormHelperText>
-                  </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Work Experience :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Work Experience" />
-                    <FormHelperText>Please state your Work Experience briefly</FormHelperText>
-                  </Grid>
+                  
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Language :</InputLabel>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Preferred Currency :</InputLabel>
                   </Grid>
+
                   <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="English" />
-                    <FormControlLabel control={<Checkbox />} label="French" />
-                    <FormControlLabel control={<Checkbox />} label="Italian" />
-                    <FormControlLabel control={<Checkbox />} label="Spanish" />
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Currency" />
-                    <FormControlLabel control={<Checkbox />} label="USD" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="USD" />
                     <FormControlLabel control={<Checkbox />} label="Euro" />
                     <FormControlLabel control={<Checkbox />} label="AUD" />
                   </Grid>

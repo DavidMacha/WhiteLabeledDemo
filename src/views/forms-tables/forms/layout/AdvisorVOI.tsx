@@ -93,13 +93,7 @@ function StickyActionBarPage() {
                     <TextField fullWidth placeholder="Enter full name" />
                     <FormHelperText>Please enter your full name</FormHelperText>
                   </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Email :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter email" />
-                    <FormHelperText>Please enter your Email</FormHelperText>
-                  </Grid>
+
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Phone Number :</InputLabel>
                   </Grid>
@@ -108,22 +102,7 @@ function StickyActionBarPage() {
                     <TextField fullWidth placeholder="Enter Phone Number" />
                     <FormHelperText>Please enter your Phone Number</FormHelperText>
                   </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Address :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Address" />
-                    <FormHelperText>Please enter your Address</FormHelperText>
-                  </Grid>            
-
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Postal Code :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Postal Code" />
-                    <FormHelperText>Please enter your Postal code (if any)</FormHelperText>
-                  </Grid>    
-
+         
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Password :</InputLabel>
                   </Grid> 
@@ -131,6 +110,7 @@ function StickyActionBarPage() {
                     <TextField fullWidth placeholder="Enter Password" />
                     <FormHelperText>Please enter your Password as confirmation</FormHelperText>
                   </Grid>
+
                 </Grid>
               </Grid>
               <Grid item xs={12}>
@@ -152,13 +132,6 @@ function StickyActionBarPage() {
                     <FormHelperText>Please enter your Degree name</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Passing Year :</InputLabel>
-                  </Grid>
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Passing Year" />
-                    <FormHelperText>Please enter Passing Year</FormHelperText>
-                  </Grid>
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>College or University :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
@@ -173,25 +146,31 @@ function StickyActionBarPage() {
                     <FormHelperText>Please state your Work Experience briefly</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Domain :</InputLabel>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Do you habe more than 3 years of experience? :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Legal" />
-                    <FormControlLabel control={<Checkbox />} label="Accounting" />
-                    <FormControlLabel control={<Checkbox />} label="IT and Technology" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="YES" />
+                    <FormControlLabel control={<Checkbox />} label="NO" />
+                  </Grid>
+                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Currency :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Currency" />
-                    <FormControlLabel control={<Checkbox />} label="USD" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="USD" />
                     <FormControlLabel control={<Checkbox />} label="Euro" />
                     <FormControlLabel control={<Checkbox />} label="AUD" />
                   </Grid>
-
                 </Grid>
               </Grid>
             </Grid>
           </CardContent>
           <Divider />
+              <Grid container spacing={2} alignItems="center">
+                  <Grid item xs={12} sm={9} lg={6}>
+                    <TextField fullWidth placeholder="Enter Phone Number" />
+                    <FormHelperText>Please Upload Your Professional License or ID, Professional Indemnity Insurance, and Certifications  </FormHelperText>
+                  </Grid>
+              </Grid>
           <DropzonePage />
           <Divider />
           <CardActions>

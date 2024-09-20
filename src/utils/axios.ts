@@ -1,7 +1,11 @@
+// see line number 36
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
 
 const axiosServices = axios.create({ baseURL: process.env.NEXT_APP_API_URL });
+
+// Dummy token for testing
+const DUMMY_TOKEN = 'Bearer dummy-token-for-testing';
 
 // ==============================|| AXIOS - FOR MOCK SERVICES ||============================== //
 
@@ -11,9 +15,12 @@ const axiosServices = axios.create({ baseURL: process.env.NEXT_APP_API_URL });
 axiosServices.interceptors.request.use(
   async (config) => {
     const session = await getSession();
-    if (session?.token.accessToken) {
-      config.headers['Authorization'] = `Bearer ${session?.token.accessToken}`;
-    }
+    
+    // Use session token if available, otherwise use the dummy token
+    config.headers['Authorization'] = session?.token?.accessToken 
+      ? `Bearer ${session.token.accessToken}`
+      : DUMMY_TOKEN;
+
     return config;
   },
   (error) => {
@@ -25,7 +32,8 @@ axiosServices.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401 && !window.location.href.includes('/login')) {
-      window.location.pathname = '/login';
+      // Redirect to login or handle the error
+      // window.location.pathname = '/login';
     }
     return Promise.reject((error.response && error.response.data) || 'Wrong Services');
   }

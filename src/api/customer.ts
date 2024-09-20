@@ -1,3 +1,129 @@
+import { mutate } from 'swr';
+import { useMemo } from 'react';
+
+// types
+import { CustomerList, CustomerProps } from 'types/customer';
+
+// Sample predefined customer data
+const predefinedCustomers: CustomerList[] = [
+  { id: 1, name: 'John Doe', email: 'john@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'smith',  role: "Manager" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:"male", firstName:"mike", lastName:"smith" , skills: ["Java"]},
+  { id: 2, name: 'meme Doe', email: 'john@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'smith',  role: "Manager" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:"male", firstName:"mike", lastName:"smith" , skills: ["Java"]}
+  //{ id: 2, name: 'Jane Smith', email: 'jane@example.com', contact: '0987654321', age: 25, country: 'UK', status: 2 },
+  // Add more customers as needed
+];
+
+const initialState: CustomerProps = {
+  modal: false,
+};
+
+export const endpoints = {
+  key: 'api/customer',
+  list: '/list', // Not used anymore
+  modal: '/modal', // Not used anymore
+  insert: '/insert', // Not used anymore
+  update: '/update', // Not used anymore
+  delete: '/delete', // Not used anymore
+};
+
+export function useGetCustomer() {
+  // Use the predefined data directly
+  const data = { customers: predefinedCustomers };
+  const isLoading = false;
+  const error = null;
+  const isValidating = false;
+
+  const memoizedValue = useMemo(
+    () => ({
+      customers: data.customers as CustomerList[],
+      customersLoading: isLoading,
+      customersError: error,
+      customersValidating: isValidating,
+      customersEmpty: !isLoading && !data.customers.length,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}
+
+export async function insertCustomer(newCustomer: CustomerList) {
+  // Update local state based on the key
+  mutate(
+    endpoints.key + endpoints.list,
+    (currentCustomer: any) => {
+      newCustomer.id = (currentCustomer.customers.length > 0 ? currentCustomer.customers[currentCustomer.customers.length - 1].id : 0) + 1;
+      const addedCustomer: CustomerList[] = [...currentCustomer.customers, newCustomer];
+
+      return {
+        ...currentCustomer,
+        customers: addedCustomer,
+      };
+    },
+    false
+  );
+}
+
+export async function updateCustomer(customerId: number, updatedCustomer: CustomerList) {
+  // Update local state based on the key
+  mutate(
+    endpoints.key + endpoints.list,
+    (currentCustomer: any) => {
+      const newCustomer: CustomerList[] = currentCustomer.customers.map((customer: CustomerList) =>
+        customer.id === customerId ? { ...customer, ...updatedCustomer } : customer
+      );
+
+      return {
+        ...currentCustomer,
+        customers: newCustomer,
+      };
+    },
+    false
+  );
+}
+
+export async function deleteCustomer(customerId: number) {
+  // Update local state based on the key
+  mutate(
+    endpoints.key + endpoints.list,
+    (currentCustomer: any) => {
+      const nonDeletedCustomer = currentCustomer.customers.filter((customer: CustomerList) => customer.id !== customerId);
+
+      return {
+        ...currentCustomer,
+        customers: nonDeletedCustomer,
+      };
+    },
+    false
+  );
+}
+
+export function useGetCustomerMaster() {
+  const data = initialState; // Use the initial state directly
+  const isLoading = false; // No loading state since we're not fetching
+
+  const memoizedValue = useMemo(
+    () => ({
+      customerMaster: data,
+      customerMasterLoading: isLoading,
+    }),
+    [data, isLoading]
+  );
+
+  return memoizedValue;
+}
+
+export function handlerCustomerDialog(modal: boolean) {
+  // Update local state based on key
+  mutate(
+    endpoints.key + endpoints.modal,
+    (currentCustomermaster: any) => {
+      return { ...currentCustomermaster, modal };
+    },
+    false
+  );
+}
+
+/*
 import useSWR, { mutate } from 'swr';
 import { useMemo } from 'react';
 
@@ -136,3 +262,4 @@ export function handlerCustomerDialog(modal: boolean) {
     false
   );
 }
+*/
