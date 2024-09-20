@@ -18,7 +18,7 @@ export interface CustomerList {
   fatherName: string;
   email: string;
   age: number;
-  gender: Gender;
+  gender: Gender|string;
   role: string;
   orders: number;
   progress: number;
