@@ -12,7 +12,7 @@ export enum Gender {
 export interface CustomerList {
   firstName: string;
   lastName: string;
-  id?: number;
+  id?: number | boolean;
   avatar: number;
   name: string;
   fatherName: string;
