@@ -1,11 +1,10 @@
-"use client"
 // PROJECT IMPORTS
-import IndexPage from 'views/ZoomCall';
+import AddNewProduct from 'views/apps/AddNewProduct';
 
 // ==============================|| ECOMMERCE - ADD PRODUCT ||============================== //
 
 function AddNewProductPage() {
-  return <IndexPage />;
+  return <AddNewProduct />;
 }
 
 export default AddNewProductPage;
