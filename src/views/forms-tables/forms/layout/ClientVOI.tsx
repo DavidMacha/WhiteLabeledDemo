@@ -136,27 +136,7 @@ function StickyActionBarPage() {
               <Grid item xs={12}>
                 <Divider />
               </Grid>
-              <Grid item xs={12}>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={12} sm={3} lg={4} />
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <Typography variant="h5" component="div" sx={{ mb: 3 }}>
-                      B. Additional Info:
-                    </Typography>
-                  </Grid>
-                  
-                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Preferred Currency :</InputLabel>
-                  </Grid>
-
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="USD" />
-                    <FormControlLabel control={<Checkbox />} label="Euro" />
-                    <FormControlLabel control={<Checkbox />} label="AUD" />
-                  </Grid>
-
-                </Grid>
-              </Grid>
+              
             </Grid>
           </CardContent>
           <Divider />

@@ -44,7 +44,7 @@ function StickyActionBarPage() {
           >
             <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ width: 1 }}>
               <Typography variant="h5" sx={{ m: 0, pl: 1.5 }}>
-              Verification of Identity:
+                Verification of Identity:
               </Typography>
               <Stack direction="row" spacing={1} sx={{ px: 1.5, py: 0.75 }}>
                 <Button color="error" size="small">
@@ -70,7 +70,7 @@ function StickyActionBarPage() {
                       Personal Information
                     </Typography>
                     <Typography variant="body2" sx={{ mb: 2 }}>
-                    These information are required to verify you as our legitimate Advisor.
+                      These information are required to verify you as our legitimate Advisor.
                     </Typography>
                   </Grid>
                 </Grid>
@@ -90,27 +90,25 @@ function StickyActionBarPage() {
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Name :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter full name" />
+                    <TextField fullWidth placeholder="Enter full name" required />
                     <FormHelperText>Please enter your full name</FormHelperText>
                   </Grid>
 
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Phone Number :</InputLabel>
                   </Grid>
-
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Phone Number" />
+                    <TextField fullWidth placeholder="Enter Phone Number" required />
                     <FormHelperText>Please enter your Phone Number</FormHelperText>
                   </Grid>
-         
+
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Password :</InputLabel>
-                  </Grid> 
+                  </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Password" />
+                    <TextField type="password" fullWidth placeholder="Enter Password" required />
                     <FormHelperText>Please enter your Password as confirmation</FormHelperText>
                   </Grid>
-
                 </Grid>
               </Grid>
               <Grid item xs={12}>
@@ -128,25 +126,25 @@ function StickyActionBarPage() {
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Degree Name :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Degree name" />
+                    <TextField fullWidth placeholder="Enter Degree name" required />
                     <FormHelperText>Please enter your Degree name</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>College or University :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter College name" />
+                    <TextField fullWidth placeholder="Enter College name" required />
                     <FormHelperText>Please enter your College name or Highest level of Education</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Work Experience :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Work Experience" />
+                    <TextField fullWidth placeholder="Enter Work Experience" required />
                     <FormHelperText>Please state your Work Experience briefly</FormHelperText>
                   </Grid>
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '1 !important' } }}>
-                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Do you habe more than 3 years of experience? :</InputLabel>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Do you have more than 3 years of experience? :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
                     <FormControlLabel control={<Checkbox defaultChecked />} label="YES" />
@@ -156,34 +154,21 @@ function StickyActionBarPage() {
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Currency :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="USD" />
-                    <FormControlLabel control={<Checkbox />} label="Euro" />
-                    <FormControlLabel control={<Checkbox />} label="AUD" />
+                    <TextField select fullWidth placeholder="Select Currency">
+                      <option value="USD">USD</option>
+                      <option value="EUR">Euro</option>
+                      <option value="AUD">AUD</option>
+                    </TextField>
+                    <FormHelperText>Please select your preferred currency</FormHelperText>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </CardContent>
-          <Divider />
-              <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={12} sm={9} lg={6}>
-                    <TextField fullWidth placeholder="Enter Phone Number" />
-                    <FormHelperText>Please Upload Your Professional License or ID, Professional Indemnity Insurance, and Certifications  </FormHelperText>
-                  </Grid>
-              </Grid>
-          <DropzonePage />
-          <Divider />
-          <CardActions>
-            <Stack direction="row" spacing={1} justifyContent="center" sx={{ width: 1, px: 1.5, py: 0.75 }}>
-              <Button color="error" size="small">
-                Cancel
-              </Button>
-              <Button variant="contained" size="small">
-                Submit
-              </Button>
-            </Stack>
-          </CardActions>
         </MainCard>
+      </Grid>
+      <Grid item xs={12}>
+        <DropzonePage />
       </Grid>
     </Grid>
   );

@@ -140,9 +140,9 @@ const applications: NavItemType = {
         },
         {
           id: 'add-new-schedule',
-          title: <FormattedMessage id="add-new-schedule" />,
+          title: <FormattedMessage id="Zoom Room" />,
           type: 'item',
-          url: '/apps/e-commerce/add-new-schedule'
+          url: '/apps/e-commerce/checkout'
         },
       ]
     }

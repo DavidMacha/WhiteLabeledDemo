@@ -1,10 +1,11 @@
+"use client"
 // PROJECT IMPORTS
-import Checkout from 'views/apps/Checkout';
+import IndexPage from 'views/ZoomCall';
 
-// ==============================|| ECOMMERCE - CHECKOUT ||============================== //
+// ==============================|| ECOMMERCE - ADD PRODUCT ||============================== //
 
-const CheckoutPage = () => {
-  return <Checkout />;
-};
+function AddNewProductPage() {
+  return <IndexPage />;
+}
 
-export default CheckoutPage;
+export default AddNewProductPage;

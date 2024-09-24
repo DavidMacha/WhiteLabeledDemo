@@ -67,13 +67,13 @@ const MenuFromAPI : NavItemType = {
           id: 'customer-list',
           title: <FormattedMessage id="Verify as Client" />,
           type: 'item',
-          url: '/forms/VOI/Advisor'
+          url: '/forms/VOI/Client'
         },
         {
           id: 'customer-card',
           title: <FormattedMessage id="Verify as Advisor" />,
           type: 'item',
-          url: '/forms/VOI/Client'
+          url: '/forms/VOI/Advisor'
         },
         {
           id: 'customer-card',

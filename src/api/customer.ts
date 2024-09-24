@@ -6,8 +6,8 @@ import { CustomerList, CustomerProps } from 'types/customer';
 
 // Sample predefined customer data
 const predefinedCustomers: CustomerList[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'smith',  role: "Manager" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:'Gender.MALE', firstName:"mike", lastName:"smith" , skills: ["Java"]},
-  { id: 2, name: 'meme Doe', email: 'john@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'smith',  role: "Manager" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:'Gender.MALE', firstName:"mike", lastName:"smith" , skills: ["Java"]}
+  { id: 1, name: 'John Doe', email: 'john@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'smith',  role: "Manager" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:'Gender.MALE', firstName:"mike", lastName:"smith" , skills: ["Insurance Law"]},
+  { id: 2, name: 'Lorem Ipsum', email: 'Lorem@example.com', contact: '1234567890', age: 30, country: 'USA', status: 1, avatar: 1, fatherName: 'Lorem',  role: "Lawyer" , orders:0, progress:50 ,orderStatus:"pending", location: "CA", about: "meme", time: ["11AM"], date: "28", gender:'Gender.MALE', firstName:"mike", lastName:"smith" , skills: ["Tax Law"]}
   //{ id: 2, name: 'Jane Smith', email: 'jane@example.com', contact: '0987654321', age: 25, country: 'UK', status: 2 },
   // Add more customers as needed
 ];
