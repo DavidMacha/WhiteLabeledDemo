@@ -64,10 +64,8 @@ const ShareBar = forwardRef((props: ShareBarProps, ref: any) => {
   }, [zmClient, onShareAudioChange, onShareStatusChange]);
   const menuItems = [];
   if (mediaStream?.isSupportOptimizedForSharedVideo()) {
-    menuItems.push(getAntdItem('Optimize for video clip', 'video share', isVideoShare && <CheckOutlined />));
   }
   if (controllingUser) {
-    menuItems.push(getAntdItem('Stop remote control', 'stop control'));
   }
   const onMenuClick = useCallback(
     (payload: { key: string }) => {

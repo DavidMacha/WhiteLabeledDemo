@@ -55,7 +55,6 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => 
   if (currentUserIndex > -1) {
     const item = videoLayout[currentUserIndex];
     if (item && canvasDimension) {
-      selfVideoLayout = { ...item, y: canvasDimension.height - item.y - item.height };
     }
   }
   const avatarActionState = useAvatarAction(zmClient, visibleParticipants);
@@ -69,23 +68,7 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => 
         })}
       >
         <canvas className="video-canvas" id="video-canvas" width="800" height="600" ref={videoRef} />
-        {selfVideoLayout && mediaStream?.isRenderSelfViewWithVideoElement() && (
-          <video
-            id={SELF_VIDEO_ID}
-            className="self-video-tag"
-            playsInline
-            muted
-            autoPlay
-            style={{
-              display: 'block',
-              width: `${selfVideoLayout.width}px`,
-              height: `${selfVideoLayout.height}px`,
-              top: `${selfVideoLayout.y}px`,
-              left: `${selfVideoLayout.x}px`,
-              pointerEvents: 'none'
-            }}
-          />
-        )}
+
         <AvatarActionContext.Provider value={avatarActionState}>
           <ul className="avatar-list">
             {visibleParticipants.map((user, index) => {

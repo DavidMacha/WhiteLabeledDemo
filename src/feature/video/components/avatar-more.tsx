@@ -22,21 +22,13 @@ const AvatarMore = (props: AvatarMoreProps) => {
   if (actionItem) {
     if (actionItem.localVolumeAdjust.enabled) {
       menu.push(
-        getAntdItem('Adjust volume locally', 'volume', actionItem?.localVolumeAdjust.toggled && <CheckOutlined />)
       );
     }
     if (actionItem?.farEndCameraControl.enabled) {
-      menu.push(getAntdItem(isControllingRemoteCamera ? 'Give up camera control' : 'Control far end camera', 'farend'));
     }
   }
   if (actionItem?.videoResolutionAdjust.enabled) {
-    menu.push(
-      getAntdItem(
-        'Subscribe other video resolution',
-        'subscribeVideoQuality',
-        actionItem?.videoResolutionAdjust.toggled && <CheckOutlined />
-      )
-    );
+
   }
   const onSliderChange = useCallback(
     (value: any) => {

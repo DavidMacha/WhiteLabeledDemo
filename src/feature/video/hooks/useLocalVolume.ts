@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useContext } from 'react';
 import { produce } from 'immer';
-import MediaContext from '../../../context/media-context';
+import MediaContext from '../../../contexts/media-context' // context/media-context';
 export function useLocalVolume() {
   const { mediaStream } = useContext(MediaContext);
   const [userVolumeList, setUserVolumeList] = useState<{ userId: number; volume: number }[]>([]);
