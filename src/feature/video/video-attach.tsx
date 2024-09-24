@@ -24,7 +24,7 @@ import { useActiveVideo } from './hooks/useAvtiveVideo';
 import { useAvatarAction } from './hooks/useAvatarAction';
 import { useNetworkQuality } from './hooks/useNetworkQuality';
 import { useParticipantsChange } from './hooks/useParticipantsChange';
-import { Participant } from '../../../';
+import { Participant } from '../../index-types';
 import { useOrientation, usePrevious } from '../../hooks';
 import { useVideoAspect } from './hooks/useVideoAspectRatio';
 import { Radio } from 'antd';

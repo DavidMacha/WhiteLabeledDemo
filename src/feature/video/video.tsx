@@ -68,7 +68,7 @@ const VideoContainer: React.FunctionComponent<RouteComponentProps> = (props) => 
         })}
       >
         <canvas className="video-canvas" id="video-canvas" width="800" height="600" ref={videoRef} />
-
+s
         <AvatarActionContext.Provider value={avatarActionState}>
           <ul className="avatar-list">
             {visibleParticipants.map((user, index) => {
