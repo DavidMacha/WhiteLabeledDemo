@@ -142,19 +142,7 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                           >
                             View Document
                           </Button>
-                          <PDFDownloadLink document={<ListCard customer={customer} />} fileName={`Customer-${customer.name}.pdf`}>
-                            {({ loading }) =>
-                              loading ? (
-                                <Button variant="outlined" color="primary" disabled>
-                                  Loading Document...
-                                </Button>
-                              ) : (
-                                <Button variant="outlined" color="primary">
-                                  Download PDF
-                                </Button>
-                              )
-                            }
-                          </PDFDownloadLink>
+
                         </Stack>
                       </Stack>
                     </Stack>
