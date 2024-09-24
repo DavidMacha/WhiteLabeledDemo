@@ -77,6 +77,7 @@
     "react-apexcharts": "^1.4.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-csv": "^2.2.2",
+    "react-date-picker": "^11.0.0",
     "react-datepicker": "^7.3.0",
     "react-device-detect": "^2.2.3",
     "react-dnd": "^16.0.1",

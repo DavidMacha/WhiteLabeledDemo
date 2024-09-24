@@ -9,7 +9,7 @@ import CallOutModal from './call-out-modal';
 import { getAntdDropdownMenu, getAntdItem } from './video-footer-utils';
 // import { useCurrentAudioLevel } from '../hooks/useCurrentAudioLevel';
 import CRCCallOutModal from './crc-call-out-modal';
-import { AudoiAnimationIcon } from 'components/audio-animation-icon';
+//import AudioAnimationIcon from 'components/audio-animation-icon';
 import { useAudioLevel } from '../hooks/useAudioLevel';
 const { Button: DropdownButton } = Dropdown;
 interface MicrophoneButtonProps {
@@ -60,42 +60,16 @@ const MicrophoneButton = (props: MicrophoneButtonProps) => {
   const tooltipText = isStartedAudio ? (isMuted ? 'unmute' : 'mute') : 'start audio';
   const menuItems = [];
   if (microphoneList?.length && audio !== 'phone') {
-    menuItems.push(
-      getAntdItem(
-        'Select a Microphone',
-        'microphone',
-        undefined,
-        microphoneList.map((i) =>
-          getAntdItem(i.label, `microphone|${i.deviceId}`, activeMicrophone === i.deviceId && <CheckOutlined />)
-        ),
-        'group'
-      )
-    );
-    menuItems.push(getAntdItem('', 'd1', undefined, undefined, 'divider'));
+
   }
   if (speakerList?.length && audio !== 'phone') {
-    menuItems.push(
-      getAntdItem(
-        'Select a speaker',
-        'speaker',
-        undefined,
-        speakerList.map((i) =>
-          getAntdItem(i.label, `speaker|${i.deviceId}`, activeSpeaker === i.deviceId && <CheckOutlined />)
-        ),
-        'group'
-      )
-    );
-    menuItems.push(getAntdItem('', 'd2', undefined, undefined, 'divider'));
+    
+    
   }
   menuItems.push(
-    getAntdItem(isSecondaryAudioStarted ? 'Stop secondary audio' : 'Start secondary audio', 'secondary audio')
   );
-  menuItems.push(getAntdItem('', 'd3', undefined, undefined, 'divider'));
-  if (audio !== 'phone') {
-    menuItems.push(getAntdItem('Audio Statistic', 'statistic'));
-  }
-  menuItems.push(getAntdItem(audio === 'phone' ? 'Hang Up' : 'Leave Audio', 'leave audio'));
-
+  
+ 
   const onMenuItemClick = (payload: { key: any }) => {
     onMicrophoneMenuClick(payload.key);
   };
@@ -122,7 +96,7 @@ const MicrophoneButton = (props: MicrophoneButtonProps) => {
         } else {
           if (level !== 0) {
             // iconType = 'icon-audio-animation';
-            return <AudoiAnimationIcon level={level} />;
+           
           } else {
             iconType = 'icon-audio-unmuted';
           }

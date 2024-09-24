@@ -6,6 +6,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
+//import Link from '@mui/material/Link';
+
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -24,11 +26,11 @@ import Alert from '@mui/material/Alert';
 
 // THIRD-PARTY
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import DatePicker from 'react-date-picker'; // Importing DatePicker
 
 // PROJECT IMPORTS
 import AlertCustomerDelete from './AlertCustomerDelete';
 import ListCard from './export-pdf/ListCard';
+
 import MainCard from 'components/MainCard';
 import Avatar from 'components/@extended/Avatar';
 import IconButton from 'components/@extended/IconButton';
@@ -52,13 +54,18 @@ const avatarImage = '/assets/images/users';
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+const timeSlots = Array.from({ length: 48 }, (_, index) => {
+  const hour = Math.floor(index / 2);
+  const minutes = index % 2 === 0 ? '00' : '30';
+  return `${hour.toString().padStart(2, '0')}:${minutes}`;
+});
+
 // ==============================|| CUSTOMER - CARD PREVIEW ||============================== //
 
 export default function CustomerPreview({ customer, open, onClose, editCustomer }: Props) {
   const matchDownMD = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const [openAlert, setOpenAlert] = useState(false);
   const [selectedDay, setSelectedDay] = useState<string>('');
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // State for date
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [serviceFee, setServiceFee] = useState<number>(0);
@@ -67,15 +74,6 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
   const [editDaysOpen, setEditDaysOpen] = useState(false);
 
   const handleDaySelection = (day: string) => setSelectedDay(day);
-
-  const handleDateChange = (vdate: Date | any) => {
-    // Check if value is a date or null, then update state accordingly
-    if (Date instanceof Date || Date === null) {
-      setSelectedDate(Date);
-    } else {
-      console.error('Unexpected value type:', Date);
-    }
-  };
   const handleTimeSelection = (time: string) => setSelectedTime(time);
 
   const handleClose = () => {
@@ -222,13 +220,13 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Law professor (Year)</Typography>
-                                  <Typography>2018 - Current</Typography>
+                                  <Typography>2019-Present</Typography>
                                 </Stack>
                               </Grid>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Company</Typography>
-                                  <Typography>London University</Typography>
+                                  <Typography>Harvard</Typography>
                                 </Stack>
                               </Grid>
                             </Grid>
@@ -237,14 +235,14 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                             <Grid container spacing={matchDownMD ? 0.5 : 3}>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
-                                  <Typography color="secondary">Engineer (Year)</Typography>
-                                  <Typography>2015 - 2018</Typography>
+                                  <Typography color="secondary">Law associate (Year)</Typography>
+                                  <Typography>2016-2019</Typography>
                                 </Stack>
                               </Grid>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Company</Typography>
-                                  <Typography>Master Tech</Typography>
+                                  <Typography>LegalMe Ltd</Typography>
                                 </Stack>
                               </Grid>
                             </Grid>
@@ -253,14 +251,14 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                             <Grid container spacing={matchDownMD ? 0.5 : 3}>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
-                                  <Typography color="secondary">Intern (Year)</Typography>
-                                  <Typography>2014 - 2015</Typography>
+                                  <Typography color="secondary">Tax lawyer (Year)</Typography>
+                                  <Typography>2013-2016</Typography>
                                 </Stack>
                               </Grid>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Company</Typography>
-                                  <Typography>Finance World</Typography>
+                                  <Typography>-</Typography>
                                 </Stack>
                               </Grid>
                             </Grid>
@@ -269,35 +267,135 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                       </MainCard>
                     </Grid>
                     <Grid item xs={12}>
-                      <MainCard title="Schedule">
-                        <Stack spacing={1}>
-                          <Typography variant="body2">Select a date:</Typography>
-                          <DatePicker
-                            onChange={handleDateChange} // Handle date change
-                            value={selectedDate}
-                            format="yyyy-MM-dd"
-                          />
-                          <Typography variant="body2">Selected Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</Typography>
-                        </Stack>
+                      <MainCard title="Skills">
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', p: 0.5, m: 0 }} component="ul">
+                          {customer.skills.map((skill: string, index: number) => (
+                            <ListItem disablePadding key={index} sx={{ width: 'auto', pr: 0.75, pb: 0.75 }}>
+                              <Chip color="secondary" variant="outlined" size="small" label={skill} />
+                            </ListItem>
+                          ))}
+                        </Box>
                       </MainCard>
                     </Grid>
                   </Grid>
+                </Grid>
+                <Grid item xs={12} sm={4} xl={3}>
+                  <MainCard>
+                    <Stack spacing={2}>
+                      <Stack spacing={0.5}>
+                        <Typography color="secondary">Service Fee per Minute</Typography>
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                          <Typography variant="h6">${serviceFee}</Typography>
+                          <Button variant="outlined" size="small" onClick={handleServiceFeeEditOpen}>
+                            Edit
+                          </Button>
+                        </Stack>
+                      </Stack>
+
+                      <Stack spacing={0.5}>
+                        <Typography color="secondary">Select Day</Typography>
+                        <Stack direction="row" spacing={1} flexWrap="wrap">
+                          {days.map((day) => (
+                            <Button
+                              key={day}
+                              variant={selectedDay === day ? 'contained' : 'outlined'}
+                              onClick={() => handleDaySelection(day)}
+                              sx={{ mb: 1 }}
+                            >
+                              {day}
+                            </Button>
+                          ))}
+                          <Button variant="outlined" size="small" onClick={handleEditDaysOpen}>
+                            Edit Days
+                          </Button>
+                        </Stack>
+                      </Stack>
+
+                      <Stack spacing={0.5}>
+                        <Typography color="secondary">Select Time</Typography>
+                        <Stack direction="row" spacing={1} flexWrap="wrap">
+                          {timeSlots.map((time) => (
+                            <Button
+                              key={time}
+                              variant={selectedTime === time ? 'contained' : 'outlined'}
+                              onClick={() => handleTimeSelection(time)}
+                              sx={{ mb: 1 }}
+                            >
+                              {time}
+                            </Button>
+                          ))}
+                        </Stack>
+                      </Stack>
+                      <Stack spacing={2}>
+                        <Button variant="contained" onClick={handleRequest}>
+                          Request
+                        </Button>
+                      </Stack>
+                    </Stack>
+                  </MainCard>
                 </Grid>
               </Grid>
             </SimpleBar>
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={handleRequest}>Request</Button>
-            <Button variant="outlined" color="error" onClick={handleClose}>Close</Button>
+            <Button color="error" onClick={onClose}>
+              Close
+            </Button>
           </DialogActions>
         </Box>
       </Dialog>
-      <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSnackbarClose}>
+      <AlertCustomerDelete id={customer.id!} title={customer.name} open={openAlert} handleClose={handleClose} />
+
+      <Dialog open={serviceFeeEditOpen} onClose={handleServiceFeeEditClose}>
+        <DialogTitle>Edit Service Fee</DialogTitle>
+        <DialogContent>
+          <TextField
+            type="number"
+            label="Service Fee per Minute"
+            value={serviceFee}
+            onChange={handleServiceFeeChange}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleServiceFeeEditClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleServiceFeeEditClose} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={editDaysOpen} onClose={handleEditDaysClose}>
+        <DialogTitle>Edit Days</DialogTitle>
+        <DialogContent>
+          <Typography>Select days to enable or disable:</Typography>
+          {daysOfWeek.map((day) => (
+            <Stack key={day} direction="row" alignItems="center" spacing={1}>
+              <Typography>{day}</Typography>
+              <Button
+                variant={days.includes(day) ? 'contained' : 'outlined'}
+                onClick={() => handleDayToggle(day)}
+                sx={{ mb: 1 }}
+              >
+                {days.includes(day) ? 'Disable' : 'Enable'}
+              </Button>
+            </Stack>
+          ))}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleEditDaysClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
         <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
-          Request sent successfully!
+          Schedule request sent
         </Alert>
       </Snackbar>
-      
     </>
   );
 }
