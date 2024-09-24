@@ -1,26 +1,4 @@
 /** @type {import('next').NextConfig} */
-
-const withSvgr = require('@svgr/webpack');
-module.exports = withSvgr({
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-    return config;
-  },
-  experimental: {
-    turbo: {
-  
-      resolveAlias: {
-        canvas: './empty-module.ts',
-      },
-    },
-  },
-});
-
-
-
 const nextConfig = {
   modularizeImports: {
     '@mui/material': {
