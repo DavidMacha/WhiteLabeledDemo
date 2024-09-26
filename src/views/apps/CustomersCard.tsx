@@ -226,9 +226,7 @@ const CustomerCardPage = () => {
               </Select>
             </FormControl>
 
-            <Button variant="contained" onClick={() => setCustomerModal(true)} size="large" startIcon={<Add />}>
-              Add Advisor Demo
-            </Button>
+
           </Stack>
         </Stack>
       </Box>

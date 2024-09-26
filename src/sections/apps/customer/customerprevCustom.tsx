@@ -123,16 +123,7 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                         </IconButton>
                       </Tooltip>
                     </PDFDownloadLink>
-                    <Tooltip title="Edit">
-                      <IconButton color="secondary" onClick={editCustomer}>
-                        <Edit />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete" onClick={handleClose}>
-                      <IconButton color="error">
-                        <Trash />
-                      </IconButton>
-                    </Tooltip>
+
                   </Stack>
                 }
               >
