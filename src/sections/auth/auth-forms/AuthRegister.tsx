@@ -167,7 +167,7 @@ const AuthRegister = () => {
                   id="firstname-login"
                   type="text"
                   value={values.pers_fName}
-                  name="firstname"
+                  name="pers_fName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder="John"
@@ -190,7 +190,7 @@ const AuthRegister = () => {
                   id="lastname-signup"
                   type="text"
                   value={values.pers_lName}
-                  name="lastname"
+                  name="pers_lName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder="Doe"
@@ -212,7 +212,7 @@ const AuthRegister = () => {
                   id="company-signup"
                   type="text"
                   value={values.pers_mName}
-                  name="company"
+                  name="pers_mName"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   placeholder="..."
