@@ -93,7 +93,7 @@ const AuthRegister = () => {
 
           const config = {
             method: 'post',
-            url: 'https://lawonearth.co.uk/api/auth/core/login',
+            url: 'https://lawonearth.co.uk/api/auth/core/register',
             headers: {
               'COMPANY-CODE': 'def-mc-admin',
               'FRONTEND-KEY': 'XXX',
