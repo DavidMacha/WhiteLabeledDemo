@@ -103,6 +103,14 @@ function StickyActionBarPage() {
                   </Grid>
 
                   <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
+                    <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Years of Experience :</InputLabel>
+                  </Grid>
+                  <Grid item xs={12} sm={9} lg={6}>
+                    <TextField type="password" fullWidth placeholder="Enter Password" required />
+                    <FormHelperText>Please enter the number of years</FormHelperText>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
                     <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Password :</InputLabel>
                   </Grid>
                   <Grid item xs={12} sm={9} lg={6}>

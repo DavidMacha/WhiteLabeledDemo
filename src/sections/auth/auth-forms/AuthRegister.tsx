@@ -90,6 +90,7 @@ const AuthRegister = () => {
           data.append('pers_fName', values.pers_fName);
           data.append('pers_mName', values.pers_mName);
           data.append('pers_lName', values.pers_lName);
+          data.append('redirectUrl', '/dashboard/default');
 
           const config = {
             method: 'post',
@@ -116,7 +117,7 @@ const AuthRegister = () => {
               password: values.password,
               password_confirmation: values.password_confirmation,
               pers_lName: values.pers_lName,
-              callbackUrl: '/dashboard/default',
+              redirectUrl: '/dashboard/default',
             });
 
             if (signInResult?.error) {
