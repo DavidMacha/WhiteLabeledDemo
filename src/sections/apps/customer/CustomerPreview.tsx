@@ -24,7 +24,8 @@ import Alert from '@mui/material/Alert';
 
 // THIRD-PARTY
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import DatePicker from 'react-date-picker'; // Importing DatePicker
+import ReactDatePicker from 'react-datepicker';
+
 
 // PROJECT IMPORTS
 import AlertCustomerDelete from './AlertCustomerDelete';
@@ -40,6 +41,8 @@ import { CustomerList } from 'types/customer';
 
 // ASSETS
 import { DocumentDownload, Edit, Trash } from 'iconsax-react';
+
+
 
 interface Props {
   customer: CustomerList;
@@ -68,14 +71,14 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
 
   const handleDaySelection = (day: string) => setSelectedDay(day);
 
-  const handleDateChange = (vdate: Date | any) => {
-    // Check if value is a date or null, then update state accordingly
-    if (Date instanceof Date || Date === null) {
-      setSelectedDate(Date);
-    } else {
-      console.error('Unexpected value type:', Date);
-    }
-  };
+const handleDateChange = (vdate: Date | any) => {
+  if (vdate instanceof Date || vdate === null) {
+    setSelectedDate(vdate);
+  } else {
+    console.error('Unexpected value type:', vdate);
+  }
+};
+
   const handleTimeSelection = (time: string) => setSelectedTime(time);
 
   const handleClose = () => {
@@ -272,11 +275,19 @@ export default function CustomerPreview({ customer, open, onClose, editCustomer 
                       <MainCard title="Schedule">
                         <Stack spacing={1}>
                           <Typography variant="body2">Select a date:</Typography>
-                          <DatePicker
-                            onChange={handleDateChange} // Handle date change
-                            value={selectedDate}
-                            format="yyyy-MM-dd"
+
+                          <ReactDatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange} // Handle null as undefined
+                            selectsStart
+                            placeholderText="Select Date and Time"
+                            className="w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-primary focus:border-primary"
+                            showTimeSelect // Enable time selection
+                            timeIntervals={15} // Time selection intervals in minutes
+                            timeCaption="Time" // Caption for time selection
+                            dateFormat="MMMM d, yyyy h:mm aa" // Display format for date and time
                           />
+                          
                           <Typography variant="body2">Selected Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</Typography>
                         </Stack>
                       </MainCard>

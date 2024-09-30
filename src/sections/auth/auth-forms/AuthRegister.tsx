@@ -130,8 +130,8 @@ const AuthRegister = () => {
               if (scriptedRef.current) {
                 setStatus({ success: true });
                 setSubmitting(false);
-                preload('api/menu/dashboard', fetcher); // Preload dashboard menu on login success
-                window.location.href = '/dashboard/default'; // Manually redirect to the desired page
+                //preload('api/menu/dashboard', fetcher); // Preload dashboard menu on login success
+                window.location.href = '/login'; // Manually redirect to the desired page
               }
             }
           } else {
