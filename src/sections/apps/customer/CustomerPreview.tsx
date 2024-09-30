@@ -292,8 +292,20 @@ const handleDateChange = (vdate: Date | any) => {
                         </Stack>
                       </MainCard>
                     </Grid>
+                    
+
                   </Grid>
                 </Grid>
+                <Grid item xs={12} sm={4} xl={3}>
+                    <MainCard title="File Views">
+                      <Stack spacing={1}>
+                        <Button variant="outlined">View Document</Button>
+                        <Button variant="outlined">Download Document</Button>
+                        <Button variant="outlined">Share Document</Button>
+                      </Stack>
+                    </MainCard>
+                  </Grid>
+                    
               </Grid>
             </SimpleBar>
           </DialogContent>
