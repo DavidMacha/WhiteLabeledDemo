@@ -1,5 +1,5 @@
 // PROJECT IMPORTS
-import ManagerList from 'views/apps/VoiAdvisorList';
+import ManagerList from 'views/apps/OldVOIcustomerList';
 
 // ==============================|| CUSTOMER - LIST ||============================== //
 

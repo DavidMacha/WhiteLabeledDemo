@@ -24,6 +24,20 @@ import { Email, Search, CheckCircle, Cancel, Chat, RemoveCircle } from '@mui/ico
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import List from '@mui/material/List';
+import Stack from '@mui/material/Stack';
+import ListItem from '@mui/material/ListItem';
+import { DocumentDownload, Edit, Trash } from 'iconsax-react';
+import DialogActions from '@mui/material/DialogActions';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from 'components/@extended/Avatar';
+import { PopupTransition } from 'components/@extended/Transitions';
+import SimpleBar from 'components/third-party/SimpleBar';
+import MainCard from 'components/MainCard';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import PdfPopup from './PdfPopup';
 
 interface Client {
   client: string;
@@ -81,21 +95,23 @@ const initialVerifiedData: Client[] = [
   }
   //... other verified clients
 ];
+
 const ClientList: FC = () => {
-  const [unverifiedData, setUnverifiedData] = useState<Client[]>(initialUnverifiedData);
-  const [verifiedData, setVerifiedData] = useState<Client[]>(initialVerifiedData);
-  const [selectedClient, setSelectedClient] = useState<Client | null>(null);
-  const [open, setOpen] = useState(false);
+    const [unverifiedData, setUnverifiedData] = useState<Client[]>(initialUnverifiedData);
+    const [verifiedData, setVerifiedData] = useState<Client[]>(initialVerifiedData);
+    const [selectedClient, setSelectedClient] = useState<Client | null>(null);
+    const [open, setOpen] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  // Handle viewing client details
-  const handleView = (client: Client) => {
-    setSelectedClient(client);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+    // Handle viewing client details
+    const handleView = (client: Client) => {
+      setSelectedClient(client);
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
 
   // Handle verification action (move client from unverified to verified)
   const handleVerify = (client: Client) => {
@@ -123,6 +139,10 @@ const ClientList: FC = () => {
     toast.info(`Notification sent to ${client.client} to chat.`);
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
     <Box>
       <ToastContainer />
@@ -130,6 +150,7 @@ const ClientList: FC = () => {
         Clients Management
       </Typography>
 
+      {/* Unverified Clients */}
       <Box my={4}>
         <Typography variant="h6">Unverified Advisors</Typography>
         <ClientTable
@@ -142,6 +163,7 @@ const ClientList: FC = () => {
         />
       </Box>
 
+      {/* Verified Clients */}
       <Box my={4}>
         <Typography variant="h6">Verified Advisors</Typography>
         <ClientTable
@@ -153,30 +175,161 @@ const ClientList: FC = () => {
         />
       </Box>
 
+      {/* Popup Dialog for Viewing Client */}
       {selectedClient && (
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Advisor Details</DialogTitle>
-          <DialogContent>
-            <Card>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <Typography variant="h6">{selectedClient.client}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography>Email: {selectedClient.email}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography>Address: {selectedClient.address}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography>Telephone: {selectedClient.telephone}</Typography>
-                  </Grid>
+        //
+
+        <>
+        <Dialog
+            open={open}
+            TransitionComponent={PopupTransition}
+            keepMounted
+            aria-describedby="alert-dialog-slide-description"
+            sx={{ '& .MuiDialog-paper': { width: 1024, maxWidth: 1, m: { xs: 1.75, sm: 2.5, md: 4 } } }}
+        >
+            <Box id="PopupPrint" sx={{ px: { xs: 2, sm: 3, md: 5 }, py: 1 }}>
+            <DialogTitle sx={{ px: 0 }}>
+                <List sx={{ width: 1, p: 0 }}>
+                <ListItem
+                    disablePadding
+                    secondaryAction={
+                    <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
+                        <Tooltip title="Other">
+                        <IconButton color="secondary">
+                            <Edit />
+                        </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Close" onClick={handleClose}>
+                        <IconButton color="error">
+                            <Trash />
+                        </IconButton>
+                        </Tooltip>
+                    </Stack>
+                    }
+                >
+                    <ListItemAvatar sx={{ mr: 0.75 }}>
+                    <Avatar alt="User Image" size="lg" src='/example.png' />
+                    </ListItemAvatar>
+                    <ListItemText
+                    primary={<Typography variant="h5">John Doe</Typography>}
+                    secondary={<Typography color="secondary">Advisor</Typography>}
+                    />
+                </ListItem>
+                </List>
+            </DialogTitle>
+            <DialogContent dividers sx={{ px: 0 }}>
+                <SimpleBar sx={{ height: 'calc(100vh - 290px)' }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={8} xl={9}>
+                    <Grid container spacing={2.25}>
+                        <Grid item xs={12}>
+                        <MainCard title="About Me">
+                            <Typography>Years of Experience: 8</Typography>
+                            <Typography>Address: 1234 Some Location</Typography>
+                            <Typography>Phone: 999-888-777</Typography>
+                        </MainCard>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                        <MainCard title="Education">
+                            <List sx={{ py: 0 }}>
+                            <ListItem divider>
+                                <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <Stack spacing={0.5}>
+                                    <Typography color="secondary">Master Degree</Typography>
+                                    <Typography>2014-2017</Typography>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <Stack spacing={0.5}>
+                                    <Typography color="secondary">Institute</Typography>
+                                    <Typography>Harvard Law School</Typography>
+                                    </Stack>
+                                </Grid>
+                                </Grid>
+                            </ListItem>
+                            </List>
+                        </MainCard>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                        <MainCard title="Employment">
+                            <List sx={{ py: 0 }}>
+                            <ListItem divider>
+                                <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <Stack spacing={0.5}>
+                                    <Typography color="secondary">Law Professor</Typography>
+                                    <Typography>2018 - Current</Typography>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <Stack spacing={0.5}>
+                                    <Typography color="secondary">Company</Typography>
+                                    <Typography>London University</Typography>
+                                    </Stack>
+                                </Grid>
+                                </Grid>
+                            </ListItem>
+                            </List>
+                        </MainCard>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                        <MainCard title="Schedule">
+                            <Stack spacing={1}>
+                            <Typography variant="body2">Additional Notes</Typography>
+                            <Typography color="secondary">
+                                Any important notes will appear here.
+                            </Typography>
+                            </Stack>
+                        </MainCard>
+                        </Grid>
+                    </Grid>
+                    </Grid>
+
+                    <Grid item xs={12} sm={4} xl={3}>
+                    <MainCard title="Uploaded Files">
+                        <Stack spacing={1}>
+                        <Button variant="outlined" href="./example.pdf">
+                            Document 1
+                        </Button>
+                        <Button variant="outlined" href="./example2.pdf">
+                            Document 2
+                        </Button>
+                        <Button variant="outlined" onClick={() => window.open('/example.pdf', '_blank')}>
+                        Document 1
+                        </Button>
+                        </Stack>
+                    </MainCard>
+
+                    <MainCard title="Availability">
+                        <Stack spacing={1}>
+                        <Button variant="outlined">Probono - Weekends</Button>
+                        <Button variant="outlined">Professional - Weekdays</Button>
+                        </Stack>
+                    </MainCard>
+                    </Grid>
                 </Grid>
-              </CardContent>
-            </Card>
-          </DialogContent>
+                </SimpleBar>
+            </DialogContent>
+
+            <DialogActions>
+                <Button variant="contained" onClick={() => handleVerify(selectedClient)}>Approve</Button>
+                <Button variant="outlined" color="error" onClick={handleClose}>Deny</Button>
+            </DialogActions>
+            </Box>
         </Dialog>
+
+        <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSnackbarClose}>
+            <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+            Approved successfully!
+            </Alert>
+        </Snackbar>
+        </>
+
+
       )}
     </Box>
   );

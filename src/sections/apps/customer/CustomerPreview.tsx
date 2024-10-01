@@ -6,8 +6,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
+import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Tooltip from '@mui/material/Tooltip';
@@ -240,7 +240,6 @@ const handleDateChange = (vdate: Date | any) => {
                     </MainCard>
                 </Grid>
 
-                    
               </Grid>
             </SimpleBar>
           </DialogContent>
