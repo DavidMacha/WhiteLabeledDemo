@@ -1,5 +1,5 @@
 // PROJECT IMPORTS
-import CustomersCard from 'views/apps/CustomersCard';
+import CustomersCard from 'views/apps/ScheduleCard';
 
 // ==============================|| CUSTOMER - CARD ||============================== //
 

@@ -121,12 +121,12 @@ const handleDateChange = (vdate: Date | any) => {
                 disablePadding
                 secondaryAction={
                   <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
-                    <Tooltip title="Edit">
+                    <Tooltip title="Other">
                       <IconButton color="secondary">
                         <Edit />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete" onClick={handleClose}>
+                    <Tooltip title="Close" onClick={handleClose}>
                       <IconButton color="error">
                         <Trash />
                       </IconButton>
@@ -170,7 +170,7 @@ const handleDateChange = (vdate: Date | any) => {
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Institute</Typography>
-                                  <Typography>Massachusetts Institute of Technology</Typography>
+                                  <Typography>Harvard Law School</Typography>
                                 </Stack>
                               </Grid>
                             </Grid>
@@ -225,22 +225,28 @@ const handleDateChange = (vdate: Date | any) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={4} xl={3}>
-                    <MainCard title="File Views">
+                    <MainCard title="Domains">
                       <Stack spacing={1}>
-                        <Button variant="outlined">Document 1</Button>
-                        <Button variant="outlined">Document 2</Button>
-                        <Button variant="outlined">Document 3</Button>
-                        <Button variant="outlined">Another Document</Button>
+                        <Button variant="outlined">Cooperate Law</Button>
+                        <Button variant="outlined">Tax Law</Button>
+                        <Button variant="outlined">I.P Law</Button>
+                        <Button variant="outlined">Estate Law</Button>
                       </Stack>
                     </MainCard>
-                    <MainCard title="Fee">
+                    <MainCard title="Service Fee">
                       <Stack spacing={1}>
                         <Button variant="outlined">5$ per min</Button>
+                        <Button variant="outlined">Probono</Button>
+                      </Stack>
+                    </MainCard>
+                    <MainCard title="Availibility">
+                      <Stack spacing={1}>
+                        <Button variant="outlined">Probono- Weekends</Button>
+                        <Button variant="outlined">Professional -Weekdays</Button>
                       </Stack>
                     </MainCard>
                 </Grid>
 
-                    
               </Grid>
             </SimpleBar>
           </DialogContent>

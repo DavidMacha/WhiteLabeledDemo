@@ -18,14 +18,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 // THIRD-PARTY
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import ReactDatePicker from 'react-datepicker';
-
 
 // PROJECT IMPORTS
 import AlertCustomerDelete from './AlertCustomerDelete';
@@ -42,8 +39,6 @@ import { CustomerList } from 'types/customer';
 // ASSETS
 import { DocumentDownload, Edit, Trash } from 'iconsax-react';
 
-
-
 interface Props {
   customer: CustomerList;
   open: boolean;
@@ -53,33 +48,12 @@ interface Props {
 
 const avatarImage = '/assets/images/users';
 
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
 // ==============================|| CUSTOMER - CARD PREVIEW ||============================== //
 
 export default function CustomerPreview({ customer, open, onClose, editCustomer }: Props) {
   const matchDownMD = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const [openAlert, setOpenAlert] = useState(false);
-  const [selectedDay, setSelectedDay] = useState<string>('');
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // State for date
-  const [selectedTime, setSelectedTime] = useState<string>('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [serviceFee, setServiceFee] = useState<number>(0);
-  const [serviceFeeEditOpen, setServiceFeeEditOpen] = useState(false);
-  const [days, setDays] = useState<string[]>(daysOfWeek);
-  const [editDaysOpen, setEditDaysOpen] = useState(false);
-
-  const handleDaySelection = (day: string) => setSelectedDay(day);
-
-const handleDateChange = (vdate: Date | any) => {
-  if (vdate instanceof Date || vdate === null) {
-    setSelectedDate(vdate);
-  } else {
-    console.error('Unexpected value type:', vdate);
-  }
-};
-
-  const handleTimeSelection = (time: string) => setSelectedTime(time);
 
   const handleClose = () => {
     setOpenAlert(!openAlert);
@@ -92,16 +66,6 @@ const handleDateChange = (vdate: Date | any) => {
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
-  };
-
-  const handleServiceFeeEditOpen = () => setServiceFeeEditOpen(true);
-  const handleServiceFeeEditClose = () => setServiceFeeEditOpen(false);
-  const handleServiceFeeChange = (event: React.ChangeEvent<HTMLInputElement>) => setServiceFee(parseFloat(event.target.value));
-
-  const handleEditDaysOpen = () => setEditDaysOpen(true);
-  const handleEditDaysClose = () => setEditDaysOpen(false);
-  const handleDayToggle = (day: string) => {
-    setDays((prevDays) => (prevDays.includes(day) ? prevDays.filter(d => d !== day) : [...prevDays, day]));
   };
 
   return (
@@ -121,8 +85,15 @@ const handleDateChange = (vdate: Date | any) => {
                 disablePadding
                 secondaryAction={
                   <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
+                    <PDFDownloadLink document={<ListCard customer={customer} />} fileName={`Customer-${customer.name}.pdf`}>
+                      <Tooltip title="Export">
+                        <IconButton color="secondary">
+                          <DocumentDownload />
+                        </IconButton>
+                      </Tooltip>
+                    </PDFDownloadLink>
                     <Tooltip title="Edit">
-                      <IconButton color="secondary">
+                      <IconButton color="secondary" onClick={editCustomer}>
                         <Edit />
                       </IconButton>
                     </Tooltip>
@@ -138,8 +109,8 @@ const handleDateChange = (vdate: Date | any) => {
                   <Avatar alt={customer.name} size="lg" src={`${avatarImage}/avatar-${!customer.avatar ? 1 : customer.avatar}.png`} />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={<Typography variant="h5">Lorum Ipsum</Typography>}
-                  secondary={<Typography color="secondary">Advisor</Typography>}
+                  primary={<Typography variant="h5">{customer.name}</Typography>}
+                  secondary={<Typography color="secondary">{customer.role}</Typography>}
                 />
               </ListItem>
             </List>
@@ -152,7 +123,7 @@ const handleDateChange = (vdate: Date | any) => {
                     <Grid item xs={12}>
                       <MainCard title="About me">
                         <Typography>
-                          Hello, I’m Advisor in an international company
+                          Hello, Myself {customer.name}, I’m {customer.role} in international company, {customer.about}
                         </Typography>
                       </MainCard>
                     </Grid>
@@ -163,7 +134,7 @@ const handleDateChange = (vdate: Date | any) => {
                             <Grid container spacing={matchDownMD ? 0.5 : 3}>
                               <Grid item xs={12} md={6}>
                                 <Stack spacing={0.5}>
-                                  <Typography color="secondary">Master Degree</Typography>
+                                  <Typography color="secondary">Master Degree (Year)</Typography>
                                   <Typography>2014-2017</Typography>
                                 </Stack>
                               </Grid>
@@ -171,6 +142,22 @@ const handleDateChange = (vdate: Date | any) => {
                                 <Stack spacing={0.5}>
                                   <Typography color="secondary">Institute</Typography>
                                   <Typography>Massachusetts Institute of Technology</Typography>
+                                </Stack>
+                              </Grid>
+                            </Grid>
+                          </ListItem>
+                          <ListItem divider>
+                            <Grid container spacing={matchDownMD ? 0.5 : 3}>
+                              <Grid item xs={12} md={6}>
+                                <Stack spacing={0.5}>
+                                  <Typography color="secondary">Bachelor (Year)</Typography>
+                                  <Typography>2011-2013</Typography>
+                                </Stack>
+                              </Grid>
+                              <Grid item xs={12} md={6}>
+                                <Stack spacing={0.5}>
+                                  <Typography color="secondary">Institute</Typography>
+                                  <Typography>Imperial College London</Typography>
                                 </Stack>
                               </Grid>
                             </Grid>
@@ -200,47 +187,17 @@ const handleDateChange = (vdate: Date | any) => {
                         </List>
                       </MainCard>
                     </Grid>
-                    <Grid item xs={12}>
-                      <MainCard title="Schedule">
-                        <Stack spacing={1}>
-                          <Typography variant="body2">Select a date:</Typography>
-
-                          <ReactDatePicker
-                            selected={selectedDate}
-                            onChange={handleDateChange} // Handle null as undefined
-                            selectsStart
-                            placeholderText="Select Date and Time"
-                            className="w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-primary focus:border-primary"
-                            showTimeSelect // Enable time selection
-                            timeIntervals={15} // Time selection intervals in minutes
-                            timeCaption="Time" // Caption for time selection
-                            dateFormat="MMMM d, yyyy h:mm aa" // Display format for date and time
-                          />
-                          
-                          <Typography variant="body2">Selected Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</Typography>
-                        </Stack>
-                      </MainCard>
-                    </Grid>
-              
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={4} xl={3}>
-                    <MainCard title="File Views">
-                      <Stack spacing={1}>
-                        <Button variant="outlined">Document 1</Button>
-                        <Button variant="outlined">Document 2</Button>
-                        <Button variant="outlined">Document 3</Button>
-                        <Button variant="outlined">Another Document</Button>
-                      </Stack>
-                    </MainCard>
-                    <MainCard title="Fee">
-                      <Stack spacing={1}>
-                        <Button variant="outlined">5$ per min</Button>
-                      </Stack>
-                    </MainCard>
+                  <MainCard title="File Views">
+                    <Stack spacing={1}>
+                      <Button variant="outlined">View Document</Button>
+                      <Button variant="outlined">Download Document</Button>
+                      <Button variant="outlined">Share Document</Button>
+                    </Stack>
+                  </MainCard>
                 </Grid>
-
-                    
               </Grid>
             </SimpleBar>
           </DialogContent>
@@ -255,7 +212,6 @@ const handleDateChange = (vdate: Date | any) => {
           Request sent successfully!
         </Alert>
       </Snackbar>
-      
     </>
   );
 }

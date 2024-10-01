@@ -90,7 +90,7 @@ const AuthRegister = () => {
           data.append('pers_fName', values.pers_fName);
           data.append('pers_mName', values.pers_mName);
           data.append('pers_lName', values.pers_lName);
-          data.append('redirectUrl', '/dashboard/default');
+          data.append('redirectUrl', 'https://wldemo-gonns-projects.vercel.app/login');
 
           const config = {
             method: 'post',
