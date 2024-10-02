@@ -38,6 +38,7 @@ import MainCard from 'components/MainCard';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+import PdfModal from 'components/PdfModal';
 
 interface Client {
   client: string;
@@ -103,7 +104,8 @@ const ClientList: FC = () => {
     const [open, setOpen] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-
+    const [openp, setOpenp] = useState(false);
+    const [pdfUrl, setPdfUrl] = useState('');
     // Handle viewing client details
     const handleView = (client: Client) => {
       setSelectedClient(client);
@@ -113,6 +115,16 @@ const ClientList: FC = () => {
     const handleClose = () => {
       setOpen(false);
     };
+
+    const handleOpen = (url: string) => {
+        setPdfUrl(url);
+        setOpenp(true);
+      };
+    
+      const handleClosePDF = () => {
+        setOpenp(false);
+        setPdfUrl('');
+      };
 
   // Handle verification action (move client from unverified to verified)
   const handleVerify = (client: Client) => {
@@ -212,7 +224,7 @@ const ClientList: FC = () => {
                     <Avatar alt="User Image" size="lg" src='/example.png' />
                     </ListItemAvatar>
                     <ListItemText
-                    primary={<Typography variant="h5">John Doe</Typography>}
+                    primary={<Typography variant="h5">{selectedClient.client}</Typography>}
                     secondary={<Typography color="secondary">Advisor</Typography>}
                     />
                 </ListItem>
@@ -278,11 +290,11 @@ const ClientList: FC = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <MainCard title="Schedule">
+                        <MainCard title="Additional Information">
                             <Stack spacing={1}>
                             <Typography variant="body2">Additional Notes</Typography>
                             <Typography color="secondary">
-                                Any important notes will appear here.
+                                Any important notes will appear here if any.
                             </Typography>
                             </Stack>
                         </MainCard>
@@ -293,15 +305,17 @@ const ClientList: FC = () => {
                     <Grid item xs={12} sm={4} xl={3}>
                     <MainCard title="Uploaded Files">
                         <Stack spacing={1}>
-                        <Button variant="outlined" href="./example2.pdf">
+                        <Button variant="outlined" href="/pdf/example.pdf">
                             Document 1
                         </Button>
-                        <Button variant="outlined" href="./example2.pdf">
+                        <Button variant="outlined" href="/pdf/example.pdf">
                             Document 2
                         </Button>
-                        <Button variant="outlined" onClick={() => window.open('/example.pdf', '_blank')}>
-                        Document 3
-                        </Button>
+
+                        <Button onClick={() => handleOpen('/pdf/example.pdf')}>Document 3</Button>
+                        <Button onClick={() => handleOpen('/pdf/example2.pdf')}>Document 4</Button>
+
+                        <PdfModal open={openp} onClose={handleClosePDF} pdfUrl={pdfUrl} />
                         </Stack>
                         
                     </MainCard>
@@ -311,6 +325,7 @@ const ClientList: FC = () => {
                         <Button variant="outlined">Probono - Weekends</Button>
                         <Button variant="outlined">Professional - Weekdays</Button>
                         </Stack>
+
                     </MainCard>
                     </Grid>
                 </Grid>
