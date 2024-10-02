@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useEffect,useRef } from 'react';
 import ZoomVideo, { TestMicrophoneReturn, TestSpeakerReturn } from '@zoom/videosdk';
 import { useMount, useUnmount } from '../../hooks';
 import './preview.scss';
@@ -81,177 +81,182 @@ const updateMicFeedbackStyle = () => {
 const { Option } = Select;
 
 const PreviewContainer = () => {
-  const [isStartedAudio, setIsStartedAudio] = useState<boolean>(false);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
-  const [isStartedVideo, setIsStartedVideo] = useState<boolean>(false);
-  const [micList, setMicList] = useState<MediaDevice[]>([]);
-  const [speakerList, setSpeakerList] = useState<MediaDevice[]>([]);
-  const [cameraList, setCameraList] = useState<MediaDevice[]>([]);
-  const [activeMicrophone, setActiveMicrophone] = useState('');
-  const [activeSpeaker, setActiveSpeaker] = useState('');
-  const [activeCamera, setActiveCamera] = useState('');
-  const [outputLevel, setOutputLevel] = useState(0);
-  const [inputLevel, setInputLevel] = useState(0);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [isRecordingVoice, setIsRecordingVoice] = useState(false);
-  const [isPlayingRecording, setIsPlayingRecording] = useState(false);
-  const [isInVBMode, setIsInVBMode] = useState(false);
-  const [isBlur, setIsBlur] = useState(false);
-  const speakerTesterRef = useRef<TestSpeakerReturn>();
-  const microphoneTesterRef = useRef<TestMicrophoneReturn>();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  const onCameraClick = useCallback(async () => {
-    if (isStartedVideo) {
-      await localVideo?.stop();
-      setIsStartedVideo(false);
-      setIsInVBMode(false);
-      setIsBlur(false);
-    } else {
-      if (videoRef.current) {
-        await localVideo?.start(videoRef.current);
-        setIsStartedVideo(true);
-      }
-    }
-  }, [isStartedVideo]);
-  const onMicrophoneClick = useCallback(async () => {
-    if (isStartedAudio) {
-      if (isMuted) {
-        await localAudio?.unmute();
-        micFeedBackInteval = setInterval(updateMicFeedbackStyle, 500);
-        setIsMuted(false);
-      } else {
-        await localAudio?.mute();
-        if (micFeedBackInteval) {
-          clearInterval(micFeedBackInteval);
+  useEffect(() => {
+    if (typeof navigator !== 'undefined') {
+                
+      const [isStartedAudio, setIsStartedAudio] = useState<boolean>(false);
+      const [isMuted, setIsMuted] = useState<boolean>(true);
+      const [isStartedVideo, setIsStartedVideo] = useState<boolean>(false);
+      const [micList, setMicList] = useState<MediaDevice[]>([]);
+      const [speakerList, setSpeakerList] = useState<MediaDevice[]>([]);
+      const [cameraList, setCameraList] = useState<MediaDevice[]>([]);
+      const [activeMicrophone, setActiveMicrophone] = useState('');
+      const [activeSpeaker, setActiveSpeaker] = useState('');
+      const [activeCamera, setActiveCamera] = useState('');
+      const [outputLevel, setOutputLevel] = useState(0);
+      const [inputLevel, setInputLevel] = useState(0);
+      const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+      const [isRecordingVoice, setIsRecordingVoice] = useState(false);
+      const [isPlayingRecording, setIsPlayingRecording] = useState(false);
+      const [isInVBMode, setIsInVBMode] = useState(false);
+      const [isBlur, setIsBlur] = useState(false);
+      const speakerTesterRef = useRef<TestSpeakerReturn>();
+      const microphoneTesterRef = useRef<TestMicrophoneReturn>();
+      const videoRef = useRef<HTMLVideoElement | null>(null);
+      const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    
+      const onCameraClick = useCallback(async () => {
+        if (isStartedVideo) {
+          await localVideo?.stop();
+          setIsStartedVideo(false);
+          setIsInVBMode(false);
+          setIsBlur(false);
+        } else {
+          if (videoRef.current) {
+            await localVideo?.start(videoRef.current);
+            setIsStartedVideo(true);
+          }
         }
-        setIsMuted(true);
-      }
-    } else {
-      await localAudio?.start();
-      setIsStartedAudio(true);
-    }
-  }, [isStartedAudio, isMuted]);
-  const onMicrophoneMenuClick = async (key: string) => {
-    const [type, deviceId] = key.split('|');
-    if (type === 'microphone') {
-      if (deviceId !== activeMicrophone) {
-        await localAudio.stop();
-        setIsMuted(true);
-        localAudio = ZoomVideo.createLocalAudioTrack(deviceId);
-        await localAudio.start();
-        setActiveMicrophone(deviceId);
-      }
-    } else if (type === 'leave audio') {
-      await localAudio.stop();
-      setIsStartedAudio(false);
-    }
-  };
-  const onSwitchCamera = async (key: string) => {
-    if (localVideo) {
-      if (activeCamera !== key) {
-        await localVideo.switchCamera(key);
-      }
-    }
-  };
-  const onBlurBackground = useCallback(async () => {
-    if (isInVBMode) {
-      if (isBlur) {
-        await localVideo.updateVirtualBackground(undefined);
-      } else {
-        await localVideo.updateVirtualBackground('blur');
-      }
-      setIsBlur(!isBlur);
-    } else {
-      if (!isBlur) {
-        localVideo.stop();
-        if (canvasRef.current) {
-          localVideo.start(canvasRef.current, { imageUrl: 'blur' });
+      }, [isStartedVideo]);
+      const onMicrophoneClick = useCallback(async () => {
+        if (isStartedAudio) {
+          if (isMuted) {
+            await localAudio?.unmute();
+            micFeedBackInteval = setInterval(updateMicFeedbackStyle, 500);
+            setIsMuted(false);
+          } else {
+            await localAudio?.mute();
+            if (micFeedBackInteval) {
+              clearInterval(micFeedBackInteval);
+            }
+            setIsMuted(true);
+          }
+        } else {
+          await localAudio?.start();
+          setIsStartedAudio(true);
         }
-        setIsInVBMode(true);
-        setIsBlur(!isBlur);
-      }
-    }
-  }, [isInVBMode, isBlur]);
-  useMount(() => {
-    mountDevices().then((devices) => {
-      setMicList(devices.mics);
-      setCameraList(devices.cameras);
-      setSpeakerList(devices.speakers);
-      if (devices.speakers.length > 0) {
-        setActiveSpeaker(devices.speakers[0].deviceId);
-      }
-      if (devices.mics.length > 0) {
-        setActiveMicrophone(devices.mics[0].deviceId);
-      }
-    });
-  });
-  const onTestSpeakerClick = () => {
-    if (microphoneTesterRef.current) {
-      microphoneTesterRef.current.destroy();
-      microphoneTesterRef.current = undefined;
-    }
-    if (isPlayingAudio) {
-      speakerTesterRef.current?.stop();
-      setIsPlayingAudio(false);
-      setOutputLevel(0);
-    } else {
-      speakerTesterRef.current = localAudio.testSpeaker({
-        speakerId: activeSpeaker,
-        onAnalyseFrequency: (value) => {
-          setOutputLevel(Math.min(100, value));
+      }, [isStartedAudio, isMuted]);
+      const onMicrophoneMenuClick = async (key: string) => {
+        const [type, deviceId] = key.split('|');
+        if (type === 'microphone') {
+          if (deviceId !== activeMicrophone) {
+            await localAudio.stop();
+            setIsMuted(true);
+            localAudio = ZoomVideo.createLocalAudioTrack(deviceId);
+            await localAudio.start();
+            setActiveMicrophone(deviceId);
+          }
+        } else if (type === 'leave audio') {
+          await localAudio.stop();
+          setIsStartedAudio(false);
         }
+      };
+      const onSwitchCamera = async (key: string) => {
+        if (localVideo) {
+          if (activeCamera !== key) {
+            await localVideo.switchCamera(key);
+          }
+        }
+      };
+      const onBlurBackground = useCallback(async () => {
+        if (isInVBMode) {
+          if (isBlur) {
+            await localVideo.updateVirtualBackground(undefined);
+          } else {
+            await localVideo.updateVirtualBackground('blur');
+          }
+          setIsBlur(!isBlur);
+        } else {
+          if (!isBlur) {
+            localVideo.stop();
+            if (canvasRef.current) {
+              localVideo.start(canvasRef.current, { imageUrl: 'blur' });
+            }
+            setIsInVBMode(true);
+            setIsBlur(!isBlur);
+          }
+        }
+      }, [isInVBMode, isBlur]);
+      useMount(() => {
+        mountDevices().then((devices) => {
+          setMicList(devices.mics);
+          setCameraList(devices.cameras);
+          setSpeakerList(devices.speakers);
+          if (devices.speakers.length > 0) {
+            setActiveSpeaker(devices.speakers[0].deviceId);
+          }
+          if (devices.mics.length > 0) {
+            setActiveMicrophone(devices.mics[0].deviceId);
+          }
+        });
       });
-      setIsPlayingAudio(true);
-    }
-  };
-  const onTestMicrophoneClick = () => {
-    if (speakerTesterRef.current) {
-      speakerTesterRef.current.destroy();
-      speakerTesterRef.current = undefined;
-    }
-    if (!isPlayingRecording && !isRecordingVoice) {
-      microphoneTesterRef.current = localAudio.testMicrophone({
-        microphoneId: activeMicrophone,
-        speakerId: activeSpeaker,
-        recordAndPlay: true,
-        onAnalyseFrequency: (value) => {
-          setInputLevel(Math.min(100, value));
-        },
-        onStartRecording: () => {
-          setIsRecordingVoice(true);
-        },
-        onStartPlayRecording: () => {
+      const onTestSpeakerClick = () => {
+        if (microphoneTesterRef.current) {
+          microphoneTesterRef.current.destroy();
+          microphoneTesterRef.current = undefined;
+        }
+        if (isPlayingAudio) {
+          speakerTesterRef.current?.stop();
+          setIsPlayingAudio(false);
+          setOutputLevel(0);
+        } else {
+          speakerTesterRef.current = localAudio.testSpeaker({
+            speakerId: activeSpeaker,
+            onAnalyseFrequency: (value) => {
+              setOutputLevel(Math.min(100, value));
+            }
+          });
+          setIsPlayingAudio(true);
+        }
+      };
+      const onTestMicrophoneClick = () => {
+        if (speakerTesterRef.current) {
+          speakerTesterRef.current.destroy();
+          speakerTesterRef.current = undefined;
+        }
+        if (!isPlayingRecording && !isRecordingVoice) {
+          microphoneTesterRef.current = localAudio.testMicrophone({
+            microphoneId: activeMicrophone,
+            speakerId: activeSpeaker,
+            recordAndPlay: true,
+            onAnalyseFrequency: (value) => {
+              setInputLevel(Math.min(100, value));
+            },
+            onStartRecording: () => {
+              setIsRecordingVoice(true);
+            },
+            onStartPlayRecording: () => {
+              setIsRecordingVoice(false);
+              setIsPlayingRecording(true);
+            },
+            onStopPlayRecording: () => {
+              setIsPlayingRecording(false);
+            }
+          });
+        } else if (isRecordingVoice) {
+          microphoneTesterRef.current?.stopRecording();
           setIsRecordingVoice(false);
-          setIsPlayingRecording(true);
-        },
-        onStopPlayRecording: () => {
+        } else if (isPlayingRecording) {
+          microphoneTesterRef.current?.stop();
           setIsPlayingRecording(false);
         }
+      };
+      let microphoneBtn = 'Test Microphone';
+      if (isRecordingVoice) {
+        microphoneBtn = 'Recording';
+      } else if (isPlayingRecording) {
+        microphoneBtn = 'Playing';
+      }
+      useUnmount(() => {
+        if (isStartedAudio) {
+          localAudio.stop();
+        }
+        if (isStartedVideo) {
+          localVideo.stop();
+        }
       });
-    } else if (isRecordingVoice) {
-      microphoneTesterRef.current?.stopRecording();
-      setIsRecordingVoice(false);
-    } else if (isPlayingRecording) {
-      microphoneTesterRef.current?.stop();
-      setIsPlayingRecording(false);
-    }
-  };
-  let microphoneBtn = 'Test Microphone';
-  if (isRecordingVoice) {
-    microphoneBtn = 'Recording';
-  } else if (isPlayingRecording) {
-    microphoneBtn = 'Playing';
-  }
-  useUnmount(() => {
-    if (isStartedAudio) {
-      localAudio.stop();
-    }
-    if (isStartedVideo) {
-      localVideo.stop();
-    }
-  });
+      }
+  }, []);
 
   return (
     <div className="js-preview-view">
