@@ -1,3 +1,5 @@
+"use client";
+
 // PROJECT IMPORTS
 //import AddNewProduct from 'views/apps/AddNewProduct';
 import PreviewContainer from 'feature/preview/preview'
