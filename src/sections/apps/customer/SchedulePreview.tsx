@@ -230,14 +230,13 @@ const handleDateChange = (vdate: Date | any) => {
                         <Button variant="outlined">Cooperate Law -5$</Button>
                         <Button variant="outlined">Tax Law -8#</Button>
                         <Button variant="outlined">I.P Law -4$</Button>
-                        <Button variant="outlined">Estate Law- 6$</Button>
                         <Button variant="outlined">Probono</Button>
                       </Stack>
                     </MainCard>
                     <MainCard title="Preferred Currency">
                       <Stack spacing={1}>
                         <Button variant="outlined">USD</Button>
-                        <Button variant="outlined">ASD</Button>
+                        <Button variant="outlined">AUD</Button>
                       </Stack>
                     </MainCard>
                     <MainCard title="Advisor's Availibility">
