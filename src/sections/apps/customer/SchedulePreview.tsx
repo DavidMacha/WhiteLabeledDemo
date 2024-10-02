@@ -225,24 +225,29 @@ const handleDateChange = (vdate: Date | any) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={4} xl={3}>
-                    <MainCard title="Domains">
+                    <MainCard title="Domains and Fee per min">
                       <Stack spacing={1}>
-                        <Button variant="outlined">Cooperate Law</Button>
-                        <Button variant="outlined">Tax Law</Button>
-                        <Button variant="outlined">I.P Law</Button>
-                        <Button variant="outlined">Estate Law</Button>
-                      </Stack>
-                    </MainCard>
-                    <MainCard title="Service Fee">
-                      <Stack spacing={1}>
-                        <Button variant="outlined">5$ per min</Button>
+                        <Button variant="outlined">Cooperate Law -5$</Button>
+                        <Button variant="outlined">Tax Law -8#</Button>
+                        <Button variant="outlined">I.P Law -4$</Button>
+                        <Button variant="outlined">Estate Law- 6$</Button>
                         <Button variant="outlined">Probono</Button>
                       </Stack>
                     </MainCard>
-                    <MainCard title="Availibility">
+                    <MainCard title="Preferred Currency">
+                      <Stack spacing={1}>
+                        <Button variant="outlined">USD</Button>
+                        <Button variant="outlined">ASD</Button>
+                      </Stack>
+                    </MainCard>
+                    <MainCard title="Advisor's Availibility">
                       <Stack spacing={1}>
                         <Button variant="outlined">Probono- Weekends</Button>
-                        <Button variant="outlined">Professional -Weekdays</Button>
+                        <Button variant="outlined">Monday</Button>
+                        <Button variant="outlined">Tuesday</Button>
+                        <Button disabled>Wednesday</Button>
+                        <Button variant="outlined">Thursday</Button>
+                        <Button variant="outlined">Friday</Button>
                       </Stack>
                     </MainCard>
                 </Grid>
