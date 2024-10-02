@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useState, useRef } from 'react';
 import ZoomVideo, { TestMicrophoneReturn, TestSpeakerReturn } from '@zoom/videosdk';
 import { useMount, useUnmount } from '../../hooks';
