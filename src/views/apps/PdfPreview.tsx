@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Document, Page } from 'react-pdf';
 
-export default function PdfPreview({ isOpen, onRequestClose, pdfFile }) {
+const PdfPreview = ({ isOpen, onRequestClose, pdfFile }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} ariaHideApp={false}>
       <h2>PDF Preview</h2>
@@ -19,4 +19,4 @@ export default function PdfPreview({ isOpen, onRequestClose, pdfFile }) {
   );
 };
 
-//export default PdfPreview; 
+export default PdfPreview; 

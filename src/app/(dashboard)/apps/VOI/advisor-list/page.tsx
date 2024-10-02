@@ -1,10 +1,10 @@
 // PROJECT IMPORTS
-import ManagerList from 'views/apps/OldVOIcustomerList';
+import ClientList from 'views/apps/OldVoiAdvisorList';
 
 // ==============================|| CUSTOMER - LIST ||============================== //
 
 const ManagerListPage = () => {
-  return <ManagerList />;
+  return <ClientList />;
 };
 
 export default ManagerListPage;
