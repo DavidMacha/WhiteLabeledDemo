@@ -1,6 +1,6 @@
 // PROJECT IMPORTS
 //import AddNewProduct from 'views/apps/AddNewProduct';
-import PreviewContainer from 'feature/preview/preview.tsx'
+import PreviewContainer from 'feature/preview/preview'
 
 // ==============================|| ECOMMERCE - ADD PRODUCT ||============================== //
 
