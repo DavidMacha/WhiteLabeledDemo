@@ -12,19 +12,16 @@ const Products = () => {
   }).format(now);
 
   return (
-    <section className="relative flex flex-col items-center justify-center gap-10 text-white h-screen">
+    <section className="relative flex flex-col items-center justify-center gap-4 min-h-[300px] text-white">
       {/* Background Image with Adjusted Height */}
       <div
-        className="h-[300px] w-[1000px] rounded-[20px] bg-hero bg-cover bg-center relative flex flex-col items-center justify-center"
+        className="h-[300px] w-[1500px] rounded-[20px] bg-hero bg-cover bg-center flex flex-col items-center justify-center"
         style={{
           backgroundImage: "url('/assets/images/hero-background.png')",
           borderRadius: "20px",
-          height: "300px",  // Ensure height is explicitly set in inline style
-          width: "1000px",
-          padding: "50px",  // Add padding to create space from borders
-          boxSizing: "border-box",  // Ensure padding is included in the height
-          position: "relative",  // Ensure positioning context for absolute positioning
-          backgroundPosition: "center", // Center the background image
+          padding: "20px", // Reduced padding to lessen space
+          boxSizing: "border-box",
+          backgroundPosition: "center",
         }}
       >
         <div className="absolute top-0 left-0 p-4">
@@ -46,10 +43,10 @@ const Products = () => {
         <div className="absolute top-[50px]"> <p>_</p></div>
         <div className="absolute top-[120px] left-0 p-4">
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl font-extrabold lg:text-7xl" style={{ color: "white" }}>
+            <h1 className="text-4xl font-extrabold lg:text-7xl" style={{ color: "white", margin: 0 }}>
               {time}
             </h1>
-            <p className="text-lg font-medium" style={{ color: "white" }}>
+            <p className="text-lg font-medium" style={{ color: "white", margin: 0 }}>
               {date}
             </p>
           </div>

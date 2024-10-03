@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import React, { useState } from 'react';
 import WebPageRenderer from 'views/ZoomCall/WebPageRenderer';
 
@@ -15,36 +14,24 @@ const AddNewProductPage = () => {
   };
 
   return (
-    <div>
-      <h1>View External Website</h1>
+    <div className="flex flex-col items-center p-4">
+      <h1 className="text-2xl md:text-3xl font-bold text-center mb-4">Zoom Preview</h1>
       <WebPageRenderer url="https://zoom-test-nine.vercel.app" scale={scale} />
 
       {/* Zoom Controls */}
-      <div style={{
-          display: 'flex',
-          justifyContent: 'center', // Center the buttons
-          gap: '10px',
-          marginTop: '10px', // Add some space above the buttons
-      }}>
-        <button onClick={zoomOut} style={buttonStyle}>Zoom Out</button>
-        <button onClick={zoomIn} style={buttonStyle}>Zoom In</button>
+      <div className="flex justify-center gap-2 mt-4">
+        <button onClick={zoomOut} className={buttonClasses}>Zoom Out</button>
+        <button onClick={zoomIn} className={buttonClasses}>Zoom In</button>
       </div>
     </div>
   );
 };
 
-// Button styles
-const buttonStyle = {
-  padding: '8px 15px',
-  backgroundColor: '#007BFF',
-  color: 'white',
-  border: 'none',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  transition: 'background-color 0.3s, transform 0.2s',
-};
+// Button styles using Tailwind CSS
+const buttonClasses = "px-4 py-2 bg-blue-500 text-white rounded transition duration-300 hover:bg-blue-600";
 
 export default AddNewProductPage;
+
 
 
 

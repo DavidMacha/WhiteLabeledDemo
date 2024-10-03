@@ -1,5 +1,5 @@
 // PROJECT IMPORTS
-import ClientList from 'views/apps/VoiClientList';
+import ClientList from 'views/apps/NewVoiClientList';
 
 // ==============================|| CUSTOMER - LIST ||============================== //
 

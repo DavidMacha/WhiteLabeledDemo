@@ -134,7 +134,7 @@ const applications: NavItemType = {
         },
         {
           id: 'Recordings',
-          title: <FormattedMessage id="Stream Room" />,
+          title: <FormattedMessage id="Session Room" />,
           type: 'item',
           url: '/apps/e-commerce/product-list'
         },

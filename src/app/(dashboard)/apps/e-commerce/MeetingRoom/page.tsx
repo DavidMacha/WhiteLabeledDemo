@@ -1,138 +1,72 @@
+"use client";
 // PROJECT IMPORTS
-import IncoiceDashboard from 'views/apps/IncoiceDashboard';
+import React, { useState } from 'react';
+import Products from 'views/apps/Products';
+import WebPageRenderer from 'views/ZoomCall/WebPageRenderer';
 
-// ==============================|| INVOICE - DASHBOARD ||============================== //
+// ==============================|| DASHBOARD WITH WEB RENDER ||============================== //
 
 const Dashboard = () => {
-  return <IncoiceDashboard />;
-};
+  const [url, setUrl] = useState(""); // State to hold the meeting link
+  const [scale, setScale] = useState(0.8); // Default scale
 
-export default Dashboard;
+  const handleUrlChange = (e) => {
+    setUrl(e.target.value); // Update the URL state
+  };
 
-/*
-"use client";
+  const handleSubmit = () => {
+    // Handle any submit actions here if needed
+    // For now, it simply renders the WebPageRenderer when the Submit button is clicked
+  };
 
-import Alert from "components/Alert";
-import Loader from "components/Loader";
-import MeetingRoom from "components/MeetingRoom";
-import MeetingSetup from "components/MeetingSetup";
-import { useGetCallById } from "hooks/useGetCallById";
-import { useUser } from "@clerk/nextjs";
-import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
-import { useParams } from "next/navigation";
-import React, { useState } from "react";
+  const zoomIn = () => {
+    setScale(prevScale => Math.min(prevScale + 0.1, 2)); // Limit max scale to 2
+  };
 
-const Meeting = ({ params }: { params: { id: string } }) => {
-  const { id } = useParams();
-  const { isLoaded, user } = useUser();
-  const { call, isCallLoading } = useGetCallById(id);
-  const [isSetupComplete, setIsSetupComplete] = useState(false);
-
-  if (!isLoaded || isCallLoading) return <Loader />;
-
-  if (!call)
-    return (
-      <p className="text-center text-3xl font-bold text-black">
-        Call Not Found
-      </p>
-    );
-
-  // get more info about custom call type:  https://getstream.io/video/docs/react/guides/configuring-call-types/
-  const notAllowed =
-    call.type === "invited" &&
-    (!user || !call.state.members.find((m) => m.user.id === user.id));
-
-  if (notAllowed)
-    return <Alert title="You are not allowed to join this meeting" />;
+  const zoomOut = () => {
+    setScale(prevScale => Math.max(prevScale - 0.1, 0.5)); // Limit min scale to 0.5
+  };
 
   return (
-    <main className="h-screen w-full">
-      <StreamCall call={call}>
-        <StreamTheme>
-          {!isSetupComplete ? (
-            <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
-          ) : (
-            <MeetingRoom />
-          )}
-        </StreamTheme>
-      </StreamCall>
-    </main>
+    <div className="flex flex-col items-center text-center p-4">
+      <Products />
+      {/* Form to enter meeting link */}
+      <div className="mt-5 flex flex-col md:flex-row items-center justify-center">
+        <input
+          type="text"
+          placeholder="Enter meeting link"
+          value={url}
+          onChange={handleUrlChange}
+          className="p-2 w-full md:w-1/3 border border-gray-300 rounded mb-3 md:mb-0 md:mr-3" // Responsive input field
+        />
+        <button 
+          onClick={handleSubmit} 
+          className="bg-blue-500 text-white py-2 px-4 rounded transition duration-300 hover:bg-blue-600"
+        >
+          Submit
+        </button>
+      </div>
+      {/* Render Web Page only if URL is provided */}
+      {url && (
+        <WebPageRenderer url={url} scale={scale} />
+      )}
+      {/* Zoom Controls */}
+      <div className="flex justify-center gap-4 mt-5">
+        <button 
+          onClick={zoomOut} 
+          className="bg-blue-500 text-white py-2 px-4 rounded transition duration-300 hover:bg-blue-600"
+        >
+          Zoom Out
+        </button>
+        <button 
+          onClick={zoomIn} 
+          className="bg-blue-500 text-white py-2 px-4 rounded transition duration-300 hover:bg-blue-600"
+        >
+          Zoom In
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default Meeting;
-*/
-
-
-
-
-
-/*
-______________________________________________intial____________________________________-
-
-// src/app/(dashboard)/apps/e-commerce/product-details/[id]/page.tsx
-import Products from 'views/apps/Products';
-import { ProductDetails } from 'views/apps/ProductDetails';
-
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-export default function Page({ params }: Props) {
-  const { id } = params;
-  <ProductDetails id={id} />
-
-  return <Products />;
-}
-
-export async function generateStaticParams() {
-  const response = [1, 2, 3, 5];
-
-  return response.map((prodId: number) => ({
-    id: prodId.toString()
-  }));
-}
-*/
-
-/*
-______________________________________________ORIGINAL ____________________________________-
-
-// import { Products } from 'types/e-commerce';
-// import axios from 'utils/axios';
-
-import ProductDetails from 'views/apps/ProductDetails';
-
-// ==============================|| PAGE ||============================== //
-
-type Props = {
-  params: {
-    id: string;
-  };
-};
-
-// Multiple versions of this page will be statically generated
-// using the `params` returned by `generateStaticParams`
-export default function Page({ params }: Props) {
-  const { id } = params;
-
-  return <ProductDetails id={id} />;
-}
-
-// Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-  // todo: this need to look back again once we implemted SWR
-  // const response = await axios.get('/api/products/list');
-
-  // return response.data.products.map((prod: Products) => ({
-  //   id: prod.id
-  // }));
-
-  const response = [1, 2, 3, 5];
-
-  return response.map((prodId: number) => ({
-    id: prodId.toString()
-  }));
-}
-*/
+export default Dashboard;

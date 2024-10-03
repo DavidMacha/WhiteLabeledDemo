@@ -165,7 +165,7 @@ const ClientList: FC = () => {
 
       {/* Unverified Clients */}
       <Box my={4}>
-        <Typography variant="h6">Unverified Advisors</Typography>
+        <Typography variant="h6">Unverified Clients</Typography>
         <ClientTable
           data={unverifiedData}
           handleView={handleView}
@@ -178,7 +178,7 @@ const ClientList: FC = () => {
 
       {/* Verified Clients */}
       <Box my={4}>
-        <Typography variant="h6">Verified Advisors</Typography>
+        <Typography variant="h6">Verified Clients</Typography>
         <ClientTable
           data={verifiedData}
           handleView={handleView}
@@ -225,7 +225,7 @@ const ClientList: FC = () => {
                     </ListItemAvatar>
                     <ListItemText
                     primary={<Typography variant="h5">{selectedClient.client}</Typography>}
-                    secondary={<Typography color="secondary">Advisor</Typography>}
+                    secondary={<Typography color="secondary">Clients</Typography>}
                     />
                 </ListItem>
                 </List>
@@ -243,28 +243,6 @@ const ClientList: FC = () => {
                         </MainCard>
                         </Grid>
 
-                        <Grid item xs={12}>
-                        <MainCard title="Education">
-                            <List sx={{ py: 0 }}>
-                            <ListItem divider>
-                                <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
-                                    <Stack spacing={0.5}>
-                                    <Typography color="secondary">Master Degree</Typography>
-                                    <Typography>2014-2017</Typography>
-                                    </Stack>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Stack spacing={0.5}>
-                                    <Typography color="secondary">Institute</Typography>
-                                    <Typography>Harvard Law School</Typography>
-                                    </Stack>
-                                </Grid>
-                                </Grid>
-                            </ListItem>
-                            </List>
-                        </MainCard>
-                        </Grid>
 
                         <Grid item xs={12}>
                         <MainCard title="Employment">
@@ -306,18 +284,18 @@ const ClientList: FC = () => {
                     <MainCard title="Uploaded Files">
                         <Stack spacing={1}>
 
-                        <Button variant="outlined" onClick={() => handleOpen('/pdf/example.pdf')}>Document A</Button>
-                        <Button variant="outlined" onClick={() => handleOpen('/pdf/example2.pdf')}>Document B</Button>
+                        <Button variant="outlined" onClick={() => handleOpen('/pdf/example.pdf')}>Document B</Button>
+                        <Button variant="outlined" onClick={() => handleOpen('/pdf/example2.pdf')}>Document A</Button>
 
                         <PdfModal open={openp} onClose={handleClosePDF} pdfUrl={pdfUrl} />
                         </Stack>
                         
                     </MainCard>
 
-                    <MainCard title="Availability">
+                    <MainCard title="Preferred Currency">
                         <Stack spacing={1}>
-                        <Button variant="outlined">Probono - Weekends</Button>
-                        <Button variant="outlined">Professional - Weekdays</Button>
+                        <Button variant="outlined">USD</Button>
+                        <Button variant="outlined">AUD</Button>
                         </Stack>
 
                     </MainCard>
