@@ -6,7 +6,12 @@ import { useMount, useUnmount } from '../../hooks';
 import './preview.scss';
 import MicrophoneButton from '../video/components/microphone';
 import CameraButton from '../video/components/camera';
-import { message, Button, Progress, Select } from 'antd';
+import { Select, MenuItem } from '@mui/material';
+
+import { LinearProgress } from '@mui/material';
+
+import { Button } from '@mui/material';
+
 import { MediaDevice } from '../video/video-types';
 import classNames from 'classnames';
 
@@ -78,12 +83,8 @@ const updateMicFeedbackStyle = () => {
   prevMicFeedbackStyle = newMicFeedbackStyle;
 };
 
-const { Option } = Select;
-
 const PreviewContainer = () => {
-  useEffect(() => {
-    if (typeof navigator !== 'undefined') {
-                
+      
       const [isStartedAudio, setIsStartedAudio] = useState<boolean>(false);
       const [isMuted, setIsMuted] = useState<boolean>(true);
       const [isStartedVideo, setIsStartedVideo] = useState<boolean>(false);
@@ -255,8 +256,7 @@ const PreviewContainer = () => {
           localVideo.stop();
         }
       });
-      }
-  }, []);
+
 
   return (
     <div className="js-preview-view">
@@ -303,55 +303,62 @@ const PreviewContainer = () => {
           <div className="audio-test-wrap">
             <h3>Speaker Test</h3>
             <div className="speaker-action">
-              <Button type="primary" onClick={onTestSpeakerClick} className="speaker-btn">
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={onTestSpeakerClick} 
+                className="speaker-btn"
+              >
                 {isPlayingAudio ? 'Stop' : 'Test Speaker'}
               </Button>
+
               <Select
-                onChange={(value) => {
-                  setActiveSpeaker(value);
-                }}
                 value={activeSpeaker}
+                onChange={(e) => setActiveSpeaker(e.target.value)}  // Note: MUI's onChange event contains the full event, not just the value
                 className="speaker-list"
               >
-                {speakerList.map((item) => {
-                  return (
-                    <Option value={item.deviceId} key={item.deviceId}>
-                      {item.label}
-                    </Option>
-                  );
-                })}
+                {speakerList.map((item) => (
+                  <MenuItem key={item.deviceId} value={item.deviceId}>  {/* Use MenuItem instead of Option */}
+                    {item.label}
+                  </MenuItem>
+                ))}
               </Select>
+
             </div>
             <div className="speaker-output">
               <span className="speaker-label">Output level</span>
-              <Progress percent={outputLevel} showInfo={false} />
+              <LinearProgress variant="determinate" value={outputLevel} />
             </div>
           </div>
           <div className="audio-test-wrap">
             <h3>Microphone Test</h3>
             <div className="speaker-action">
-              <Button type="primary" onClick={onTestMicrophoneClick} className="speaker-btn">
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={onTestMicrophoneClick} 
+                className="speaker-btn"
+              >
                 {microphoneBtn}
               </Button>
+
               <Select
-                onChange={(value) => {
-                  setActiveMicrophone(value);
-                }}
-                value={activeMicrophone}
+                value={activeSpeaker}
+                onChange={(e) => setActiveSpeaker(e.target.value)} // Same as your Antd version
                 className="speaker-list"
               >
-                {micList.map((item) => {
-                  return (
-                    <Option value={item.deviceId} key={item.deviceId}>
-                      {item.label}
-                    </Option>
-                  );
-                })}
+                {speakerList.map((item) => (
+                  <MenuItem key={item.deviceId} value={item.deviceId}>
+                    {item.label}
+                  </MenuItem>
+                ))}
               </Select>
+
             </div>
             <div className="speaker-output">
               <span className="speaker-label">Input level</span>
-              <Progress percent={inputLevel} showInfo={false} />
+              <LinearProgress variant="determinate" value={inputLevel} />
+
             </div>
           </div>
         </div>
