@@ -14,7 +14,7 @@ const PdfModal: React.FC<PdfModalProps> = ({ open, onClose, pdfUrl }) => {
       <DialogTitle>Document Preview</DialogTitle>
       <DialogContent>
         <iframe
-          src={pdfUrl}
+          src={`${pdfUrl}#toolbar=0`}
           style={{ width: '100%', height: '500px' }}
           frameBorder="0"
         />
